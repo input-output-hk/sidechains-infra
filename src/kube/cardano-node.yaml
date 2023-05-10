@@ -1,0 +1,97 @@
+---
+# AWS Storage Class
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cardano-standard-rwo
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+
+# Relay StatefulSet ###############################################################################################################
+
+# Relay Volume Claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: relay-data
+  labels:
+    app: cardano
+    pvc: relay-data
+spec:
+  storageClassName: cardano-standard-rwo
+  accessModes: [ ReadWriteOnce ]
+  resources:
+    requests:
+      storage: 40G
+
+# Relay StatefulSet
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: relay
+  labels:
+    app: cardano
+spec:
+  serviceName: "relay-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cardano
+  template:
+    metadata:
+      labels:
+        app: cardano
+    spec:
+      containers:
+      - name: relay
+        image: inputoutput/cardano-node
+        imagePullPolicy: Always
+        env:
+        - name: CARDANO_TOPOLOGY
+          valueFrom:
+            configMapKeyRef:
+              name: relaycfg
+              key:  topology
+        - name: CARDANO_CUSTOM_PEERS
+          valueFrom:
+            configMapKeyRef:
+              name: relaycfg
+              key:  customPeers
+        - name: CARDANO_UPDATE_TOPOLOGY
+          value: "true"
+        args: [ "run" ]
+        ports:
+          - containerPort: 3001
+        volumeMounts:
+        - name: datavol
+          mountPath: /opt/cardano/data
+        - name: keys
+          mountPath: /var/cardano/secret/keys
+      volumes:
+      - name: datavol
+        persistentVolumeClaim:
+          claimName: relay-data
+      - name: keys
+        secret:
+          secretName: secrets
+          defaultMode: 0400
+
+# Relay TCP Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: relay-service
+  labels:
+    app: cardano
+spec:
+  clusterIP: None
+  selector:
+    app: cardano
+  ports:
+  - name: tcp
+    port: 3001
