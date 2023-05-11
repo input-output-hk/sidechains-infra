@@ -1,3 +1,10 @@
+# NOTES
+#  - It creates a new AWS StorageClass
+#  - Uses StatefulSet instead of Pods
+#  - Uses the officialinputoutput/cardano-node DockerHub image
+#  - No block producer, only a relay using a relaycfg ConfigMap
+#  - Secrets are stored in secrets
+
 ---
 # AWS Storage Class
 apiVersion: storage.k8s.io/v1
