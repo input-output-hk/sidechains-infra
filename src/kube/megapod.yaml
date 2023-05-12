@@ -76,7 +76,7 @@ spec:
         volumeMounts:
         - name: chain-data
           mountPath: /chain-data
-      - name: relay
+      - name: cardano-node
         image: inputoutput/cardano-node
         imagePullPolicy: Always
         env:
@@ -98,6 +98,8 @@ spec:
         volumeMounts:
         - name: datavol
           mountPath: /opt/cardano/data
+        - name: node-ipc
+          mountPath: /node-ipc
         - name: keys
           mountPath: /var/cardano/secret/keys
 
