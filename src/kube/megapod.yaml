@@ -4,7 +4,6 @@ kind: ConfigMap
 metadata:
   name: vector-config
 data:
-  # TODO: Add actual values
   vector.toml: |
     [api]
     enabled = true
@@ -95,8 +94,7 @@ spec:
     
 
       - name: bridge-backend
-        # TODO: add image
-        image: <image>
+        image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
         volumeMounts:
         - name: node-ipc
           mountPath: /node-ipc
