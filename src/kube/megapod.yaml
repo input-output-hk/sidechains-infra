@@ -2,31 +2,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: relaycfg
-data:
-  # TODO: Add actual values
-  publicIP: "<EXTERNAL_IP:NODE_PORT>"
-  customPeers: "<BPROD_CLUSTER_IP:3001>"
-  # TODO: Add actual values
-  topology: |
-    {
-      "Producers": [
-        {
-          "addr": "relays-new.cardano-mainnet.iohk.io",
-          "port": 3001,
-          "valency": 1
-        }
-        {
-          "addr": "<BPROD_CLUSTER_IP>",
-          "port": 3001,
-          "valency": 1
-        }
-      ]
-    }
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
   name: vector-config
 data:
   # TODO: Add actual values
@@ -81,21 +56,11 @@ spec:
 
 
       - name: cardano-node
-        image: inputoutput/cardano-node:1.35.3-configs
+        image: inputoutput/cardano-node:8.0.0
         imagePullPolicy: Always
         env:
-        - name: CARDANO_TOPOLOGY
-          valueFrom:
-            configMapKeyRef:
-              name: relaycfg
-              key:  topology
-        - name: CARDANO_CUSTOM_PEERS
-          valueFrom:
-            configMapKeyRef:
-              name: relaycfg
-              key:  customPeers
-        - name: CARDANO_UPDATE_TOPOLOGY
-          value: "true"
+        - name: NETWORK
+          value: "preview"
         args: [ "run" ]
         ports:
           - containerPort: 3001
