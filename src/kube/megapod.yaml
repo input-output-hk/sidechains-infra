@@ -148,6 +148,9 @@ spec:
           name: vector-config
       - name: logs
         emptyDir: {}
+        volumes:
+      - name: node-ipc
+        emptyDir: {}
       - name: datavol
         persistentVolumeClaim:
           claimName: relay-data
