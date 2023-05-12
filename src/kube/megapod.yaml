@@ -60,6 +60,8 @@ spec:
     metadata:
       labels:
         app: sidechains-substrate-poc
+
+
     spec:
       containers:
       - name: substrate-node
@@ -76,6 +78,8 @@ spec:
         volumeMounts:
         - name: chain-data
           mountPath: /chain-data
+
+
       - name: cardano-node
         image: inputoutput/cardano-node:1.35.3-configs
         imagePullPolicy: Always
@@ -103,6 +107,7 @@ spec:
         - name: keys
           mountPath: /var/cardano/secret/keys
 
+
       - name: postgres
         image: postgres:latest
         ports:
@@ -110,6 +115,7 @@ spec:
         volumeMounts:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
+
 
       - name: vector
         image: timberio/vector:latest
@@ -121,7 +127,8 @@ spec:
           mountPath: /etc/vector
         - name: logs
           mountPath: /var/log
-     
+    
+
       - name: bridge-backend
         # TODO: add image
         image: <image>
@@ -130,6 +137,7 @@ spec:
           mountPath: /node-ipc
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
+
 
       - name: cardano-db-sync
         image: inputoutput/cardano-db-sync:latest
@@ -143,6 +151,7 @@ spec:
           mountPath: /config
         - name: genesis-config
           mountPath: /genesis
+
 
       volumes:
       - name: vector-config-volume
@@ -167,7 +176,10 @@ spec:
         configMap:
           name: genesis-config
 
+
   volumeClaimTemplates:
+
+
   - metadata:
       name: chain-data
     spec:
@@ -176,6 +188,8 @@ spec:
         requests:
           # 1 year estimate + 5GB
           storage: 50Gi
+
+
   - metadata:
       name: relay-data
     spec:
@@ -185,6 +199,8 @@ spec:
         requests:
           # for relay operation config only
           storage: 5Gi
+
+
   - metadata:
       name: postgres-data
     spec:
@@ -193,6 +209,8 @@ spec:
         requests:
           # 1 year estimate + 5GB
           storage: 50Gi
+
+
   - metadata:
       name: db-sync-data
     spec:
