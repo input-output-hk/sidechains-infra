@@ -15,7 +15,7 @@ data:
           "addr": "relays-new.cardano-mainnet.iohk.io",
           "port": 3001,
           "valency": 1
-        },
+        }
         {
           "addr": "<BPROD_CLUSTER_IP>",
           "port": 3001,
@@ -35,13 +35,13 @@ data:
     enabled = true
     address = "0.0.0.0:8686"
 
-    [sources.demo_logs]
-    type = "demo_logs"
+    [sources.vector_logs]
+    type = "vector_logs"
     interval = 1.0
     format = "json"
 
     [sinks.console]
-    inputs = ["demo_logs"]
+    inputs = ["vector_logs"]
     target = "stdout"
     type = "console"
     encoding.codec = "json"
@@ -110,7 +110,7 @@ spec:
           mountPath: /var/lib/postgresql/data
 
       - name: vector
-        image: timberio/vector:0.29.1-debian
+        image: timberio/vector
         ports:
         - containerPort: 8686
           name: vector-api
@@ -130,7 +130,7 @@ spec:
           mountPath: /var/lib/postgresql/data
 
       - name: cardano-db-sync
-        image: inputoutput/cardano-db-sync:13.0.5
+        image: inputoutput/cardano-db-sync
         args: ["run", "--config", "/config/config.yaml", "--socket-path", "/node-ipc/node.socket"]
         volumeMounts:
         - name: db-sync-data
