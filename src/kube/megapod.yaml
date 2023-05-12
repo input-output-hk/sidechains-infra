@@ -121,7 +121,8 @@ spec:
           mountPath: /var/log
      
       - name: bridge-backend
-        image: <Your image path here>
+        # TODO: add image
+        image: <image>
         volumeMounts:
         - name: node-ipc
           mountPath: /node-ipc
