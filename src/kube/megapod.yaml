@@ -77,7 +77,7 @@ spec:
         - name: chain-data
           mountPath: /chain-data
       - name: cardano-node
-        image: inputoutput/cardano-node
+        image: inputoutput/cardano-node:1.35.3-configs
         imagePullPolicy: Always
         env:
         - name: CARDANO_TOPOLOGY
@@ -104,7 +104,7 @@ spec:
           mountPath: /var/cardano/secret/keys
 
       - name: postgres
-        image: postgres
+        image: postgres:latest
         ports:
         - containerPort: 5432
         volumeMounts:
@@ -112,7 +112,7 @@ spec:
           mountPath: /var/lib/postgresql/data
 
       - name: vector
-        image: timberio/vector
+        image: timberio/vector:latest
         ports:
         - containerPort: 8686
           name: vector-api
@@ -132,7 +132,7 @@ spec:
           mountPath: /var/lib/postgresql/data
 
       - name: cardano-db-sync
-        image: inputoutput/cardano-db-sync
+        image: inputoutput/cardano-db-sync:latest
         args: ["run", "--config", "/config/config.yaml", "--socket-path", "/node-ipc/node.socket"]
         volumeMounts:
         - name: db-sync-data
