@@ -1,5 +1,66 @@
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-chain-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-relay-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cardano-standard-rwo
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-postgres-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-db-sync-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: relay-data
