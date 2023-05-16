@@ -1,82 +1,86 @@
+#---
+## The k8 service will allow db-sync to reach cardano-node via localhost:3001
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  name: cardano-node-service
+#  namespace: sidechains-substrate-poc
+#spec:
+#  selector:
+#    app: cardano-node
+#  ports:
+#    - protocol: TCP
+#      port: 3001
+#      targetPort: 3001
+#---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: aws-ecr-registry-key
+#  namespace: sidechains-substrate-poc
+#data:
+#  #  1. Obtain ecr password
+#  # aws ecr get-login-password --region eu-central-1
+#  #
+#  #  2. Base64 encode it as a kvp
+#  # echo -n 'AWS:<ecr_password> | base64 -w0 | tr -d '\n'
+#  #
+#  #  3. Create key.json
+#  #{
+#  #  "auths": {
+#  #    "305415268059.dkr.ecr.eu-central-1.amazonaws.com": {
+#  #      "auth": "<encoded kvp as above>"
+#  #    }
+#  #  }
+#  #}
+#  #
+#  #  4. Encode the entire key.json and dump it here below
+#  # base64 -w0 key.json | tr -d '\n'
+#  #
+#  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICIzMDU0MTUyNjgwNTkuZGtyLmVjci5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbSI6IHsKICAgICAgImF1dGgiOiAiUVZkVE9tVjVTbmRaV0d4ellqSkdhMGxxYjJsU1JuQlBVV3BLZWsxWFVuZE5la0l4VkVaV2VrNHdNRE5YYlhoSFkycE9hMUpVVm5wUFEzUjZVVmM1VWxKSVNqVmlWVlpHVld0d1MxRnVSbFZWTUVZMFdWVjBWVTVZWTNkVFNFVjRaV3hvVTFSVlZYZGlWekF3VFROa2JWcHJTbE5rYTJNMFl6TkdhVlp1VmpWT2JrMHpZVE5KTVV0NmEzZGlNVlpRVVROQ2IwMXFTazVQUlZWeVpESnNWV0pGYjNoU00xWXlWMVJzV0ZORmNFMWpibEpQVFZaS1VGa3hXbXBNTVZKTlZIcGFNbGt6VVRKYWJteFBUMVY0ZUdWVE9VVlRWRTVHVVROS1RFNUZXbmRPUjJSTVZsZFpkMkpZUVhaV01XUndWRlJPTmxZeGFESk5SMncyV1dsMGVtRldUa1JPTUdSdlRUTmFNV1ZGT0RSU00xSllZVlZ6TldGNlRrSkxNMnd5VW0xU2FGcHVSbHBaTWtwelZVVldTMVJXVm5oa1IyeFVVa1UxTkZadFZsTmxWbEpzVmpCNGQxSlliRXRXYWxKYVZYbDBlVmRITVZSWlZrNVRWRzFhV0dORk1VMWFWR1JHWkRCS1IxUlZhRkJpYlhoRlZUSkdNVTVwT1dsak1EVnNZMGM0ZUZGVVZYcFRXSEJwWW14S1VHVlZPSGxXV0VKTFQxVnNXRTR5T1hwUlZFNVBZbFpzZDFFeWQzSmphVGxaVkZSV1lVMUlRazFOVjBVd1RXeFZlVlZJY0VSalYwazBXVEJ3YTJORk1YWlRSMDEyVDFkYVVGbFhPV3hqVjJSdFUxZDRjbUZIVFhKWFZteHlaRzFvV1ZSRVZYaFVNR1JvVkRGS2MyRldaSGhpYTFGNFZtczVTbVJYVm10VGVrSjZWakpHV0U1dFZrWkxNVW8yWVZSU1JsZEhkM2xTVkZwR1pXNU9NVlp0Y0d0aVJsSmFTekZ3V1Zsck5XdGFiVTVMVjFVeFdtSkVSbTVYYTA1dVZFUk5OVk16UVhaVk1qbFpXVEowYzJWVmRIZExNVVpvWldwV1NXTnNXbGxqTVZwcFlsVjBkV0o2VVhaa1dIQm9WMVZzZUZJeVJqQlhSRm8xV2xkS1ZHUnNUWGxTUlRGNVdqRndjMVp1UWt4amVYUTBXVmhrVFZKVk1XdFZibWhRVld4c2FsWlZielZrYlhScVYxZGtSbGt5ZURWaU1GWnBWRlJrVWxkdE5IWmhNRFI1VjBVeGFsa3hRbXRqU0VrMFVqSjRiMVpwT1hSV2JrcERaVzFzZWs1c1RsVmlhbU0wWVZoc1lWZHFRazFUYWs1VFZGWlNNMk5JUm5kaGJXaHhZa1JTVkU1RWJFNVZSa1pSVjBka1Vrd3pUbWhrYXpGNFRXcG9XR1F3VGxsaE1YQnRXWHBvY2xOWFpFWmhXRUkxWkc1c2RWUllUazFYVlRWS1lqTmFZVTVVV2t4UmJVbDRZbnBzUmxkRVJraFdiWGhyV2toa1ZWbFdUWGRhYTJSNFpVVmFWVlJxWnpGU2VYUk1WVzFvYUZWSVFuWmpWRXAyVm14S1lXUnVUbGRUYTJ4RlkyMTRlRlJJVVhoalZGcFZWMVZaZUU1NlZrcGtNRVpOWkVka1VtSlVaRWxoVlZKR1ZsWkNTV0V5UlhwaWJGSjVZbTVuTWxWNU9WUmpSMXAzWTI1S1JWUkZhRXhPYm1ONFRqSlpOR1Z0T0RKYWVrRXlZekpqZWs1clZuSk9ibFZ5VmtNNVQxRnBkRzVPYkhCWFUydHdVbE50Y0ZobGJWcDJXVEZTTTA1c1FsbFJNbmhGVmxWamQxUkZhRmRXVlhSRVlqRkpNbE14U2sxbFZHaHhUREprVGsxclNYSlpWMlIwWkZkR2Nrc3pjRXhWVmxwdlRraEdUR1ZHYjNwaVJFNWFZVlJPYWxrd2NETmphMDVOWkZoc2FsTlhkSGhVYldnMllqTkpNRlZVWkU5VWJrVXhaVk4wTlU5R2FHdGxibEpUVlZaVmQxSnNjRzFSTTBKcllURktTMkl5Y0VwUk1sWkpWRlJLY21WWVJsTlVWV3hQV1cxV2JsTkVSbXhrUkVwcVRVZFdhRlpYTVVsalZYUnVTekZzVUZwRk1ETkxNRGwyVlcxMGJFOVdaelZTYlhnMFUycGtWMlJGVWxGVmVYTTBWbGh2ZUZWdVJuRlNTRUZ5VFRGcmQySXlOVlprVm14TlZVVndWazFGT1VoVE1HTXlWakJvY0ZZelpGVk5iVkpNVFcxNFVHUkVUa1pqVlRWTVUxUmplVlpWUlhoV1NGSjNaRWMxTldOcVduSmpSbVJzVjBka1VGRnJWazFPYmtwSlkwaFNVRTE2U21wTU1rMTVVak5DYzFwWVpITlRWVkkxVGxaR1JtUjZiRnBpUlZaR1ZVZHdVMkZFUWxGbGFrNHpUMU4wUWsxWVVuTlJWMUV3WkVobmVVMXNTa3BSYTFadVZsWmtVRTlITkdsTVEwcHJXVmhTYUdFeVZqVkphbTlwVVZaR1JsRnJSa2xoUkU0MlYxVTVhMlJJUWtOUmJFNVhaSGs1V2sxdFJuVlBSVXBaVTFWUk1HRXpaRTFWVjFwMVlqRlNjVTVZY0ROWGJsSklVMnh3ZGxkc1JrSlJWVVpKVGtoa2JWRldiRXRUTWpsaFUxZG9NbGt3TlVKVlYwNUlZakJqTkdReVNsSlRWVXBDVWtWS2RsRnRaSEpqVjJoeVlWVmpOV1I2UWtOUmJtUkdaREJvYmxkVmNGcFRWbkJLVVZaa1ZsSkZTa0pTV0ZaT1VXdFdSbEpGVG5ObFJ6bHpaRzVOTkU0eU1VcFNWVGwxVVROd00xTlZTa1pUVlVVelpEQnpNbFF6U2taUmJWcEVaRlpHUkZsck9YVlJlazVOWldzNWFtUnJTVE5rVm1oU1lVTTRlR1JYVG5sYVJVWldZMjF3ZVdFd2FFUldSMmQzVFZWMFYyRjZWbUZhVjNSTlRtcGtTV0pXUlRWVGVrMHpaRzA1U2xwdFJuWlVWRlpvVlZkYWQyTlhiRmRaZWpCcFRFTktNbHBZU25waFZ6bDFTV3B2YVUxcFNYTkpibEkxWTBkVmFVOXBTa1ZSVmxKQ1dEQjBSbGRUU1hOSmJWWTBZMGRzZVZsWVVuQmlNalJwVDJwRk1rOUVVWHBOUkVVelQwUlNPUT09IgogICAgfQogIH0KfQoK
+#type: kubernetes.io/dockerconfigjson
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: Secret
 metadata:
-  name: pv-chain-data
-spec:
-  capacity:
-    storage: 50Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  awsElasticBlockStore:
-    # TODO
-    volumeID: "<aws_volume_id>"
-    fsType: "ext4"
+  name: postgres-password-secret
+  namespace: sidechains-substrate-poc
+type: Opaque
+data:
+  password: "cG9zdGdyZXNfcGFzc3dvcmQ=" # postgres_password
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: Secret
 metadata:
-  name: pv-relay-data
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: cardano-standard-rwo
-  awsElasticBlockStore:
-    # TODO
-    volumeID: "<aws_volume_id>"
-    fsType: "ext4"
+  name: postgres-db
+  namespace: sidechains-substrate-poc
+type: Opaque
+data:
+  dbname: "ZGI=" # db
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: Secret
 metadata:
-  name: pv-postgres-data
-spec:
-  capacity:
-    storage: 50Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  awsElasticBlockStore:
-    # TODO
-    volumeID: "<aws_volume_id>"
-    fsType: "ext4"
+  name: postgres-user
+  namespace: sidechains-substrate-poc
+type: Opaque
+data:
+  username: "ZGJfdXNlcm5hbWU=" # db_username
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: Secret
 metadata:
-  name: pv-db-sync-data
-spec:
-  capacity:
-    storage: 5Gi
-  accessModes:
-    - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  awsElasticBlockStore:
-    # TODO
-    volumeID: "<aws_volume_id>"
-    fsType: "ext4"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: relay-data
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-    # for relay operation config only
-      storage: 5Gi
-  storageClassName: cardano-standard-rwo
+  name: postgres-password
+  namespace: sidechains-substrate-poc
+type: Opaque
+data:
+  password: "ZGJfcGFzc3dvcmQ=" # db_password
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: vector-config
+  namespace: sidechains-substrate-poc
 data:
   vector.toml: |
     [api]
@@ -98,8 +102,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sidechains-substrate-poc
+  namespace: sidechains-substrate-poc
 spec:
-  serviceName: "sidechains-service"
+  serviceName: sidechains-substrate-poc
   replicas: 1
   selector:
     matchLabels:
@@ -108,152 +113,256 @@ spec:
     metadata:
       labels:
         app: sidechains-substrate-poc
-
-
     spec:
       containers:
-      - name: substrate-node
-        image: parity/substrate
-        ports:
-        - containerPort: 30333
-          name: p2p
-        - containerPort: 9933
-          name: rpc
-        - containerPort: 9944
-          name: ws
-        - containerPort: 9615
-          name: metrics
-        volumeMounts:
-        - name: chain-data
-          mountPath: /chain-data
 
 
-      - name: cardano-node
-        image: inputoutput/cardano-node:8.0.0
-        imagePullPolicy: Always
-        env:
-        - name: NETWORK
-          value: "preview"
-        args: [ "run" ]
-        ports:
-          - containerPort: 3001
-        volumeMounts:
-        - name: datavol
-          mountPath: /opt/cardano/data
-        - name: node-ipc
-          mountPath: /node-ipc
-        - name: keys
-          mountPath: /var/cardano/secret/keys
+        - name: substrate-node
+          image: parity/substrate
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--dev"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
 
 
-      - name: postgres
-        image: postgres:latest
-        ports:
-        - containerPort: 5432
-        volumeMounts:
-        - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+        - name: cardano-node
+          image: inputoutput/cardano-node:8.0.0
+          ports:
+            - containerPort: 3001
+          env:
+            - name: NETWORK
+              value: "preview"
+          volumeMounts:
+            - name: node-ipc
+              mountPath: /node-ipc
+            - name: datavol
+              mountPath: /opt/cardano/data
+            - name: keys
+              mountPath: /var/cardano/secret/keys
 
 
-      - name: vector
-        image: timberio/vector:latest
-        ports:
-        - containerPort: 8686
-          name: vector-api
-        volumeMounts:
-        - name: vector-config-volume
-          mountPath: /etc/vector
-        - name: logs
-          mountPath: /var/log
-    
-
-      - name: bridge-backend
-        image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
-        volumeMounts:
-        - name: node-ipc
-          mountPath: /node-ipc
-        - name: postgres-data
-          mountPath: /var/lib/postgresql/data
+        - name: postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+               secretKeyRef:
+                name: postgres-password-secret
+                key: password
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
 
 
-      - name: cardano-db-sync
-        image: inputoutput/cardano-db-sync:latest
-        args: ["run", "--config", "/config/config.yaml", "--socket-path", "/node-ipc/node.socket"]
-        volumeMounts:
-        - name: db-sync-data
-          mountPath: /var/lib/cexplorer
-        - name: node-ipc
-          mountPath: /node-ipc
-        - name: db-sync-config
-          mountPath: /config
-        - name: genesis-config
-          mountPath: /genesis
+        - name: vector
+          image: timberio/vector:nightly-alpine
+          ports:
+            - containerPort: 8686
+          volumeMounts:
+            - name: vector-config-volume
+              mountPath: /etc/vector
+            - name: logs
+              mountPath: /var/log
+
+
+        - name: bridge-backend
+          image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
+          volumeMounts:
+            - name: node-ipc
+              mountPath: /node-ipc
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+
+
+        - name: cardano-db-sync
+          image: inputoutput/cardano-db-sync:latest
+          args:
+            - --config
+            - |
+              {
+                "EnableLogMetrics": false,
+                "EnableLogging": true,
+                "NetworkName": "shelley_qa",
+                "NodeConfigFile": "config.json",
+                "PrometheusPort": 8080,
+                "RequiresNetworkMagic": "RequiresMagic",
+                "defaultBackends": [
+                  "KatipBK"
+                ],
+                "defaultScribes": [
+                  [
+                    "StdoutSK",
+                    "stdout"
+                  ]
+                ],
+                "minSeverity": "Info",
+                "options": {
+                  "cfokey": {
+                    "value": "Release-1.0.0"
+                  },
+                  "mapBackends": {},
+                  "mapSeverity": {
+                    "db-sync-node": "Info",
+                    "db-sync-node.Mux": "Error",
+                    "db-sync-node.Subscription": "Error"
+                  },
+                  "mapSubtrace": {
+                    "#ekgview": {
+                      "contents": [
+                        [
+                          {
+                            "contents": "cardano.epoch-validation.benchmark",
+                            "tag": "Contains"
+                          },
+                          [
+                            {
+                              "contents": ".monoclock.basic.",
+                              "tag": "Contains"
+                            }
+                          ]
+                        ],
+                        [
+                          {
+                            "contents": "cardano.epoch-validation.benchmark",
+                            "tag": "Contains"
+                          },
+                          [
+                            {
+                              "contents": "diff.RTS.cpuNs.timed.",
+                              "tag": "Contains"
+                            }
+                          ]
+                        ],
+                        [
+                          {
+                            "contents": "#ekgview.#aggregation.cardano.epoch-validation.benchmark",
+                            "tag": "StartsWith"
+                          },
+                          [
+                            {
+                              "contents": "diff.RTS.gcNum.timed.",
+                              "tag": "Contains"
+                            }
+                          ]
+                        ]
+                      ],
+                      "subtrace": "FilterTrace"
+                    },
+                    "#messagecounters.aggregation": {
+                      "subtrace": "NoTrace"
+                    },
+                    "#messagecounters.ekgview": {
+                      "subtrace": "NoTrace"
+                    },
+                    "#messagecounters.katip": {
+                      "subtrace": "NoTrace"
+                    },
+                    "#messagecounters.monitoring": {
+                      "subtrace": "NoTrace"
+                    },
+                    "#messagecounters.switchboard": {
+                      "subtrace": "NoTrace"
+                    },
+                    "benchmark": {
+                      "contents": [
+                        "GhcRtsStats",
+                        "MonotonicClock"
+                      ],
+                      "subtrace": "ObservableTrace"
+                    },
+                    "cardano.epoch-validation.utxo-stats": {
+                      "subtrace": "NoTrace"
+                    }
+                  }
+                },
+                "rotation": {
+                  "rpKeepFilesNum": 10,
+                  "rpLogLimitBytes": 5000000,
+                  "rpMaxAgeHours": 24
+                },
+                "setupBackends": [
+                  "AggregationBK",
+                  "KatipBK"
+                ],
+                "setupScribes": [
+                  {
+                    "scFormat": "ScText",
+                    "scKind": "StdoutSK",
+                    "scName": "stdout",
+                    "scRotation": null
+                  }
+                ]
+              }
+              - --socket-path /node-ipc/node.socket
+          env:
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: trust
+          volumeMounts:
+            - name: db-sync-config
+              mountPath: /config
+            - name: genesis-config
+              mountPath: /genesis
+            - name: node-ipc
+              mountPath: /node-ipc
+            - name: db-sync-data
+              mountPath: /var/lib/cexplorer
+            - name: postgres-db-secret
+              mountPath: /run/secrets/postgres_db
+              readOnly: true
+            - name: postgres-user-secret
+              mountPath: /run/secrets/postgres_user
+              readOnly: true
+            - name: postgres-password-secret
+              mountPath: /run/secrets/postgres_password
+              readOnly: true
+
 
 
       volumes:
-      - name: vector-config-volume
-        configMap:
-          name: vector-config
-      - name: logs
-        emptyDir: {}
-      - name: node-ipc
-        emptyDir: {}
-      - name: datavol
-        persistentVolumeClaim:
-          claimName: relay-data
-      - name: keys
-        secret:
-          secretName: secrets
-          defaultMode: 0400
-      - name: db-sync-config
-        configMap:
-          name: db-sync-config
-      - name: genesis-config
-        configMap:
-          name: genesis-config
-
-
-  volumeClaimTemplates:
-
-
-  - metadata:
-      name: chain-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          # 1 year estimate + 5GB
-          storage: 50Gi
-
-
-  - metadata:
-      name: relay-data
-    spec:
-      storageClassName: cardano-standard-rwo
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          # for relay operation config only
-          storage: 5Gi
-
-
-  - metadata:
-      name: postgres-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          # 1 year estimate + 5GB
-          storage: 50Gi
-
-
-  - metadata:
-      name: db-sync-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          # for logs only
-          storage: 5Gi
-       
-
+        - name: chain-data    
+          emptyDir: {}
+        - name: node-ipc     
+          emptyDir: {}
+        - name: datavol       
+          emptyDir: {}
+        - name: keys         
+          emptyDir: {}
+        - name: postgres-data
+          emptyDir: {}
+        - name: vector-config-volume 
+          emptyDir: {}
+        - name: logs          
+          emptyDir: {}
+        - name: db-sync-config
+          configMap:
+            name: db-sync-config
+            items:
+              - key: config.json
+                path: config.json
+        - name: db-sync-data 
+          emptyDir: {}
+        - name: genesis-config
+          emptyDir: {}
+        - name: postgres-db-secret
+          secret:
+            secretName: postgres-db
+        - name: postgres-user-secret
+          secret:
+            secretName: postgres-user
+        - name: postgres-password-secret
+          secret:
+            secretName: postgres-password

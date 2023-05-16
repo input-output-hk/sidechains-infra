@@ -1,0 +1,259 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-chain-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-relay-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: cardano-standard-rwo
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-postgres-data
+spec:
+  capacity:
+    storage: 50Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-db-sync-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  awsElasticBlockStore:
+    # TODO
+    volumeID: "<aws_volume_id>"
+    fsType: "ext4"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: relay-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+    # for relay operation config only
+      storage: 5Gi
+  storageClassName: cardano-standard-rwo
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vector-config
+data:
+  vector.toml: |
+    [api]
+    enabled = true
+    address = "0.0.0.0:8686"
+
+    [sources.vector_logs]
+    type = "vector_logs"
+    interval = 1.0
+    format = "json"
+
+    [sinks.console]
+    inputs = ["vector_logs"]
+    target = "stdout"
+    type = "console"
+    encoding.codec = "json"
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sidechains-substrate-poc
+spec:
+  serviceName: "sidechains-service"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidechains-substrate-poc
+  template:
+    metadata:
+      labels:
+        app: sidechains-substrate-poc
+
+
+    spec:
+      containers:
+      - name: substrate-node
+        image: parity/substrate
+        ports:
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9933
+          name: rpc
+        - containerPort: 9944
+          name: ws
+        - containerPort: 9615
+          name: metrics
+        volumeMounts:
+        - name: chain-data
+          mountPath: /chain-data
+
+
+      - name: cardano-node
+        image: inputoutput/cardano-node:8.0.0
+        imagePullPolicy: Always
+        env:
+        - name: NETWORK
+          value: "preview"
+        args: [ "run" ]
+        ports:
+          - containerPort: 3001
+        volumeMounts:
+        - name: datavol
+          mountPath: /opt/cardano/data
+        - name: node-ipc
+          mountPath: /node-ipc
+        - name: keys
+          mountPath: /var/cardano/secret/keys
+
+
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+
+
+      - name: vector
+        image: timberio/vector:latest
+        ports:
+        - containerPort: 8686
+          name: vector-api
+        volumeMounts:
+        - name: vector-config-volume
+          mountPath: /etc/vector
+        - name: logs
+          mountPath: /var/log
+    
+
+      - name: bridge-backend
+        image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
+        volumeMounts:
+        - name: node-ipc
+          mountPath: /node-ipc
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+
+
+      - name: cardano-db-sync
+        image: inputoutput/cardano-db-sync:latest
+        args: ["run", "--config", "/config/config.yaml", "--socket-path", "/node-ipc/node.socket"]
+        volumeMounts:
+        - name: db-sync-data
+          mountPath: /var/lib/cexplorer
+        - name: node-ipc
+          mountPath: /node-ipc
+        - name: db-sync-config
+          mountPath: /config
+        - name: genesis-config
+          mountPath: /genesis
+
+
+      volumes:
+      - name: vector-config-volume
+        configMap:
+          name: vector-config
+      - name: logs
+        emptyDir: {}
+      - name: node-ipc
+        emptyDir: {}
+      - name: datavol
+        persistentVolumeClaim:
+          claimName: relay-data
+      - name: keys
+        secret:
+          secretName: secrets
+          defaultMode: 0400
+      - name: db-sync-config
+        configMap:
+          name: db-sync-config
+      - name: genesis-config
+        configMap:
+          name: genesis-config
+
+
+  volumeClaimTemplates:
+
+
+  - metadata:
+      name: chain-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          # 1 year estimate + 5GB
+          storage: 50Gi
+
+
+  - metadata:
+      name: relay-data
+    spec:
+      storageClassName: cardano-standard-rwo
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          # for relay operation config only
+          storage: 5Gi
+
+
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          # 1 year estimate + 5GB
+          storage: 50Gi
+
+
+  - metadata:
+      name: db-sync-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          # for logs only
+          storage: 5Gi
+       
+
