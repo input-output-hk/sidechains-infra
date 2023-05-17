@@ -109,6 +109,8 @@ spec:
           env:
             - name: POSTGRES_HOST_AUTH_METHOD
               value: "trust"
+            - name: POSTGRES_DB
+              value: "cexplore"
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
