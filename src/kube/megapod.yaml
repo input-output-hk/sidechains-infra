@@ -142,13 +142,12 @@ spec:
               value: "preview"
             - name: CARDANO_NODE_SOCKET_PATH
               value: /ipc/node.socket
-          command:
-            - /bin/sh
-            - -c
+          command: ["/bin/sh", "-c"]
+          args:
             - |
-               mkdir -p /tmp/configuration &&
-               cp /pgpass/pgpass /tmp/configuration/pgpass &&
-               chmod 600 /tmp/configuration/pgpass 
+              mkdir -p /tmp/configuration &&
+              cp /pgpass/pgpass /tmp/configuration/pgpass &&
+              chmod 600 /tmp/configuration/pgpass 
           volumeMounts:
             - name: node-ipc
               mountPath: /ipc
