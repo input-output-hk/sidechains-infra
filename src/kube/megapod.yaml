@@ -43,38 +43,13 @@ type: kubernetes.io/dockerconfigjson
 apiVersion: v1
 kind: Secret
 metadata:
-  name: postgres-password-secret
+  name: postgres
   namespace: sidechains-substrate-poc
 type: Opaque
 data:
-  password: "cG9zdGdyZXNfcGFzc3dvcmQ=" # postgres_password
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-db
-  namespace: sidechains-substrate-poc
-type: Opaque
-data:
-  dbname: "ZGI=" # db
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-user
-  namespace: sidechains-substrate-poc
-type: Opaque
-data:
-  username: "ZGJfdXNlcm5hbWU=" # db_username
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres-password
-  namespace: sidechains-substrate-poc
-type: Opaque
-data:
-  password: "ZGJfcGFzc3dvcmQ=" # db_password
+  postgres-db: "ZGI=" # db
+  postgres-username: "ZGJfdXNlcm5hbWU=" # db_username
+  postgres-password: "ZGJfcGFzc3dvcmQ=" # db_password
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -374,11 +349,21 @@ spec:
             - containerPort: 5432
               protocol: TCP
           env:
+            - name: POSTGRES_DB
+              valueFrom:
+               secretKeyRef:
+                name: postgres-db
+                key: postgres-db
+            - name: POSTGRES_USERNAME
+              valueFrom:
+               secretKeyRef:
+                name: postgres-username
+                key: postgres-username
             - name: POSTGRES_PASSWORD
               valueFrom:
                secretKeyRef:
-                name: postgres-password-secret
-                key: password
+                name: postgres-password
+                key: postgres-password
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
@@ -410,8 +395,27 @@ spec:
             - --config /config/db-sync-config.json
             - --socket-path /node-ipc/node.socket
           env:
+            - name: NETWORK
+              value: "preview"
             - name: POSTGRES_HOST_AUTH_METHOD
               value: trust
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres
+                  key: postgres-db
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres
+                  key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres
+                  key: postgres-password
+
+
           volumeMounts:
             - name: db-sync-config
               mountPath: /config
