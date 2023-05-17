@@ -139,6 +139,8 @@ spec:
             - name: CARDANO_NODE_SOCKET_PATH
               value: /ipc/node.socket
           command:
+            - mkdir /configuration
+            - cp /pgpass/pgpass /configuration
             - sh
             - -c
             - (chmod 600 /configuration/pgpass)
@@ -148,7 +150,7 @@ spec:
             - name: postgres-run
               mountPath: /run/postgresql
             - name: pgpass
-              mountPath: /configuration
+              mountPath: /pgpass
 
 
 
