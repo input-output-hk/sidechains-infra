@@ -94,8 +94,8 @@ spec:
             - containerPort: 5432
               protocol: TCP
           env:
-             name: POSTGRES_HOST_AUTH_METHOD
-             value: "trust"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: "trust"
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
