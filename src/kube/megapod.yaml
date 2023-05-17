@@ -1,4 +1,15 @@
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres
+  namespace: sidechains-substrate-poc
+type: Opaque
+data:
+  postgres-db: "ZGI=" # db
+  postgres-username: "ZGJfdXNlcm5hbWU=" # db_username
+  postgres-password: "ZGJfcGFzc3dvcmQ=" # db_password
+---
 # The k8 service will allow db-sync to reach cardano-node via localhost:3001
 apiVersion: v1
 kind: Service
@@ -107,10 +118,25 @@ spec:
             - containerPort: 5432
               protocol: TCP
           env:
+            - name: POSTGRES_DB
+              valueFrom:
+               secretKeyRef:
+                name: postgres-db
+                key: postgres-db
+            - name: POSTGRES_USERNAME
+              valueFrom:
+               secretKeyRef:
+                name: postgres-username
+                key: postgres-username
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+               secretKeyRef:
+                name: postgres-password
+                key: postgres-password
             - name: POSTGRES_HOST_AUTH_METHOD
               value: "trust"
             - name: POSTGRES_DB
-              value: "cexplore"
+              value: "cexplorer"
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
