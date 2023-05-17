@@ -12,44 +12,7 @@ spec:
     - protocol: TCP
       port: 3001
       targetPort: 3001
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: aws-ecr-registry-key
-  namespace: sidechains-substrate-poc
-data:
-  #  1. Obtain ecr password
-  # aws ecr get-login-password --region eu-central-1
-  #
-  #  2. Base64 encode it as a kvp
-  # echo -n 'AWS:<ecr_password> | base64 -w0 | tr -d '\n'
-  #
-  #  3. Create key.json
-  #{
-  #  "auths": {
-  #    "305415268059.dkr.ecr.eu-central-1.amazonaws.com": {
-  #      "auth": "<encoded kvp as above>"
-  #    }
-  #  }
-  #}
-  #
-  #  4. Encode the entire key.json and dump it here below
-  # base64 -w0 key.json | tr -d '\n'
-  #
-  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICIzMDU0MTUyNjgwNTkuZGtyLmVjci5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbSI6IHsKICAgICAgImF1dGgiOiAiUVZkVE9tVjVTbmRaV0d4ellqSkdhMGxxYjJsU1JuQlBVV3BLZWsxWFVuZE5la0l4VkVaV2VrNHdNRE5YYlhoSFkycE9hMUpVVm5wUFEzUjZVVmM1VWxKSVNqVmlWVlpHVld0d1MxRnVSbFZWTUVZMFdWVjBWVTVZWTNkVFNFVjRaV3hvVTFSVlZYZGlWekF3VFROa2JWcHJTbE5rYTJNMFl6TkdhVlp1VmpWT2JrMHpZVE5KTVV0NmEzZGlNVlpRVVROQ2IwMXFTazVQUlZWeVpESnNWV0pGYjNoU00xWXlWMVJzV0ZORmNFMWpibEpQVFZaS1VGa3hXbXBNTVZKTlZIcGFNbGt6VVRKYWJteFBUMVY0ZUdWVE9VVlRWRTVHVVROS1RFNUZXbmRPUjJSTVZsZFpkMkpZUVhaV01XUndWRlJPTmxZeGFESk5SMncyV1dsMGVtRldUa1JPTUdSdlRUTmFNV1ZGT0RSU00xSllZVlZ6TldGNlRrSkxNMnd5VW0xU2FGcHVSbHBaTWtwelZVVldTMVJXVm5oa1IyeFVVa1UxTkZadFZsTmxWbEpzVmpCNGQxSlliRXRXYWxKYVZYbDBlVmRITVZSWlZrNVRWRzFhV0dORk1VMWFWR1JHWkRCS1IxUlZhRkJpYlhoRlZUSkdNVTVwT1dsak1EVnNZMGM0ZUZGVVZYcFRXSEJwWW14S1VHVlZPSGxXV0VKTFQxVnNXRTR5T1hwUlZFNVBZbFpzZDFFeWQzSmphVGxaVkZSV1lVMUlRazFOVjBVd1RXeFZlVlZJY0VSalYwazBXVEJ3YTJORk1YWlRSMDEyVDFkYVVGbFhPV3hqVjJSdFUxZDRjbUZIVFhKWFZteHlaRzFvV1ZSRVZYaFVNR1JvVkRGS2MyRldaSGhpYTFGNFZtczVTbVJYVm10VGVrSjZWakpHV0U1dFZrWkxNVW8yWVZSU1JsZEhkM2xTVkZwR1pXNU9NVlp0Y0d0aVJsSmFTekZ3V1Zsck5XdGFiVTVMVjFVeFdtSkVSbTVYYTA1dVZFUk5OVk16UVhaVk1qbFpXVEowYzJWVmRIZExNVVpvWldwV1NXTnNXbGxqTVZwcFlsVjBkV0o2VVhaa1dIQm9WMVZzZUZJeVJqQlhSRm8xV2xkS1ZHUnNUWGxTUlRGNVdqRndjMVp1UWt4amVYUTBXVmhrVFZKVk1XdFZibWhRVld4c2FsWlZielZrYlhScVYxZGtSbGt5ZURWaU1GWnBWRlJrVWxkdE5IWmhNRFI1VjBVeGFsa3hRbXRqU0VrMFVqSjRiMVpwT1hSV2JrcERaVzFzZWs1c1RsVmlhbU0wWVZoc1lWZHFRazFUYWs1VFZGWlNNMk5JUm5kaGJXaHhZa1JTVkU1RWJFNVZSa1pSVjBka1Vrd3pUbWhrYXpGNFRXcG9XR1F3VGxsaE1YQnRXWHBvY2xOWFpFWmhXRUkxWkc1c2RWUllUazFYVlRWS1lqTmFZVTVVV2t4UmJVbDRZbnBzUmxkRVJraFdiWGhyV2toa1ZWbFdUWGRhYTJSNFpVVmFWVlJxWnpGU2VYUk1WVzFvYUZWSVFuWmpWRXAyVm14S1lXUnVUbGRUYTJ4RlkyMTRlRlJJVVhoalZGcFZWMVZaZUU1NlZrcGtNRVpOWkVka1VtSlVaRWxoVlZKR1ZsWkNTV0V5UlhwaWJGSjVZbTVuTWxWNU9WUmpSMXAzWTI1S1JWUkZhRXhPYm1ONFRqSlpOR1Z0T0RKYWVrRXlZekpqZWs1clZuSk9ibFZ5VmtNNVQxRnBkRzVPYkhCWFUydHdVbE50Y0ZobGJWcDJXVEZTTTA1c1FsbFJNbmhGVmxWamQxUkZhRmRXVlhSRVlqRkpNbE14U2sxbFZHaHhUREprVGsxclNYSlpWMlIwWkZkR2Nrc3pjRXhWVmxwdlRraEdUR1ZHYjNwaVJFNWFZVlJPYWxrd2NETmphMDVOWkZoc2FsTlhkSGhVYldnMllqTkpNRlZVWkU5VWJrVXhaVk4wTlU5R2FHdGxibEpUVlZaVmQxSnNjRzFSTTBKcllURktTMkl5Y0VwUk1sWkpWRlJLY21WWVJsTlVWV3hQV1cxV2JsTkVSbXhrUkVwcVRVZFdhRlpYTVVsalZYUnVTekZzVUZwRk1ETkxNRGwyVlcxMGJFOVdaelZTYlhnMFUycGtWMlJGVWxGVmVYTTBWbGh2ZUZWdVJuRlNTRUZ5VFRGcmQySXlOVlprVm14TlZVVndWazFGT1VoVE1HTXlWakJvY0ZZelpGVk5iVkpNVFcxNFVHUkVUa1pqVlRWTVUxUmplVlpWUlhoV1NGSjNaRWMxTldOcVduSmpSbVJzVjBka1VGRnJWazFPYmtwSlkwaFNVRTE2U21wTU1rMTVVak5DYzFwWVpITlRWVkkxVGxaR1JtUjZiRnBpUlZaR1ZVZHdVMkZFUWxGbGFrNHpUMU4wUWsxWVVuTlJWMUV3WkVobmVVMXNTa3BSYTFadVZsWmtVRTlITkdsTVEwcHJXVmhTYUdFeVZqVkphbTlwVVZaR1JsRnJSa2xoUkU0MlYxVTVhMlJJUWtOUmJFNVhaSGs1V2sxdFJuVlBSVXBaVTFWUk1HRXpaRTFWVjFwMVlqRlNjVTVZY0ROWGJsSklVMnh3ZGxkc1JrSlJWVVpKVGtoa2JWRldiRXRUTWpsaFUxZG9NbGt3TlVKVlYwNUlZakJqTkdReVNsSlRWVXBDVWtWS2RsRnRaSEpqVjJoeVlWVmpOV1I2UWtOUmJtUkdaREJvYmxkVmNGcFRWbkJLVVZaa1ZsSkZTa0pTV0ZaT1VXdFdSbEpGVG5ObFJ6bHpaRzVOTkU0eU1VcFNWVGwxVVROd00xTlZTa1pUVlVVelpEQnpNbFF6U2taUmJWcEVaRlpHUkZsck9YVlJlazVOWldzNWFtUnJTVE5rVm1oU1lVTTRlR1JYVG5sYVJVWldZMjF3ZVdFd2FFUldSMmQzVFZWMFYyRjZWbUZhVjNSTlRtcGtTV0pXUlRWVGVrMHpaRzA1U2xwdFJuWlVWRlpvVlZkYWQyTlhiRmRaZWpCcFRFTktNbHBZU25waFZ6bDFTV3B2YVUxcFNYTkpibEkxWTBkVmFVOXBTa1ZSVmxKQ1dEQjBSbGRUU1hOSmJWWTBZMGRzZVZsWVVuQmlNalJwVDJwRk1rOUVVWHBOUkVVelQwUlNPUT09IgogICAgfQogIH0KfQoK
 type: kubernetes.io/dockerconfigjson
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: postgres
-  namespace: sidechains-substrate-poc
-type: Opaque
-data:
-  postgres-db: "ZGI=" # db
-  postgres-username: "ZGJfdXNlcm5hbWU=" # db_username
-  postgres-password: "ZGJfcGFzc3dvcmQ=" # db_password
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -118,16 +81,12 @@ spec:
             - name: NETWORK
               value: "preview"
             - name: CARDANO_NODE_SOCKET_PATH
-              value: /node-ipc/node.socket
+              value: /ipc/node.socket
           volumeMounts:
             - name: node-ipc
-              mountPath: /node-ipc
+              mountPath: /ipc
             - name: datavol
               mountPath: /opt/cardano/data
-            - name: keys
-              mountPath: /var/cardano/secret/keys
-            - name: db-sync-config
-              mountPath: /db-sync-config
 
 
         - name: postgres
@@ -136,26 +95,13 @@ spec:
             - containerPort: 5432
               protocol: TCP
           env:
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: trust
-            - name: POSTGRES_DB
-              valueFrom:
-               secretKeyRef:
-                name: postgres-db
-                key: postgres-db
-            - name: POSTGRES_USERNAME
-              valueFrom:
-               secretKeyRef:
-                name: postgres-username
-                key: postgres-username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-               secretKeyRef:
-                name: postgres-password
-                key: postgres-password
+             name: POSTGRES_HOST_AUTH_METHOD
+             value: "trust"
           volumeMounts:
             - name: postgres-data
               mountPath: /var/lib/postgresql/data
+            - name: postgres-run
+              mountPath: /run/postgresql
 
 
         - name: vector
@@ -173,8 +119,8 @@ spec:
           image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
           imagePullPolicy: IfNotPresent
           volumeMounts:
-            - name: postgres-data
-              mountPath: /var/lib/postgresql/data
+            - name: postgres-run
+              mountPath: /run/postgresql
 
 
         - name: cardano-db-sync
@@ -183,44 +129,13 @@ spec:
             - name: NETWORK
               value: "preview"
             - name: CARDANO_NODE_SOCKET_PATH
-              value: /node-ipc/node.socket
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: trust
-            - name: POSTGRES_DB
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres
-                  key: postgres-db
-            - name: POSTGRES_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres
-                  key: postgres-username
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                configMapKeyRef:
-                  name: postgres
-                  key: postgres-password
-
-
+              value: /ipc/node.socket
           volumeMounts:
-            - name: db-sync-config
-              mountPath: /config
-            - name: genesis-config
-              mountPath: /genesis
             - name: node-ipc
-              mountPath: /node-ipc
-            - name: db-sync-data
-              mountPath: /var/lib/cexplorer
-            - name: postgres-db-secret
-              mountPath: /run/secrets/postgres_db
-              readOnly: true
-            - name: postgres-user-secret
-              mountPath: /run/secrets/postgres_user
-              readOnly: true
-            - name: postgres-password-secret
-              mountPath: /run/secrets/postgres_password
-              readOnly: true
+              mountPath: /ipc
+            - name: postgres-run
+              mountPath: /run/postgresql
+
 
 
 
@@ -235,24 +150,10 @@ spec:
           emptyDir: {}
         - name: postgres-data
           emptyDir: {}
+        - name: postgres-run
+          emptyDir: {}
         - name: vector-config-volume 
           configMap:
             name: vector-config
         - name: logs          
           emptyDir: {}
-        - name: db-sync-config
-          configMap:
-            name: db-sync-config
-        - name: db-sync-data 
-          emptyDir: {}
-        - name: genesis-config
-          emptyDir: {}
-        - name: postgres-db-secret
-          secret:
-            secretName: postgres-db
-        - name: postgres-user-secret
-          secret:
-            secretName: postgres-user
-        - name: postgres-password-secret
-          secret:
-            secretName: postgres-password
