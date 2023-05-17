@@ -145,9 +145,9 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
-              mkdir -p /tmp/configuration &&
-              cp /pgpass/pgpass /tmp/configuration/pgpass &&
-              chmod 600 /tmp/configuration/pgpass 
+              mkdir -p /configuration &&
+              cp /pgpass/pgpass /configuration/pgpass &&
+              chmod 600 /configuration/pgpass 
           volumeMounts:
             - name: node-ipc
               mountPath: /ipc
