@@ -16,6 +16,15 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: pgpass
+  namespace: sidechains-substrate-poc
+data:
+  pgpass: |
+    /run/postgresql::cexplorer::
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: vector-config
   namespace: sidechains-substrate-poc
 data:
@@ -134,6 +143,8 @@ spec:
               mountPath: /ipc
             - name: postgres-run
               mountPath: /run/postgresql
+            - name: pgpass
+              mountPath: /configuration
 
 
 
@@ -151,6 +162,9 @@ spec:
           emptyDir: {}
         - name: postgres-run
           emptyDir: {}
+        - name: pgpass
+          configMap:
+            name: pgpass
         - name: vector-config-volume 
           configMap:
             name: vector-config
