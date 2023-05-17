@@ -79,6 +79,221 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: db-sync-config
+  namespace: sidechains-substrate-poc
+data:
+  db-sync-config.json: |
+    {
+      "EnableLogMetrics": false,
+      "EnableLogging": true,
+      "NetworkName": "mainnet",
+      "NodeConfigFile": "/nix/store/9qxnjirql2snfln1w2gwdl8169l7404x-config-mainnet.json",
+      "RequiresNetworkMagic": "RequiresNoMagic",
+      "defaultBackends": [
+        "KatipBK"
+      ],
+      "defaultScribes": [
+        [
+          "StdoutSK",
+          "stdout"
+        ]
+      ],
+      "hasPrometheus": [
+        "0.0.0.0",
+        12698
+      ],
+      "minSeverity": "Info",
+      "options": {
+        "cfokey": {
+          "value": "Release-1.0.0"
+        },
+        "mapBackends": {},
+        "mapSeverity": {
+          "db-sync-node": "Info",
+          "db-sync-node.Mux": "Error",
+          "db-sync-node.Subscription": "Error"
+        },
+        "mapSubtrace": {
+          "#ekgview": {
+            "contents": [
+              [
+                {
+                  "contents": "cardano.epoch-validation.benchmark",
+                  "tag": "Contains"
+                },
+                [
+                  {
+                    "contents": ".monoclock.basic.",
+                    "tag": "Contains"
+                  }
+                ]
+              ],
+              [
+                {
+                  "contents": "cardano.epoch-validation.benchmark",
+                  "tag": "Contains"
+                },
+                [
+                  {
+                    "contents": "diff.RTS.cpuNs.timed.",
+                    "tag": "Contains"
+                  }
+                ]
+              ],
+              [
+                {
+                  "contents": "#ekgview.#aggregation.cardano.epoch-validation.benchmark",
+                  "tag": "StartsWith"
+                },
+                [
+                  {
+                    "contents": "diff.RTS.gcNum.timed.",
+                    "tag": "Contains"
+                  }
+                ]
+              ]
+            ],
+            "subtrace": "FilterTrace"
+          },
+          "#messagecounters.aggregation": {
+            "subtrace": "NoTrace"
+          },
+          "#messagecounters.ekgview": {
+            "subtrace": "NoTrace"
+          },
+          "#messagecounters.katip": {
+            "subtrace": "NoTrace"
+          },
+          "#messagecounters.monitoring": {
+            "subtrace": "NoTrace"
+          },
+          "#messagecounters.switchboard": {
+            "subtrace": "NoTrace"
+          },
+          "benchmark": {
+            "contents": [
+              "GhcRtsStats",
+              "MonotonicClock"
+            ],
+            "subtrace": "ObservableTrace"
+          },
+          "cardano.epoch-validation.utxo-stats": {
+            "subtrace": "NoTrace"
+          }
+        }
+      },
+      "rotation": {
+        "rpKeepFilesNum": 10,
+        "rpLogLimitBytes": 5000000,
+        "rpMaxAgeHours": 24
+      },
+      "setupBackends": [
+        "AggregationBK",
+        "KatipBK"
+      ],
+      "setupScribes": [
+        {
+          "scFormat": "ScText",
+          "scKind": "StdoutSK",
+          "scName": "stdout",
+          "scRotation": null
+        }
+      ]
+    }
+  node-config.json: |
+    {
+      "ApplicationName": "cardano-sl",
+      "ApplicationVersion": 1,
+      "ByronGenesisFile": "/nix/store/3678ccikas3q16jcqcghwviqsd5k9wjx-mainnet-byron-genesis.json",
+      "ByronGenesisHash": "5f20df933584822601f9e3f8c024eb5eb252fe8cefb24d1317dc3d432e940ebb",
+      "LastKnownBlockVersion-Alt": 0,
+      "LastKnownBlockVersion-Major": 3,
+      "LastKnownBlockVersion-Minor": 0,
+      "MaxKnownMajorProtocolVersion": 2,
+      "Protocol": "Cardano",
+      "RequiresNetworkMagic": "RequiresNoMagic",
+      "ShelleyGenesisFile": "/nix/store/hxgam7f415s8b0j6c3qwakgkzd0pr5h4-mainnet-shelley-genesis.json",
+      "ShelleyGenesisHash": "1a3be38bcbb7911969283716ad7aa550250226b76a61fc51cc9a9a35d9276d81",
+      "TraceBlockFetchClient": false,
+      "TraceBlockFetchDecisions": false,
+      "TraceBlockFetchProtocol": false,
+      "TraceBlockFetchProtocolSerialised": false,
+      "TraceBlockFetchServer": false,
+      "TraceChainDb": true,
+      "TraceChainSyncBlockServer": false,
+      "TraceChainSyncClient": false,
+      "TraceChainSyncHeaderServer": false,
+      "TraceChainSyncProtocol": false,
+      "TraceDNSResolver": true,
+      "TraceDNSSubscription": true,
+      "TraceErrorPolicy": true,
+      "TraceForge": true,
+      "TraceHandshake": false,
+      "TraceIpSubscription": true,
+      "TraceLocalChainSyncProtocol": false,
+      "TraceLocalErrorPolicy": true,
+      "TraceLocalHandshake": false,
+      "TraceLocalTxSubmissionProtocol": false,
+      "TraceLocalTxSubmissionServer": false,
+      "TraceMempool": true,
+      "TraceMux": false,
+      "TraceTxInbound": false,
+      "TraceTxOutbound": false,
+      "TraceTxSubmissionProtocol": false,
+      "TracingVerbosity": "NormalVerbosity",
+      "TurnOnLogMetrics": true,
+      "TurnOnLogging": true,
+      "defaultBackends": [
+        "KatipBK"
+      ],
+      "defaultScribes": [
+        [
+          "StdoutSK",
+          "stdout"
+        ]
+      ],
+      "hasEKG": 12788,
+      "hasPrometheus": [
+        "0.0.0.0",
+        12798
+      ],
+      "minSeverity": "Info",
+      "options": {
+        "mapBackends": {
+          "cardano.node.metrics": [
+            "EKGViewBK"
+          ],
+          "cardano.node.resources": [
+            "EKGViewBK"
+          ]
+        },
+        "mapSubtrace": {
+          "cardano.node.metrics": {
+            "subtrace": "Neutral"
+          }
+        }
+      },
+      "rotation": {
+        "rpKeepFilesNum": 10,
+        "rpLogLimitBytes": 5000000,
+        "rpMaxAgeHours": 24
+      },
+      "setupBackends": [
+        "KatipBK"
+      ],
+      "setupScribes": [
+        {
+          "scFormat": "ScText",
+          "scKind": "StdoutSK",
+          "scName": "stdout",
+          "scRotation": null
+        }
+      ]
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: vector-config
   namespace: sidechains-substrate-poc
 data:
@@ -87,13 +302,12 @@ data:
     enabled = true
     address = "0.0.0.0:8686"
 
-    [sources.vector_logs]
-    type = "vector_logs"
-    interval = 1.0
-    format = "json"
+    [sources.log_file]
+    type = "file"
+    include = ["/var/log/*.log"]
 
     [sinks.console]
-    inputs = ["vector_logs"]
+    inputs = ["log_file"]
     target = "stdout"
     type = "console"
     encoding.codec = "json"
@@ -191,123 +405,8 @@ spec:
         - name: cardano-db-sync
           image: inputoutput/cardano-db-sync:latest
           args:
-            - --config
-            - |
-              {
-                "EnableLogMetrics": false,
-                "EnableLogging": true,
-                "NetworkName": "shelley_qa",
-                "NodeConfigFile": "config.json",
-                "PrometheusPort": 8080,
-                "RequiresNetworkMagic": "RequiresMagic",
-                "defaultBackends": [
-                  "KatipBK"
-                ],
-                "defaultScribes": [
-                  [
-                    "StdoutSK",
-                    "stdout"
-                  ]
-                ],
-                "minSeverity": "Info",
-                "options": {
-                  "cfokey": {
-                    "value": "Release-1.0.0"
-                  },
-                  "mapBackends": {},
-                  "mapSeverity": {
-                    "db-sync-node": "Info",
-                    "db-sync-node.Mux": "Error",
-                    "db-sync-node.Subscription": "Error"
-                  },
-                  "mapSubtrace": {
-                    "#ekgview": {
-                      "contents": [
-                        [
-                          {
-                            "contents": "cardano.epoch-validation.benchmark",
-                            "tag": "Contains"
-                          },
-                          [
-                            {
-                              "contents": ".monoclock.basic.",
-                              "tag": "Contains"
-                            }
-                          ]
-                        ],
-                        [
-                          {
-                            "contents": "cardano.epoch-validation.benchmark",
-                            "tag": "Contains"
-                          },
-                          [
-                            {
-                              "contents": "diff.RTS.cpuNs.timed.",
-                              "tag": "Contains"
-                            }
-                          ]
-                        ],
-                        [
-                          {
-                            "contents": "#ekgview.#aggregation.cardano.epoch-validation.benchmark",
-                            "tag": "StartsWith"
-                          },
-                          [
-                            {
-                              "contents": "diff.RTS.gcNum.timed.",
-                              "tag": "Contains"
-                            }
-                          ]
-                        ]
-                      ],
-                      "subtrace": "FilterTrace"
-                    },
-                    "#messagecounters.aggregation": {
-                      "subtrace": "NoTrace"
-                    },
-                    "#messagecounters.ekgview": {
-                      "subtrace": "NoTrace"
-                    },
-                    "#messagecounters.katip": {
-                      "subtrace": "NoTrace"
-                    },
-                    "#messagecounters.monitoring": {
-                      "subtrace": "NoTrace"
-                    },
-                    "#messagecounters.switchboard": {
-                      "subtrace": "NoTrace"
-                    },
-                    "benchmark": {
-                      "contents": [
-                        "GhcRtsStats",
-                        "MonotonicClock"
-                      ],
-                      "subtrace": "ObservableTrace"
-                    },
-                    "cardano.epoch-validation.utxo-stats": {
-                      "subtrace": "NoTrace"
-                    }
-                  }
-                },
-                "rotation": {
-                  "rpKeepFilesNum": 10,
-                  "rpLogLimitBytes": 5000000,
-                  "rpMaxAgeHours": 24
-                },
-                "setupBackends": [
-                  "AggregationBK",
-                  "KatipBK"
-                ],
-                "setupScribes": [
-                  {
-                    "scFormat": "ScText",
-                    "scKind": "StdoutSK",
-                    "scName": "stdout",
-                    "scRotation": null
-                  }
-                ]
-              }
-              - --socket-path /node-ipc/node.socket
+            - --config /config/db-sync-config.json
+            - --socket-path /node-ipc/node.socket
           env:
             - name: POSTGRES_HOST_AUTH_METHOD
               value: trust
@@ -344,15 +443,13 @@ spec:
         - name: postgres-data
           emptyDir: {}
         - name: vector-config-volume 
-          emptyDir: {}
+          configMap:
+            name: vector-config
         - name: logs          
           emptyDir: {}
         - name: db-sync-config
           configMap:
             name: db-sync-config
-            items:
-              - key: config.json
-                path: config.json
         - name: db-sync-data 
           emptyDir: {}
         - name: genesis-config
