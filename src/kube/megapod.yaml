@@ -37,6 +37,10 @@ data:
     type = "file"
     include = ["/var/log/*.log"]
 
+    [sinks.prometheus]
+    type = "prometheus_exporter"
+    inputs = [ "my-source-or-transform-id" ]
+
     [sinks.console]
     inputs = ["log_file"]
     target = "stdout"
