@@ -87,7 +87,7 @@ data:
       "EnableLogMetrics": false,
       "EnableLogging": true,
       "NetworkName": "mainnet",
-      "NodeConfigFile": "/nix/store/9qxnjirql2snfln1w2gwdl8169l7404x-config-mainnet.json",
+      "NodeConfigFile": "/config/node-config.json",
       "RequiresNetworkMagic": "RequiresNoMagic",
       "defaultBackends": [
         "KatipBK"
@@ -364,6 +364,8 @@ spec:
               mountPath: /opt/cardano/data
             - name: keys
               mountPath: /var/cardano/secret/keys
+            - name: db-sync-config
+              mountPath: /db-sync-config
 
 
         - name: postgres
