@@ -1,0 +1,117 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sidechains-substrate-poc
+  namespace: sidechains-substrate-poc
+spec:
+  serviceName: sidechains-substrate-poc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidechains-substrate-poc
+  template:
+    metadata:
+      labels:
+        app: sidechains-substrate-poc
+    spec:
+      containers:
+
+        - name: alice
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "1Gi"
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+        - name: bob
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "1Gi"
+          args:
+            - "--base-path"
+            - "/data/bob"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+        - name: charlie
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "1Gi"
+          args:
+            - "--base-path"
+            - "/data/charlie"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000002"
+          env: []
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+        - name: dave
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "1Gi"
+          args:
+            - "--base-path"
+            - "/data/dave"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000003"
+          env: []
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+        - name: eve
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "1Gi"
+          args:
+            - "--base-path"
+            - "/data/eve"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000004"
+          env: []
+          volumeMounts:
+            - name: data
+              mountPath: /data
+
+      volumes:
+        - name: data
+          emptyDir: {}

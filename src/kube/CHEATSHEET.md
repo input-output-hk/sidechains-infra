@@ -19,7 +19,14 @@ kubectl logs sidechains-substrate-poc-0 -c cardano-node -n sidechains-substrate-
 kubectl logs sidechains-substrate-poc-0 -c postgres -n sidechains-substrate-poc
 kubectl logs sidechains-substrate-poc-0 -c vector -n sidechains-substrate-poc
 kubectl logs sidechains-substrate-poc-0 -c bridge-backend -n sidechains-substrate-poc
-kubectl logs sidechains-substrate-poc-0 -c cardano-db-sync -n sidechains-substrate-poc
+kubectl logs sidechains-substrate-poc-0 -c cardano-db-sync -n sidechains-substrate-pocS
+
+## Alice, Bob, Charlie, Dave, Eve
+kubectl logs sidechains-substrate-poc-0 -c alice -n sidechains-substrate-poc
+kubectl logs sidechains-substrate-poc-0 -c bob -n sidechains-substrate-poc
+kubectl logs sidechains-substrate-poc-0 -c charlie -n sidechains-substrate-poc
+kubectl logs sidechains-substrate-poc-0 -c dave -n sidechains-substrate-poc
+kubectl logs sidechains-substrate-poc-0 -c eve -n sidechains-substrate-poc
 
 ## Deploy
 kubectl apply -f megapod.yaml
