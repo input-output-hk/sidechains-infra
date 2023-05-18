@@ -1,16 +1,16 @@
-(import "substrate-node.jsonnet") +
-(import "cardano-node.jsonnet") +
+(import "substrate_node.jsonnet") +
+(import "cardano_node.jsonnet") +
 (import "volumes.jsonnet") +
 (import "configmaps.jsonnet") +
 {
   _config:: {
-    substrate-node: {
+    substrate_node: {
       port: 3000,
-      name: "grafana",
+      name: "substrate-node",
     },
-    cardano-node: {
+    cardano_node: {
       port: 9090,
-      name: "prometheus"
+      name: "cardano-node"
     }
   }
-}{}
+}
