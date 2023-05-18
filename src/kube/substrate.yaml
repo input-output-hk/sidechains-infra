@@ -1,0 +1,165 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sidechains-substrate-poc
+  namespace: sidechains-substrate-poc
+spec:
+  serviceName: sidechains-substrate-poc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidechains-substrate-poc
+  template:
+    metadata:
+      labels:
+        app: sidechains-substrate-poc
+    spec:
+      containers:
+        - name: alice
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chai
+              mountPath: /chain-data
+        - name: bob
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
+        - name: charlie
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
+        - name: dave
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
+        - name: eve
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
+        - name: alice
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 30333
+              protocol: TCP
+            - containerPort: 9933
+              protocol: TCP
+            - containerPort: 9944
+              protocol: TCP
+            - containerPort: 9615
+              protocol: TCP
+          args:
+            - "--base-path"
+            - "/data/alice"
+            - "--chain"
+            - "local"
+            - "--validator"
+            - "--node-key"
+            - "0000000000000000000000000000000000000000000000000000000000000001"
+          env: []
+          volumeMounts:
+            - name: chain-data
+              mountPath: /chain-data
+      volumes:
+        - name: chain-data    
+          emptyDir: {}
