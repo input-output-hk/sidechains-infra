@@ -1,8 +1,9 @@
+local k = import 'k.libsonnet';
 {
   substrate_node: {
-    deployment: $.k.deployment.new('substrate-node', [
+    deployment: k.deployment.new('substrate-node', [
       {
-        image: '305415268059.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:v0.0.1',
+        image: '689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1',
         name: 'substrate-node',
         ports: [
           { containerPort: 30333, name: 'default-1' },

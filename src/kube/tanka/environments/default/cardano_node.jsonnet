@@ -1,6 +1,7 @@
+local k = import 'k.libsonnet';
 {
   cardano_node: {
-    deployment: $.k.deployment.new('cardano-node', [
+    deployment: k.deployment.new('cardano-node', [
       {
         image: 'inputoutput/cardano-node:8.0.0',
         name: 'cardano-node',
