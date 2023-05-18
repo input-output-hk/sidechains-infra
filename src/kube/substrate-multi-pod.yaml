@@ -67,7 +67,7 @@ metadata:
   namespace: sidechains-substrate-poc
   labels:
     app: sidechains-substrate-poc
-    node: bobb
+    node: bob
 spec:
   containers:
     - name: bob
