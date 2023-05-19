@@ -1,0 +1,315 @@
+########## alice ##########
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alice
+  namespace: sidechains-substrate-poc
+  labels:
+    app: sidechains-substrate-poc
+    node: alice
+spec:
+  containers:
+    - name: alice
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1Gi"
+      args:
+        - "--name"
+        - "alice"
+        - "--base-path"
+        - "/data/alice"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+      ports:
+        - containerPort: 30333
+          name: tcp-30333
+        - containerPort: 9946
+          name: tcp-9946
+        - containerPort: 9934
+          name: tcp-9934
+  volumes:
+    - name: data
+      emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alice-service
+  namespace: sidechains-substrate-poc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: alice
+  ports:
+    - name: tcp-30333
+      port: 30333
+      targetPort: 30333
+    - name: tcp-9946
+      port: 9947
+      targetPort: 9946
+    - name: tcp-9934
+      port: 9934
+      targetPort: 9934
+---
+########## bob ##########
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bob
+  namespace: sidechains-substrate-poc
+  labels:
+    app: sidechains-substrate-poc
+    node: bob
+spec:
+  containers:
+    - name: bob
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1Gi"
+      args:
+        - "--name"
+        - "bob"
+        - "--base-path"
+        - "/data/bob"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000002"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+      ports:
+        - containerPort: 30333
+          name: tcp-30333
+        - containerPort: 9946
+          name: tcp-9946
+        - containerPort: 9934
+          name: tcp-9934
+  volumes:
+    - name: data
+      emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: bob-service
+  namespace: sidechains-substrate-poc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: bob
+  ports:
+    - name: tcp-30333
+      port: 30333
+      targetPort: 30333
+    - name: tcp-9946
+      port: 9947
+      targetPort: 9946
+    - name: tcp-9934
+      port: 9934
+      targetPort: 9934
+---
+########## charlie ##########
+apiVersion: v1
+kind: Pod
+metadata:
+  name: charlie
+  namespace: sidechains-substrate-poc
+  labels:
+    app: sidechains-substrate-poc
+    node: charlie
+spec:
+  containers:
+    - name: charlie
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1Gi"
+      args:
+        - "--name"
+        - "charlie"
+        - "--base-path"
+        - "/data/charlie"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000003"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+      ports:
+        - containerPort: 30333
+          name: tcp-30333
+        - containerPort: 9946
+          name: tcp-9946
+        - containerPort: 9934
+          name: tcp-9934
+  volumes:
+    - name: data
+      emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: charlie-service
+  namespace: sidechains-substrate-poc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: charlie
+  ports:
+    - name: tcp-30333
+      port: 30333
+      targetPort: 30333
+    - name: tcp-9946
+      port: 9947
+      targetPort: 9946
+    - name: tcp-9934
+      port: 9934
+      targetPort: 9934
+---
+########## dave ##########
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dave
+  namespace: sidechains-substrate-poc
+  labels:
+    app: sidechains-substrate-poc
+    node: dave
+spec:
+  containers:
+    - name: dave
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1Gi"
+      args:
+        - "--name"
+        - "dave"
+        - "--base-path"
+        - "/data/dave"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000004"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+      ports:
+        - containerPort: 30333
+          name: tcp-30333
+        - containerPort: 9946
+          name: tcp-9946
+        - containerPort: 9934
+          name: tcp-9934
+  volumes:
+    - name: data
+      emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dave-service
+  namespace: sidechains-substrate-poc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: dave
+  ports:
+    - name: tcp-30333
+      port: 30333
+      targetPort: 30333
+    - name: tcp-9946
+      port: 9947
+      targetPort: 9946
+    - name: tcp-9934
+      port: 9934
+      targetPort: 9934
+---
+########## eve ##########
+apiVersion: v1
+kind: Pod
+metadata:
+  name: eve
+  namespace: sidechains-substrate-poc
+  labels:
+    app: sidechains-substrate-poc
+    node: eve
+spec:
+  containers:
+    - name: eve
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1Gi"
+      args:
+        - "--name"
+        - "eve"
+        - "--base-path"
+        - "/data/eve"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000005"
+      volumeMounts:
+        - name: data
+          mountPath: /data
+      ports:
+        - containerPort: 30333
+          name: tcp-30333
+        - containerPort: 9946
+          name: tcp-9947
+        - containerPort: 9934
+          name: tcp-9934
+  volumes:
+    - name: data
+      emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: eve-service
+  namespace: sidechains-substrate-poc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: eve
+  ports:
+    - name: tcp-30333
+      port: 30333
+      targetPort: 30333
+    - name: tcp-9946
+      port: 9947
+      targetPort: 9946
+    - name: tcp-9934
+      port: 9934
+      targetPort: 9934
+
