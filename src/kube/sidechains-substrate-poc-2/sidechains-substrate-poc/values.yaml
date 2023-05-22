@@ -1,0 +1,89 @@
+pods:
+  - name: alice
+    replicaCount: 1
+  - name: bob
+    replicaCount: 1
+  - name: charlie
+    replicaCount: 1
+  - name: dave
+    replicaCount: 1
+  - name: eve
+    replicaCount: 1
+
+images:
+  cardanoNode: inputoutput/cardano-node:8.0.0
+  dbSync: inputoutput/cardano-db-sync:latest 
+  postgres: postgres:15.3
+  bridgeBackend: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
+  substrateNode: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
+  vector: timberio/vector:nightly-alpine
+
+ports:
+  cardanoNode:
+    - 3001
+  dbSync:
+    - 3001
+  postgres:
+    - 5432
+  bridgeBackend:
+    - 5432
+  substrateNode:
+    - 30333
+    - 9946
+    - 9934
+  vector:
+    - 8686
+
+envs:
+  cardano-node:
+    NETWORK: "preview"
+    CARDANO_NODE_SOCKET_PATH: "/ipc/node.socket"
+  db-sync:
+    NETWORK: "preview"
+    PGPASSFILE: "/pgpass/pgpass"
+    CARDANO_NODE_SOCKET_PATH: "/ipc/node.socket"
+    CARDANO_NODE_SOCKET_TCP_HOST: "http://cardano-node-service"
+    CARDANO_NODE_SOCKET_TCP_PORT: "3001"
+  postgres:
+    POSTGRES_USERNAME: "username"
+    POSTGRES_PASSWORD: "password"
+    POSTGRES_HOST_AUTH_METHOD: "trust"
+    POSTGRES_DB: "cexplorer"
+  bridgeBackend:
+  substrateNode:
+  vector:
+
+args:
+  cardano-node:
+  db-sync:
+  postgres:
+  bridgeBackend:
+  substrateNode:
+  vector:
+
+config-maps:
+  - name: vector-config
+    data:
+      vector.toml: |
+        [api]
+        enabled = true
+        address = "0.0.0.0:8686"
+        [sources.log_file]
+        type = "file"
+        include = ["/var/log/*.log"]
+        # [sinks.prometheus]
+        # type = "prometheus_exporter"
+        # inputs = [ "my-source-or-transform-id" ]
+        [sinks.console]
+        inputs = ["log_file"]
+        target = "stdout"
+        type = "console"
+        encoding.codec = "json"
+  - name: pgpass
+    data:
+      pgpass: "/var/run/postgresql:5432:cexplorer:*:*"
+  - name: secrets
+    data:
+      postgres_db: "cexplorer"
+      postgres_user: "username"
+      postgres_password: "password"

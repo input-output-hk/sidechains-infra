@@ -1,0 +1,29 @@
+{{- range .Values.pods }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .name }}
+  labels:
+    app: {{ .name }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .name }}
+    spec:
+      containers:
+      {{- range $key, $value := $.Values.images }}
+      - name: {{ .name }}-{{ $key }}
+        image: {{ $value }}
+        ports:
+        {{- range $port := index $.Values.ports $key }}
+        - containerPort: {{ $port }}
+        {{- end }}
+      {{- end }}
+---
+{{- end }}
+
