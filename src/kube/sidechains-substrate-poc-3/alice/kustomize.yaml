@@ -2,3 +2,7 @@ resources:
   - ../base/base.yaml
 
 namePrefix: alice
+configMapGenerator:
+  - name: nodeKeys
+    files:
+      - ../base/configmap.yaml
