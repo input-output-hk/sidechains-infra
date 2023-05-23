@@ -95,7 +95,7 @@ spec:
         - name: vector
           image: timberio/vector:nightly-alpine
           ports:
-            - containerPort: {{ index .Values.ports.vector 0 }}
+            - containerPort: 8686 
           volumeMounts:
             - name: vector-config
               mountPath: /etc/vector
