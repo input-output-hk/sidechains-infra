@@ -81,7 +81,7 @@ spec:
              - "local"
              - "--validator"
              - "--node-key"
-             - "{{ .node-key }}"
+             - "{{ .nodekey }}"
           ports:
              - containerPort: 30333
                name: p2p
