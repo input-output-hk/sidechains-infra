@@ -5,17 +5,17 @@ kind: Deployment
 metadata:
   name: {{ .name }}
   labels:
-    app: {{ $.Release.Name }}-{{ .name }}
+    app: {{ .name }}
   namespace: sidechains-substrate-poc-2 
 spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      app: {{ $.Release.Name }}-{{ .name }}
+      app: {{ .name }}
   template:
     metadata:
       labels:
-        app: {{ $.Release.Name }}-{{ .name }}
+        app: {{ .name }}
     spec:
       containers:
         - name: {{ .name }}-cardano-node
