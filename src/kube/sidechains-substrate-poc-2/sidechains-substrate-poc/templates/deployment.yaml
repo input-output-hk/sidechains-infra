@@ -1,4 +1,4 @@
-{{- range $value.pods }}
+{{- range .Values.pods }}
 
 apiVersion: apps/v1
 kind: Deployment
@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}-cardano-node
-          image: {{ $.Values.containerImages.cardano-node }}
+          image: inputoutput/cardano-node:8.0.0 
           env:
             - name: NETWORK
               value: "preview"
