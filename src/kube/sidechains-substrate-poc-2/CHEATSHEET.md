@@ -1,13 +1,13 @@
 # CHEATSHEET
 
 ## Local
-aws eks update-kubeconfig --region eu-central-1 --name  iog-sidechain-substrate-kubernetes
-aws eks list-clusters --region eu-central-1
-kubectl config get-contexts
 nix-shell -p kubectl awscli2 kubernetes-helm
 
-## Helm
-helm create sidechains-substrate-poc
+## List
+helm list
+
+## Deploy
+helm install <version> ./ --namespace sidechains-substrate-poc-2
 
 ## High level
 kubectl get pods -n sidechains-substrate-poc # List containers
