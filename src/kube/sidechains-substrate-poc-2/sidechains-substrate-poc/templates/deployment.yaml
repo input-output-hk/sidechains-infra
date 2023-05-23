@@ -31,7 +31,7 @@ spec:
             - name: cardano-node-datavol
               mountPath: /opt/cardano/data
         - name: {{ .name }}-db-sync
-          image: {{ $.Values.containerImages.db-sync }}
+          image: inputoutput/cardano-db-sync:latest 
           env:
             - name: NETWORK
               value: "preview"
@@ -47,7 +47,7 @@ spec:
             - name: postgres-secrets
               mountPath: /run/secrets
         - name: postgres
-          image: {{ $.Values.containerImages.postgres }} 
+          image: postgres:15.3
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -64,14 +64,14 @@ spec:
             - name: postgres-run
               mountPath: /run/postgresql
         - name: bridge-backend
-          image: {{ $.Values.containerImages.bridge-backend }}
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
           volumeMounts:
           - name: ipc
             mountPath: /node-ipc
           - name: data
             mountPath: /var/lib/postgresql/data
         - name: substrate-node
-          image: {{ $.Values.containerImages.substrate-node }}
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
           args: 
              - "--name"
              - {{ .name }}
@@ -93,7 +93,7 @@ spec:
              - name: data
                mountPath: /data
         - name: vector
-          image: {{ .Values.containerImages.vector }}
+          image: timberio/vector:nightly-alpine
           ports:
             - containerPort: {{ index .Values.ports.vector 0 }}
           volumeMounts:
