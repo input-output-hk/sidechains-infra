@@ -28,7 +28,7 @@ spec:
           volumeMounts:
             - name: ipc
               mountPath: /ipc
-            - name: cardano-node-datavol
+            - name: data
               mountPath: /opt/cardano/data
         - name: {{ .name }}-db-sync
           image: inputoutput/cardano-db-sync:latest 
@@ -59,7 +59,7 @@ spec:
             - name: POSTGRES_DB
               value: "cexplorer"
           volumeMounts:
-            - name: postgres-data
+            - name: data
               mountPath: /var/lib/postgresql/data
             - name: postgres-run
               mountPath: /run/postgresql
@@ -102,11 +102,9 @@ spec:
             - name: vector-logs
               mountPath: /var/log
       volumes:
+        - name: data
+          emptyDir: {}
         - name: ipc
-          emptyDir: {}
-        - name: cardano-node-datavol
-          emptyDir: {}
-        - name: postgres-data
           emptyDir: {}
         - name: postgres-run
           emptyDir: {}
