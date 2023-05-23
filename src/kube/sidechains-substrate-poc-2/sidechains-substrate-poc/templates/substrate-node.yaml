@@ -1,0 +1,27 @@
+{{- range .Values.pods }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ .name }}-substrate-node
+  labels:
+    app: {{ .name }}-substrate-node
+spec:
+  containers:
+    - name: substrate-node
+      image: {{ $.Values.images.substrateNode }}
+      args:
+        - "--name"
+        - "{{ .name }}"
+        - "--base-path"
+        - "/data/{{ .name }}"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "{{ $.Values.args.substrateNode.[.name].nodeKey }}"
+      ports:
+        {{- range $.Values.ports.substrateNode }}
+        - name: tcp-{{ . }}
+          containerPort: {{ . }}
+        {{- end }}
+{{- end }}
