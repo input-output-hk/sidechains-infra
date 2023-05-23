@@ -3,10 +3,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $.Release.Name }}-{{ .name }}
+  name: {{ .name }}
   labels:
     app: {{ $.Release.Name }}-{{ .name }}
-  namespace: {{ $.Release.Namespace }}
+  namespace: sidechains-substrate-poc-2 
 spec:
   replicas: {{ .replicaCount }}
   selector:
