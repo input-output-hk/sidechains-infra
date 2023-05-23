@@ -2,28 +2,119 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .name }}
+  name: {{ $.Release.Name }}-{{ .name }}
   labels:
-    app: {{ .name }}
+    app: {{ $.Release.Name }}-{{ .name }}
+  namespace: {{ $.Release.Namespace }}
 spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      app: {{ .name }}
+      app: {{ $.Release.Name }}-{{ .name }}
   template:
     metadata:
       labels:
-        app: {{ .name }}
+        app: {{ $.Release.Name }}-{{ .name }}
     spec:
       containers:
-      {{- range $key, $value := $.Values.images }}
-      - name: {{ .name }}-{{ $key }}
-        image: {{ $value }}
-        ports:
-        {{- range $port := index $.Values.ports $key }}
-        - containerPort: {{ $port }}
-        {{- end }}
-      {{- end }}
----
+        - name: {{ .name }}-cardano-node
+          image: {{ $.Values.images.cardano-node }}
+          env:
+            - name: NETWORK
+              value: "preview"
+            - name: CARDANO_NODE_SOCKET_PATH
+              value: /ipc/node.socket
+          volumeMounts:
+            - name: ipc
+              mountPath: /ipc
+            - name: cardano-node-datavol
+              mountPath: /opt/cardano/data
+        - name: {{ .name }}-db-sync
+          image: {{ $.Values.images.db-sync }}
+          env:
+            - name: NETWORK
+              value: "preview"
+            - name: POSTGRES_HOST
+              value: "localhost"
+            - name: POSTGRES_PORT
+              value: "5432"
+          volumeMounts:
+            - name: ipc
+              mountPath: /node-ipc
+            - name: postgres-run
+              mountPath: /run/postgresql
+            - name: postgres-secrets
+              mountPath: /run/secrets
+        - name: postgres
+          image: {{ $.Values.images.postgres }} 
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          env:
+            - name: POSTGRES_PASSWORD
+              value: "password123"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: "trust"
+            - name: POSTGRES_DB
+              value: "cexplorer"
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+            - name: postgres-run
+              mountPath: /run/postgresql
+        - name: bridge-backend
+          image: {{ $.Values.images.bridge-backend }}
+          volumeMounts:
+          - name: ipc
+            mountPath: /node-ipc
+          - name: data
+            mountPath: /var/lib/postgresql/data
+        - name: substrate-node
+          image: {{ $.Values.images.substrate-node }}
+          args: 
+             - "--name"
+             - {{ .name }}
+             - "--base-path"
+             - "/data/{{ .name }}"
+             - "--chain"
+             - "local"
+             - "--validator"
+             - "--node-key"
+             - "{{ .node-key }}"
+          ports:
+             - containerPort: 30333
+               name: p2p
+             - containerPort: 9945
+               name: ws-port
+             - containerPort: 9933
+               name: rcp-port
+          volumeMounts:
+             - name: data
+               mountPath: /data
+        - name: vector
+          image: {{ .Values.images.vector }}
+          ports:
+            - containerPort: {{ index .Values.ports.vector 0 }}
+          volumeMounts:
+            - name: vector-config
+              mountPath: /etc/vector
+            - name: vector-logs
+              mountPath: /var/log
+      volumes:
+        - name: ipc
+          emptyDir: {}
+        - name: cardano-node-datavol
+          emptyDir: {}
+        - name: postgres-data
+          emptyDir: {}
+        - name: postgres-run
+          emptyDir: {}
+        - name: secrets
+          configMap:
+            name: secrets
+        - name: vector-config
+          configMap:
+            name: vector-config
+        - name: vector-logs
+          emptyDir: {}
 {{- end }}
-

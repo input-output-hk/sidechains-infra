@@ -1,14 +1,14 @@
 pods:
   - name: alice
-    replicaCount: 1
+    node-key: "0000000000000000000000000000000000000000000000000000000000000001"
   - name: bob
-    replicaCount: 1
+    node-key: "0000000000000000000000000000000000000000000000000000000000000002"
   - name: charlie
-    replicaCount: 1
+    node-key: "0000000000000000000000000000000000000000000000000000000000000003"
   - name: dave
-    replicaCount: 1
+    node-key: "0000000000000000000000000000000000000000000000000000000000000004"
   - name: eve
-    replicaCount: 1
+    node-key: "0000000000000000000000000000000000000000000000000000000000000005"
 
 images:
   cardanoNode: inputoutput/cardano-node:8.0.0
@@ -18,60 +18,7 @@ images:
   substrateNode: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
   vector: timberio/vector:nightly-alpine
 
-ports:
-  cardanoNode:
-    - 3001
-  dbSync:
-    - 3001
-  postgres:
-    - 5432
-  bridgeBackend:
-    - 5432
-  substrateNode:
-    - 30333
-    - 9946
-    - 9934
-  vector:
-    - 8686
-
-envs:
-  cardano-node:
-    NETWORK: "preview"
-    CARDANO_NODE_SOCKET_PATH: "/ipc/node.socket"
-  db-sync:
-    NETWORK: "preview"
-    PGPASSFILE: "/pgpass/pgpass"
-    CARDANO_NODE_SOCKET_PATH: "/ipc/node.socket"
-    CARDANO_NODE_SOCKET_TCP_HOST: "http://cardano-node-service"
-    CARDANO_NODE_SOCKET_TCP_PORT: "3001"
-  postgres:
-    POSTGRES_USERNAME: "username"
-    POSTGRES_PASSWORD: "password"
-    POSTGRES_HOST_AUTH_METHOD: "trust"
-    POSTGRES_DB: "cexplorer"
-  bridgeBackend:
-  substrateNode:
-  vector:
-
-args:
-  cardano-node:
-  db-sync:
-  postgres:
-  bridgeBackend:
-  substrateNode:
-    alice:
-      node-key: "0000000000000000000000000000000000000000000000000000000000000001"
-    bob:
-      node-key: "0000000000000000000000000000000000000000000000000000000000000002"
-    charlie:
-      node-key: "0000000000000000000000000000000000000000000000000000000000000003"
-    dave:
-      node-key: "0000000000000000000000000000000000000000000000000000000000000004"
-    eve:
-      node-key: "0000000000000000000000000000000000000000000000000000000000000005"
-  vector:
-
-config-maps:
+configMaps:
   - name: vector-config
     data:
       vector.toml: |
@@ -89,11 +36,8 @@ config-maps:
         target = "stdout"
         type = "console"
         encoding.codec = "json"
-  - name: pgpass
-    data:
-      pgpass: "/var/run/postgresql:5432:cexplorer:*:*"
   - name: secrets
     data:
       postgres_db: "cexplorer"
-      postgres_user: "username"
-      postgres_password: "password"
+      postgres_user: "postgres"
+      postgres_password: "password123"
