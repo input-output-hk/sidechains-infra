@@ -74,7 +74,7 @@ spec:
           image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
           args: 
              - "--name"
-             - {{ .name }}
+             - "{{ .name }}"
              - "--base-path"
              - "/data/{{ .name }}"
              - "--chain"
