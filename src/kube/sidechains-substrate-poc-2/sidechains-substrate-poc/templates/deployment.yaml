@@ -44,7 +44,7 @@ spec:
               mountPath: /node-ipc
             - name: postgres-run
               mountPath: /run/postgresql
-            - name: postgres-secrets
+            - name: secrets
               mountPath: /run/secrets
         - name: postgres
           image: postgres:15.3
