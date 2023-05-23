@@ -62,9 +62,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: ipc
+        - name: alice-ipc
           mountPath: /ipc
-        - name: data
+        - name: alice-data
           mountPath: /opt/cardano/data
     - name: alice-db-sync
       image: inputoutput/cardano-db-sync:latest 
@@ -252,9 +252,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: ipc
+        - name: bob-ipc
           mountPath: /ipc
-        - name: data
+        - name: bob-data
           mountPath: /opt/cardano/data
     - name: bob-db-sync
       image: inputoutput/cardano-db-sync:latest 
@@ -442,9 +442,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: ipc
+        - name: charlie-ipc
           mountPath: /ipc
-        - name: data
+        - name: charlie-data
           mountPath: /opt/cardano/data
     - name: charlie-db-sync
       image: inputoutput/cardano-db-sync:latest 
@@ -632,9 +632,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: ipc
+        - name: dave-ipc
           mountPath: /ipc
-        - name: data
+        - name: dave-data
           mountPath: /opt/cardano/data
     - name: dave-db-sync
       image: inputoutput/cardano-db-sync:latest 
@@ -822,9 +822,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: ipc
+        - name: eve-ipc
           mountPath: /ipc
-        - name: data
+        - name: eve-data
           mountPath: /opt/cardano/data
     - name: eve-db-sync
       image: inputoutput/cardano-db-sync:latest 
