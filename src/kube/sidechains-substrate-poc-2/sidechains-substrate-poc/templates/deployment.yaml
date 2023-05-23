@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: {{ .name }}-cardano-node
-          image: {{ $.Values.images.cardano-node }}
+          image: {{ $.Values.containerImages.cardano-node }}
           env:
             - name: NETWORK
               value: "preview"
@@ -31,7 +31,7 @@ spec:
             - name: cardano-node-datavol
               mountPath: /opt/cardano/data
         - name: {{ .name }}-db-sync
-          image: {{ $.Values.images.db-sync }}
+          image: {{ $.Values.containerImages.db-sync }}
           env:
             - name: NETWORK
               value: "preview"
@@ -47,7 +47,7 @@ spec:
             - name: postgres-secrets
               mountPath: /run/secrets
         - name: postgres
-          image: {{ $.Values.images.postgres }} 
+          image: {{ $.Values.containerImages.postgres }} 
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -64,14 +64,14 @@ spec:
             - name: postgres-run
               mountPath: /run/postgresql
         - name: bridge-backend
-          image: {{ $.Values.images.bridge-backend }}
+          image: {{ $.Values.containerImages.bridge-backend }}
           volumeMounts:
           - name: ipc
             mountPath: /node-ipc
           - name: data
             mountPath: /var/lib/postgresql/data
         - name: substrate-node
-          image: {{ $.Values.images.substrate-node }}
+          image: {{ $.Values.containerImages.substrate-node }}
           args: 
              - "--name"
              - {{ .name }}
@@ -93,7 +93,7 @@ spec:
              - name: data
                mountPath: /data
         - name: vector
-          image: {{ .Values.images.vector }}
+          image: {{ .Values.containerImages.vector }}
           ports:
             - containerPort: {{ index .Values.ports.vector 0 }}
           volumeMounts:

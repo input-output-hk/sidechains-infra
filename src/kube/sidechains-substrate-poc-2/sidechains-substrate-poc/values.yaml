@@ -10,13 +10,14 @@ pods:
   - name: eve
     node-key: "0000000000000000000000000000000000000000000000000000000000000005"
 
-images:
+containerImages:
   cardano-node: inputoutput/cardano-node:8.0.0
   db-sync: inputoutput/cardano-db-sync:latest 
   postgres: postgres:15.3
   bridge-backend: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
   substrate-node: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
   vector: timberio/vector:nightly-alpine
+
 
 configMaps:
   - name: vector-config
