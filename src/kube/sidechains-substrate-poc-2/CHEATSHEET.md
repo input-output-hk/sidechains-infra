@@ -38,4 +38,4 @@ kubectl exec -it -n sidechains-substrate-poc postgres -- sh
 kubectl apply -f environment.yaml
 
 ## Nuke
-kubectl delete -f environment.yaml
+kubectl delete all --all -n sidechains-substrate-poc-2
