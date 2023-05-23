@@ -1,4 +1,4 @@
-{{- range .Values.pods }}
+{{- range $value.pods }}
 
 apiVersion: apps/v1
 kind: Deployment
