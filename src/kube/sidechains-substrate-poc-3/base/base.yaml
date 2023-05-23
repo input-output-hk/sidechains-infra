@@ -149,7 +149,7 @@ spec:
          - "local"
          - "--validator"
          - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+         - $(my-configmap.data.$(namePrefix)-node-key)
       ports:
          - containerPort: 30333
            name: p2p
