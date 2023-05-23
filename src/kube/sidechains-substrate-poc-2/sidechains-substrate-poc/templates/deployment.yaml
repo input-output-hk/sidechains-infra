@@ -1,4 +1,5 @@
 {{- range .Values.pods }}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -117,4 +118,6 @@ spec:
             name: vector-config
         - name: vector-logs
           emptyDir: {}
+
 {{- end }}
+  
