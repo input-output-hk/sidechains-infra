@@ -115,7 +115,7 @@ spec:
           mountPath: /var/lib/postgresql/data
         - name: eve-postgres-run
           mountPath: /run/postgresql
-    - name: eve-bridge-backend
+    - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
       resources:
