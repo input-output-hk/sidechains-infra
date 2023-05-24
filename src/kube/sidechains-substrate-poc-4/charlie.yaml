@@ -164,7 +164,7 @@ spec:
       args: 
          - "--charlie"
          - "--base-path"
-         - "/data/charlie"
+         - "/data"
          - "--chain"
          - "local"
          - "--validator"

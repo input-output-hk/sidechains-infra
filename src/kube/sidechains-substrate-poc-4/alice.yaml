@@ -164,7 +164,7 @@ spec:
       args: 
          - "--alice"
          - "--base-path"
-         - "/data/alice"
+         - "/data"
          - "--chain"
          - "local"
          - "--validator"

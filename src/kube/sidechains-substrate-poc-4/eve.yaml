@@ -164,7 +164,7 @@ spec:
       args: 
          - "--eve"
          - "--base-path"
-         - "/data/eve"
+         - "/data"
          - "--chain"
          - "local"
          - "--validator"

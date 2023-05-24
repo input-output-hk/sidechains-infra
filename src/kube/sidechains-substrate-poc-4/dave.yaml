@@ -164,7 +164,7 @@ spec:
       args: 
          - "--dave"
          - "--base-path"
-         - "/data/dave"
+         - "/data"
          - "--chain"
          - "local"
          - "--validator"

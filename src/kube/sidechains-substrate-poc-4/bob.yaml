@@ -164,7 +164,7 @@ spec:
       args: 
          - "--bob"
          - "--base-path"
-         - "/data/bob"
+         - "/data"
          - "--chain"
          - "local"
          - "--validator"
