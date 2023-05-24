@@ -49,13 +49,13 @@ spec:
     - name: alice-cardano-node
       image: inputoutput/cardano-node:8.0.0 
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "1000m"
-        requests:
-          memory: "1024Mi"
-          cpu: "1000m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "1000m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -69,13 +69,13 @@ spec:
     - name: alice-db-sync
       image: inputoutput/cardano-db-sync:latest 
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "4096Mi"
-          cpu: "2000m"
-        requests:
-          memory: "4096Mi"
-          cpu: "2000m"
+      #resources:
+      #  limits:
+      #    memory: "4096Mi"
+      #    cpu: "2000m"
+      #  requests:
+      #    memory: "4096Mi"
+      #    cpu: "2000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -93,13 +93,13 @@ spec:
     - name: alice-postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "4096Mi"
-          cpu: "2000m"
-        requests:
-          memory: "4096Mi"
-          cpu: "2000m"
+      #resources:
+      #  limits:
+      #    memory: "4096Mi"
+      #    cpu: "2000m"
+      #  requests:
+      #    memory: "4096Mi"
+      #    cpu: "2000m"
       ports:
         - containerPort: 5432
           protocol: TCP
@@ -116,30 +116,30 @@ spec:
         - name: alice-postgres-run
           mountPath: /run/postgresql
     - name: alice-bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "512Mi"
-          cpu: "1000m"
-        requests:
-          memory: "512Mi"
-          cpu: "1000m"
+      #resources:
+      #  limits:
+      #    memory: "512Mi"
+      #    cpu: "1000m"
+      #  requests:
+      #    memory: "512Mi"
+      #    cpu: "1000m"
       volumeMounts:
       - name: alice-ipc
         mountPath: /node-ipc
       - name: alice-data
         mountPath: /var/lib/postgresql/data
     - name: alice-substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "512Mi"
-          cpu: "300m"
-        requests:
-          memory: "512Mi"
-          cpu: "300m"
+      #resources:
+      #  limits:
+      #    memory: "512Mi"
+      #    cpu: "300m"
+      #  requests:
+      #    memory: "512Mi"
+      #    cpu: "300m"
       args: 
          - "--name"
          - "alice"
@@ -163,13 +163,13 @@ spec:
     - name: alice-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "300Mi"
-          cpu: "300m"
-        requests:
-          memory: "300Mi"
-          cpu: "300m"
+      #resources:
+      #  limits:
+      #    memory: "300Mi"
+      #    cpu: "300m"
+      #  requests:
+      #    memory: "300Mi"
+      #    cpu: "300m"
       ports:
         - containerPort: 8686 
       volumeMounts:

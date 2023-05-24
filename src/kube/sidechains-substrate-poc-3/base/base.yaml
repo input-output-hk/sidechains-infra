@@ -141,15 +141,16 @@ spec:
           memory: "512Mi"
           cpu: "300m"
       args: 
-         - "--name"
-         - "$(namePrefix)"
+         - "--$(namePrefix)"
          - "--base-path"
          - "/data/$(namePrefix)"
          - "--chain"
          - "local"
          - "--validator"
          - "--node-key"
-         - $(my-configmap.data.$(namePrefix)-node-key)
+         - "$(node-key)"
+         - "--bootnodes"
+         - "$(bootnodes)"
       ports:
          - containerPort: 30333
            name: p2p

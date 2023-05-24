@@ -6,3 +6,6 @@ vars:
 - name: node-key
   objvalues:
     - "0000000000000000000000000000000000000000000000000000000000000004"
+- name: bootnodes
+  objvalues:
+    - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
