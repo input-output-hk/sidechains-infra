@@ -49,13 +49,13 @@ spec:
     - name: cardano-node
       image: inputoutput/cardano-node:8.0.0 
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "1000m"
-        requests:
-          memory: "1024Mi"
-          cpu: "1000m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "1000m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -69,13 +69,13 @@ spec:
     - name: db-sync
       image: inputoutput/cardano-db-sync:13.1.1.0
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "2000Mi"
-          cpu: "2000m"
-        requests:
-          memory: "2000Mi"
-          cpu: "2000m"
+      #resources:
+      #  limits:
+      #    memory: "2000Mi"
+      #    cpu: "2000m"
+      #  requests:
+      #    memory: "2000Mi"
+      #    cpu: "2000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -93,13 +93,13 @@ spec:
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "2000Mi"
-          cpu: "2000m"
-        requests:
-          memory: "2000Mi"
-          cpu: "2000m"
+      #resources:
+      #  limits:
+      #    memory: "2000Mi"
+      #    cpu: "2000m"
+      #  requests:
+      #    memory: "2000Mi"
+      #    cpu: "2000m"
       ports:
         - containerPort: 5432
           protocol: TCP
@@ -118,28 +118,28 @@ spec:
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "512Mi"
-          cpu: "1000m"
-        requests:
-          memory: "512Mi"
-          cpu: "1000m"
+      #resources:
+      #  limits:
+      #    memory: "512Mi"
+      #    cpu: "1000m"
+      #  requests:
+      #    memory: "512Mi"
+      #    cpu: "1000m"
       volumeMounts:
       - name: charlie-ipc
-        mountPath: /node-ipc
+        mountPath: /local
       - name: charlie-data
         mountPath: /var/lib/postgresql/data
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "512Mi"
-          cpu: "300m"
-        requests:
-          memory: "512Mi"
-          cpu: "300m"
+      #resources:
+      #  limits:
+      #    memory: "512Mi"
+      #    cpu: "300m"
+      #  requests:
+      #    memory: "512Mi"
+      #    cpu: "300m"
       args: 
          - "--charlie"
          - "--base-path"
@@ -164,13 +164,13 @@ spec:
     - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "300Mi"
-          cpu: "300m"
-        requests:
-          memory: "300Mi"
-          cpu: "300m"
+      #resources:
+      #  limits:
+      #    memory: "300Mi"
+      #    cpu: "300m"
+      #  requests:
+      #    memory: "300Mi"
+      #    cpu: "300m"
       ports:
         - containerPort: 8686 
       volumeMounts:
