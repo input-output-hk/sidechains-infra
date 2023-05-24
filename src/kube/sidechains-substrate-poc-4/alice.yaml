@@ -1,0 +1,195 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sidechains-substrate-poc-3
+# alice
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alice-vector-config
+  namespace: sidechains-substrate-poc-3
+data:
+  vector.toml: |
+    [api]
+    enabled = true
+    address = "0.0.0.0:8686"
+    [sources.log_file]
+    type = "file"
+    include = ["/var/log/*.log"]
+    # [sinks.prometheus]
+    # type = "prometheus_exporter"
+    # inputs = [ "my-source-or-transform-id" ]
+    [sinks.console]
+    inputs = ["log_file"]
+    target = "stdout"
+    type = "console"
+    encoding.codec = "json"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: alice-secrets
+  namespace: sidechains-substrate-poc-3
+data:
+  postgres_db: "cexplorer"
+  postgres_user: "postgres"
+  postgres_password: "password123"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alice
+  namespace: sidechains-substrate-poc-3
+  labels:
+    app: alice
+    node: alice
+spec:
+  containers:
+    - name: cardano-node
+      image: inputoutput/cardano-node:8.0.0 
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "1000m"
+        requests:
+          memory: "1024Mi"
+          cpu: "1000m"
+      env:
+        - name: NETWORK
+          value: "preview"
+        - name: CARDANO_NODE_SOCKET_PATH
+          value: /ipc/node.socket
+      volumeMounts:
+        - name: alice-ipc
+          mountPath: /ipc
+        - name: alice-data
+          mountPath: /opt/cardano/data
+    - name: db-sync
+      image: inputoutput/cardano-db-sync:13.1.1.0
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "2000m"
+        requests:
+          memory: "2000Mi"
+          cpu: "2000m"
+      env:
+        - name: NETWORK
+          value: "preview"
+        - name: POSTGRES_HOST
+          value: "localhost"
+        - name: POSTGRES_PORT
+          value: "5432"
+      volumeMounts:
+        - name: alice-ipc
+          mountPath: /node-ipc
+        - name: alice-postgres-run
+          mountPath: /run/postgresql
+        - name: alice-secrets
+          mountPath: /run/secrets
+    - name: postgres
+      image: postgres:15.3
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "2000m"
+        requests:
+          memory: "2000Mi"
+          cpu: "2000m"
+      ports:
+        - containerPort: 5432
+          protocol: TCP
+      env:
+        - name: POSTGRES_PASSWORD
+          value: "password123"
+        - name: POSTGRES_HOST_AUTH_METHOD
+          value: "trust"
+        - name: POSTGRES_DB
+          value: "cexplorer"
+      volumeMounts:
+        - name: alice-data
+          mountPath: /var/lib/postgresql/data
+        - name: alice-postgres-run
+          mountPath: /run/postgresql
+    - name: alice-bridge-backend
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
+        requests:
+          memory: "512Mi"
+          cpu: "1000m"
+      volumeMounts:
+      - name: alice-ipc
+        mountPath: /node-ipc
+      - name: alice-data
+        mountPath: /var/lib/postgresql/data
+    - name: substrate-node
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "300m"
+        requests:
+          memory: "512Mi"
+          cpu: "300m"
+      args: 
+         - "--alice"
+         - "--base-path"
+         - "/data/alice"
+         - "--chain"
+         - "local"
+         - "--validator"
+         - "--node-key"
+         - "0000000000000000000000000000000000000000000000000000000000000001"
+         - "--bootnodes"
+         - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+      ports:
+         - containerPort: 30333
+           name: p2p
+         - containerPort: 9945
+           name: ws-port
+         - containerPort: 9933
+           name: rcp-port
+      volumeMounts:
+         - name: alice-data
+           mountPath: /data
+    - name: vector
+      image: timberio/vector:nightly-alpine
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "300Mi"
+          cpu: "300m"
+        requests:
+          memory: "300Mi"
+          cpu: "300m"
+      ports:
+        - containerPort: 8686 
+      volumeMounts:
+        - name: alice-vector-config
+          mountPath: /etc/vector
+        - name: alice-vector-logs
+          mountPath: /var/log
+  volumes:
+    - name: alice-data
+      emptyDir: {}
+    - name: alice-ipc
+      emptyDir: {}
+    - name: alice-postgres-run
+      emptyDir: {}
+    - name: alice-secrets
+      configMap:
+        name: alice-secrets
+    - name: alice-vector-config
+      configMap:
+        name: alice-vector-config
+    - name: alice-vector-logs
+      emptyDir: {}
