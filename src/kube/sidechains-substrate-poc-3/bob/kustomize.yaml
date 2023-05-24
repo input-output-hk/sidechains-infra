@@ -1,8 +1,0 @@
-resources:
-  - ../base/base.yaml
-
-namePrefix: bob
-configMapGenerator:
-  - name: nodeKeys
-    files:
-      - ../base/configmap.yaml

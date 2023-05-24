@@ -1,0 +1,8 @@
+resources:
+  - ../base/base.yaml
+
+namePrefix: dave
+vars:
+- name: node-key
+  objvalues:
+    - "0000000000000000000000000000000000000000000000000000000000000004"

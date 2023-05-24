@@ -46,7 +46,7 @@ metadata:
     node: $(namePrefix)
 spec:
   containers:
-    - name: $(namePrefix)-cardano-node
+    - name: cardano-node
       image: inputoutput/cardano-node:8.0.0 
       imagePullPolicy: IfNotPresent
       resources:
@@ -66,8 +66,8 @@ spec:
           mountPath: /ipc
         - name: $(namePrefix)-data
           mountPath: /opt/cardano/data
-    - name: $(namePrefix)-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+    - name: db-sync
+      image: inputoutput/cardano-db-sync:13.1.1.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -90,7 +90,7 @@ spec:
           mountPath: /run/postgresql
         - name: $(namePrefix)-secrets
           mountPath: /run/secrets
-    - name: $(namePrefix)-postgres
+    - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
       resources:
@@ -130,7 +130,7 @@ spec:
         mountPath: /node-ipc
       - name: $(namePrefix)-data
         mountPath: /var/lib/postgresql/data
-    - name: $(namePrefix)-substrate-node
+    - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
       imagePullPolicy: IfNotPresent
       resources:
@@ -160,7 +160,7 @@ spec:
       volumeMounts:
          - name: $(namePrefix)-data
            mountPath: /data
-    - name: $(namePrefix)-vector
+    - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
       resources:
