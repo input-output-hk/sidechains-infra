@@ -20,8 +20,8 @@ kubectl delete -k overlays/eve/
 
 # Render
 
-kustomize build overlays/alice/
-kustomize build overlays/bob/
-kustomize build overlays/charlie/
-kustomize build overlays/dave/
-kustomize build overlays/eve/
+kubectl kustomize overlays/alice/
+kubectl kustomize overlays/bob/
+kubectl kustomize overlays/charlie/
+kubectl kustomize overlays/dave/
+kubectl kustomize overlays/eve/
