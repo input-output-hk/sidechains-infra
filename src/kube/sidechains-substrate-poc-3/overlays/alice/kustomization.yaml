@@ -7,6 +7,17 @@ resources:
 resources:
 - base.yaml
 
-source: kind: Deployment fieldPath: metadata.namePrefix value: alice
-source: kind: Deployment fieldPath: spec.template.spec.containers[3].args[2] value: 0000000000000000000000000000000000000000000000000000000000000001
-source: kind: Deployment fieldPath: spec.template.spec.containers[3].args[4] value: /dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
+- source:
+    kind: Deployment
+    fieldPath: spec.template.spec.containers[3].args[0]
+    value: alice
+
+- source:
+    kind: Deployment
+    fieldPath: spec.template.spec.containers[3].args[2]
+    value: 0000000000000000000000000000000000000000000000000000000000000001
+
+- source:
+    kind: Deployment
+    fieldPath: spec.template.spec.containers[3].args[4]
+    value: /dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
