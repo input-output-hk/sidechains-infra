@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ../base/base.yaml
-  -  configmap.yaml
+  - configmap.yaml
 
 namePrefix: charlie
 
@@ -14,11 +14,11 @@ replacements:
   targets:
   - select:
       fieldPaths:
-      - spec.template.spec.containers.[name=substrate-node].args.[name=node-key].value
+      - spec.template.spec.containers.[name=substrate-node].env.[name=node-key].value
     values:
-      - "0000000000000000000000000000000000000000000000000000000000000003"
+      - value: "0000000000000000000000000000000000000000000000000000000000000003" 
   - select:
       fieldPaths:
       - spec.template.spec.containers.[name=substrate-node].args.[name=bootnodes].value
     values:
-      - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXw
+      - value: "/dns/charlie-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/56D7KooM8iJAsdfghj8765fghjkoU78dfGh9kjHji4fdA8gJ4wF"

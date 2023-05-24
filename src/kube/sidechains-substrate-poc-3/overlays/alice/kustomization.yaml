@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - ../base/base.yaml
-  -  configmap.yaml
+  - configmap.yaml
 
 namePrefix: alice
 
@@ -14,11 +14,11 @@ replacements:
   targets:
   - select:
       fieldPaths:
-      - spec.template.spec.containers.[name=substrate-node].args.[name=node-key].value
+      - spec.template.spec.containers.[name=substrate-node].env.[name=node-key].value
     values:
-      - "0000000000000000000000000000000000000000000000000000000000000001"
+      - value: "0000000000000000000000000000000000000000000000000000000000000001"
   - select:
       fieldPaths:
       - spec.template.spec.containers.[name=substrate-node].args.[name=bootnodes].value
     values:
-      - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXw
+      - value: "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
