@@ -116,7 +116,7 @@ spec:
         - name: alice-postgres-run
           mountPath: /run/postgresql
     - name: alice-bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
       #resources:
       #  limits:
@@ -131,7 +131,7 @@ spec:
       - name: alice-data
         mountPath: /var/lib/postgresql/data
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
       #resources:
       #  limits:
