@@ -127,7 +127,7 @@ spec:
       #    cpu: "1000m"
       volumeMounts:
       - name: alice-ipc
-        mountPath: /node-ipc
+        mountPath: /local
       - name: alice-data
         mountPath: /var/lib/postgresql/data
     - name: substrate-node
