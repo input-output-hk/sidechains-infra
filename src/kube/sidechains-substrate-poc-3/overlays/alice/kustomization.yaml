@@ -4,13 +4,16 @@ kind: Kustomization
 resources:
   - ../base/base.yaml
 
-resources:
-- base.yaml
-
+replacements:
 - source:
-    kind: Deployment
-    fieldPath: spec.template.spec.containers[3].args[0]
-    value: alice
+    kind: string
+    name: alice
+  targets:
+  - select:
+      name: hello
+      kind: Job
+    fieldPaths: 
+    - spec.template.spec.containers[3].args[0]
 
 - source:
     kind: Deployment
