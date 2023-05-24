@@ -3,6 +3,14 @@ kind: Kustomization
 
 resources:
   - ../base/base.yaml
+vars:
+- name: node-key
+  objref:
+    kind: Service
+    name: my-service
+    apiVersion: v1
+  fieldref:
+    fieldpath: metadata.name
 
 replacements:
 - source:
