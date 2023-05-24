@@ -1,11 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
   - ../base/base.yaml
+  -  configmap.yaml
 
 namePrefix: eve
-vars:
-- name: node-key
-  values:
-    - "0000000000000000000000000000000000000000000000000000000000000005"
-- name: bootnodes
-  values:
-    - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+
+replacements:
+- source:
+    kind: ConfigMap
+    name: eve-configmap
+  targets:
+  - select:
+      fieldPaths:
+      - spec.template.spec.containers.[name=substrate-node].args.[name=node-key].value
+    values:
+      - "0000000000000000000000000000000000000000000000000000000000000005"
+  - select:
+      fieldPaths:
+      - spec.template.spec.containers.[name=substrate-node].args.[name=bootnodes].value
+    values:
+      - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXw
