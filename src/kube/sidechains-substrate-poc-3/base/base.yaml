@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: sidechains-substrate-poc-3
-# $(namePrefix)
+# namePrefix
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: $(namePrefix)-vector-config
+  name: namePrefix-vector-config
   namespace: sidechains-substrate-poc-3
 data:
   vector.toml: |
@@ -29,7 +29,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: $(namePrefix)-secrets
+  name: namePrefix-secrets
   namespace: sidechains-substrate-poc-3
 data:
   postgres_db: "cexplorer"
@@ -39,11 +39,11 @@ data:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: $(namePrefix)
+  name: namePrefix
   namespace: sidechains-substrate-poc-3
   labels:
-    app: $(namePrefix)
-    node: $(namePrefix)
+    app: namePrefix
+    node: namePrefix
 spec:
   containers:
     - name: cardano-node
@@ -62,9 +62,9 @@ spec:
         - name: CARDANO_NODE_SOCKET_PATH
           value: /ipc/node.socket
       volumeMounts:
-        - name: $(namePrefix)-ipc
+        - name: namePrefix-ipc
           mountPath: /ipc
-        - name: $(namePrefix)-data
+        - name: namePrefix-data
           mountPath: /opt/cardano/data
     - name: db-sync
       image: inputoutput/cardano-db-sync:13.1.1.0
@@ -84,11 +84,11 @@ spec:
         - name: POSTGRES_PORT
           value: "5432"
       volumeMounts:
-        - name: $(namePrefix)-ipc
+        - name: namePrefix-ipc
           mountPath: /node-ipc
-        - name: $(namePrefix)-postgres-run
+        - name: namePrefix-postgres-run
           mountPath: /run/postgresql
-        - name: $(namePrefix)-secrets
+        - name: namePrefix-secrets
           mountPath: /run/secrets
     - name: postgres
       image: postgres:15.3
@@ -111,11 +111,11 @@ spec:
         - name: POSTGRES_DB
           value: "cexplorer"
       volumeMounts:
-        - name: $(namePrefix)-data
+        - name: namePrefix-data
           mountPath: /var/lib/postgresql/data
-        - name: $(namePrefix)-postgres-run
+        - name: namePrefix-postgres-run
           mountPath: /run/postgresql
-    - name: $(namePrefix)-bridge-backend
+    - name: namePrefix-bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend
       imagePullPolicy: IfNotPresent
       resources:
@@ -126,9 +126,9 @@ spec:
           memory: "512Mi"
           cpu: "1000m"
       volumeMounts:
-      - name: $(namePrefix)-ipc
+      - name: namePrefix-ipc
         mountPath: /node-ipc
-      - name: $(namePrefix)-data
+      - name: namePrefix-data
         mountPath: /var/lib/postgresql/data
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
@@ -141,16 +141,16 @@ spec:
           memory: "512Mi"
           cpu: "300m"
       args: 
-         - "--$(namePrefix)"
+         - "--namePrefix"
          - "--base-path"
-         - "/data/$(namePrefix)"
+         - "/data/namePrefix"
          - "--chain"
          - "local"
          - "--validator"
          - "--node-key"
-         - "$(node-key)"
+         - "nodeKey"
          - "--bootnodes"
-         - "$(bootnodes)"
+         - "bootNodes"
       ports:
          - containerPort: 30333
            name: p2p
@@ -159,7 +159,7 @@ spec:
          - containerPort: 9933
            name: rcp-port
       volumeMounts:
-         - name: $(namePrefix)-data
+         - name: namePrefix-data
            mountPath: /data
     - name: vector
       image: timberio/vector:nightly-alpine
@@ -174,22 +174,22 @@ spec:
       ports:
         - containerPort: 8686 
       volumeMounts:
-        - name: $(namePrefix)-vector-config
+        - name: namePrefix-vector-config
           mountPath: /etc/vector
-        - name: $(namePrefix)-vector-logs
+        - name: namePrefix-vector-logs
           mountPath: /var/log
   volumes:
-    - name: $(namePrefix)-data
+    - name: namePrefix-data
       emptyDir: {}
-    - name: $(namePrefix)-ipc
+    - name: namePrefix-ipc
       emptyDir: {}
-    - name: $(namePrefix)-postgres-run
+    - name: namePrefix-postgres-run
       emptyDir: {}
-    - name: $(namePrefix)-secrets
+    - name: namePrefix-secrets
       configMap:
-        name: $(namePrefix)-secrets
-    - name: $(namePrefix)-vector-config
+        name: namePrefix-secrets
+    - name: namePrefix-vector-config
       configMap:
-        name: $(namePrefix)-vector-config
-    - name: $(namePrefix)-vector-logs
+        name: namePrefix-vector-config
+    - name: namePrefix-vector-logs
       emptyDir: {}
