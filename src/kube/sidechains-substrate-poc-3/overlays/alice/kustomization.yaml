@@ -3,19 +3,17 @@ kind: Kustomization
 
 resources:
   - ../base/base.yaml
-  - configmap.yaml
 
-namePrefix: alice
+resources:
+- base.yaml
 
 replacements:
-- source:
-    kind: ConfigMap
-    name: alice-configmap
-  targets:
-  - select:
-      fieldPath:
-      - spec.template.spec.containers.[name=substrate-node].args.[name=node-key].value
-      - spec.template.spec.containers.[name=substrate-node].args[name=bootnodes].value.
-    values:
-      - "2222222222222222222222222222222222222222222222222222222222222222"
-      - "/dns/charlie-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/56D7KooM8iJAsdfghj8765fghjkoU78dfGh9kjHji4fdA8gJ4wF"
+- name: namePrefix
+  from: $(namePrefix)
+  to: alice
+- name: node-key
+  from: $(node-key)
+  to: 0000000000000000000000000000000000000000000000000000000000000001
+- name: bootnodes
+  from: $(bootnodes)
+  to: /dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp
