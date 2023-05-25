@@ -63,20 +63,20 @@ metadata:
   name: alice
   namespace: sidechains-substrate-poc-4
   labels:
-    app: alice
+    app: sidechains-substrate-poc
     node: alice
 spec:
   containers:
     - name: cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "1024Mi"
-      #    cpu: "1000m"
-      #  requests:
-      #    memory: "1024Mi"
-      #    cpu: "1000m"
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "600m"
+        requests:
+          memory: "1024Mi"
+          cpu: "300m"
       env:
         - name: NETWORK
           value: "preview"
@@ -90,13 +90,13 @@ spec:
     - name: db-sync
       image: inputoutput/cardano-db-sync:13.1.1.0
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
-      #  requests:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "600m"
+        requests:
+          memory: "2000Mi"
+          cpu: "400m"
       env:
         - name: NETWORK
           value: "preview"
@@ -106,62 +106,65 @@ spec:
           value: "5432"
       volumeMounts:
         - name: alice-ipc
-          mountPath: /node-ipc
-        - name: alice-postgres-run
+          mountPath: /node-ipc # /node-ipc/node.socket is a hardcoded path in the docker image
+        - name: alice-postgres-run # TODO: check again if docker image needs and access to this directory
           mountPath: /run/postgresql
-        - name: alice-secrets
+        - name: alice-secrets # TODO: these credentials could be passed with env variables, what is preferred way in k8s?
           mountPath: /run/secrets
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
-      #  requests:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "600m"
+        requests:
+          memory: "2000Mi"
+          cpu: "300m"
       ports:
         - containerPort: 5432
           protocol: TCP
       env:
         - name: POSTGRES_PASSWORD
           value: "password123"
-        - name: POSTGRES_HOST_AUTH_METHOD
-          value: "trust"
         - name: POSTGRES_DB
           value: "cexplorer"
       volumeMounts:
-        - name: alice-data
+        - name: alice-postgres-data
           mountPath: /var/lib/postgresql/data
         - name: alice-postgres-run
           mountPath: /run/postgresql
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "512Mi"
-      #    cpu: "1000m"
-      #  requests:
-      #    memory: "512Mi"
-      #    cpu: "1000m"
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
+        requests:
+          memory: "512Mi"
+          cpu: "200m"
+      env:
+        - name: CARDANO_FOLLOWER_POSTGRES_USERNAME
+          value: "postgres"
+        - name: CARDANO_FOLLOWER_POSTGRES_PASSWORD
+          value: "password123"
+        - name: CARDANO_FOLLOWER_JDBC_URL
+          value: "jdbc:postgresql://localhost:5432/cexplorer"
       volumeMounts:
       - name: alice-ipc
         mountPath: /local
-      - name: alice-data
-        mountPath: /var/lib/postgresql/data
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "512Mi"
-      #    cpu: "300m"
-      #  requests:
-      #    memory: "512Mi"
-      #    cpu: "300m"
-      args: 
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
+        requests:
+          memory: "512Mi"
+          cpu: "300m"
+      args:
          - "--alice"
          - "--base-path"
          - "/data"
@@ -171,7 +174,7 @@ spec:
          - "--node-key"
          - "0000000000000000000000000000000000000000000000000000000000000001"
          - "--bootnodes"
-         - "/dns/alice-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+         - "/dns/alice-service.sidechains-substrate-poc-4.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
       ports:
          - containerPort: 30333
            name: p2p
@@ -191,9 +194,9 @@ spec:
           cpu: "300m"
         requests:
           memory: "300Mi"
-          cpu: "300m"
+          cpu: "200m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: alice-vector-config
           mountPath: /etc/vector
@@ -203,6 +206,8 @@ spec:
     - name: alice-data
       emptyDir: {}
     - name: alice-ipc
+      emptyDir: {}
+    - name: alice-postgres-data
       emptyDir: {}
     - name: alice-postgres-run
       emptyDir: {}

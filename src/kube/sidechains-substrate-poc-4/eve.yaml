@@ -36,7 +36,7 @@ data:
     enabled = true
     address = "0.0.0.0:8686"
     [sources.log_file]
-    type = "file/
+    type = "file"
     include = ["/var/log/*.log"]
     # [sinks.prometheus]
     # type = "prometheus_exporter"
@@ -63,20 +63,20 @@ metadata:
   name: eve
   namespace: sidechains-substrate-poc-4
   labels:
-    app: eve
+    app: sidechains-substrate-poc
     node: eve
 spec:
   containers:
     - name: cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
           memory: "1024Mi"
-          cpu: "1000m"
+          cpu: "600m"
         requests:
           memory: "1024Mi"
-          cpu: "1000m"
+          cpu: "300m"
       env:
         - name: NETWORK
           value: "preview"
@@ -90,13 +90,13 @@ spec:
     - name: db-sync
       image: inputoutput/cardano-db-sync:13.1.1.0
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
-      #  requests:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "600m"
+        requests:
+          memory: "2000Mi"
+          cpu: "400m"
       env:
         - name: NETWORK
           value: "preview"
@@ -114,86 +114,89 @@ spec:
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
-      #  requests:
-      #    memory: "2000Mi"
-      #    cpu: "2000m"
+      resources:
+        limits:
+          memory: "2000Mi"
+          cpu: "600m"
+        requests:
+          memory: "2000Mi"
+          cpu: "300m"
       ports:
         - containerPort: 5432
           protocol: TCP
       env:
         - name: POSTGRES_PASSWORD
           value: "password123"
-        - name: POSTGRES_HOST_AUTH_METHOD
-          value: "trust"
         - name: POSTGRES_DB
           value: "cexplorer"
       volumeMounts:
-        - name: eve-data
+        - name: eve-postgres-data
           mountPath: /var/lib/postgresql/data
         - name: eve-postgres-run
           mountPath: /run/postgresql
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "512Mi"
-      #    cpu: "1000m"
-      #  requests:
-      #    memory: "512Mi"
-      #    cpu: "1000m"
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
+        requests:
+          memory: "512Mi"
+          cpu: "200m"
+      env:
+        - name: CARDANO_FOLLOWER_POSTGRES_USERNAME
+          value: "postgres"
+        - name: CARDANO_FOLLOWER_POSTGRES_PASSWORD
+          value: "password123"
+        - name: CARDANO_FOLLOWER_JDBC_URL
+          value: "jdbc:postgresql://localhost:5432/cexplorer"
       volumeMounts:
-      - name: eve-ipc
-        mountPath: /local
-      - name: eve-data
-        mountPath: /var/lib/postgresql/data
+        - name: eve-ipc
+          mountPath: /local
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "512Mi"
-      #    cpu: "300m"
-      #  requests:
-      #    memory: "512Mi"
-      #    cpu: "300m"
-      args: 
-         - "--eve"
-         - "--base-path"
-         - "/data"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000005"
-         - "--bootnodes"
-         - "/dns/eve-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "1000m"
+        requests:
+          memory: "512Mi"
+          cpu: "300m"
+      args:
+        - "--eve"
+        - "--base-path"
+        - "/data"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000002"
+        - "--bootnodes"
+        - "/dns/alice-service.sidechains-substrate-poc-4.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: eve-data
-           mountPath: /data
+        - name: eve-data
+          mountPath: /data
     - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "300Mi"
-      #    cpu: "300m"
-      #  requests:
-      #    memory: "300Mi"
-      #    cpu: "300m"
+      resources:
+        limits:
+          memory: "300Mi"
+          cpu: "300m"
+        requests:
+          memory: "300Mi"
+          cpu: "200m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: eve-vector-config
           mountPath: /etc/vector
@@ -203,6 +206,8 @@ spec:
     - name: eve-data
       emptyDir: {}
     - name: eve-ipc
+      emptyDir: {}
+    - name: eve-postgres-data
       emptyDir: {}
     - name: eve-postgres-run
       emptyDir: {}
