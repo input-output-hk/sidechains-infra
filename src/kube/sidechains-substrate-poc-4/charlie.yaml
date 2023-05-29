@@ -92,6 +92,12 @@ spec:
           value: "preview"
         - name: POSTGRES_HOST
           value: "localhost"
+        - name: POSTGRES_DB
+          value: "cexplorer"
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "password123"
         - name: POSTGRES_PORT
           value: "5432"
       volumeMounts:
