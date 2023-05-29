@@ -48,16 +48,6 @@ data:
     encoding.codec = "json"
 ---
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: charlie-secrets
-  namespace: sidechains-substrate-poc-4
-data:
-  postgres_db: "cexplorer"
-  postgres_user: "postgres"
-  postgres_password: "password123"
----
-apiVersion: v1
 kind: Pod
 metadata:
   name: charlie
@@ -109,8 +99,6 @@ spec:
           mountPath: /node-ipc
         - name: charlie-postgres-run
           mountPath: /run/postgresql
-        - name: charlie-secrets
-          mountPath: /run/secrets
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -211,9 +199,6 @@ spec:
       emptyDir: {}
     - name: charlie-postgres-run
       emptyDir: {}
-    - name: charlie-secrets
-      configMap:
-        name: charlie-secrets
     - name: charlie-vector-config
       configMap:
         name: charlie-vector-config

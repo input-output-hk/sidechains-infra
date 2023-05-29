@@ -48,16 +48,6 @@ data:
     encoding.codec = "json"
 ---
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: bob-secrets
-  namespace: sidechains-substrate-poc-4
-data:
-  postgres_db: "cexplorer"
-  postgres_user: "postgres"
-  postgres_password: "password123"
----
-apiVersion: v1
 kind: Pod
 metadata:
   name: bob
@@ -109,8 +99,6 @@ spec:
           mountPath: /node-ipc
         - name: bob-postgres-run
           mountPath: /run/postgresql
-        - name: bob-secrets
-          mountPath: /run/secrets
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -211,9 +199,6 @@ spec:
       emptyDir: {}
     - name: bob-postgres-run
       emptyDir: {}
-    - name: bob-secrets
-      configMap:
-        name: bob-secrets
     - name: bob-vector-config
       configMap:
         name: bob-vector-config

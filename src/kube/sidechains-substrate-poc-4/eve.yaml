@@ -48,16 +48,6 @@ data:
     encoding.codec = "json"
 ---
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: eve-secrets
-  namespace: sidechains-substrate-poc-4
-data:
-  postgres_db: "cexplorer"
-  postgres_user: "postgres"
-  postgres_password: "password123"
----
-apiVersion: v1
 kind: Pod
 metadata:
   name: eve
@@ -109,8 +99,6 @@ spec:
           mountPath: /node-ipc
         - name: eve-postgres-run
           mountPath: /run/postgresql
-        - name: eve-secrets
-          mountPath: /run/secrets
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -211,9 +199,6 @@ spec:
       emptyDir: {}
     - name: eve-postgres-run
       emptyDir: {}
-    - name: eve-secrets
-      configMap:
-        name: eve-secrets
     - name: eve-vector-config
       configMap:
         name: eve-vector-config
