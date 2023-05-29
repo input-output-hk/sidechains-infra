@@ -17,6 +17,11 @@ kubectl delete -f charlie.yaml
 kubectl delete -f dave.yaml
 kubectl delete -f eve.yaml
 
+# Describe
+
+kubectl get pods -n sidechains-substrate-poc-4
+kubectl describe pods -n sidechains-substrate-poc-4
+
 # Logs
 
 kubectl logs alice -c cardano-node -n sidechains-substrate-poc-4
