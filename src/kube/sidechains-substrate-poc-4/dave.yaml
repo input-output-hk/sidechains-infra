@@ -97,8 +97,8 @@ spec:
       volumeMounts:
         - name: dave-ipc
           mountPath: /node-ipc
-        - name: dave-postgres-run
-          mountPath: /run/postgresql
+        - name: dave-cexplorer
+          mountPath: /var/lib
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -120,7 +120,7 @@ spec:
       volumeMounts:
         - name: dave-postgres-data
           mountPath: /var/lib/postgresql/data
-        - name: dave-postgres-run
+        - name: dave-cexplorer
           mountPath: /run/postgresql
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
@@ -197,7 +197,7 @@ spec:
       emptyDir: {}
     - name: dave-postgres-data
       emptyDir: {}
-    - name: dave-postgres-run
+    - name: dave-cexplorer
       emptyDir: {}
     - name: dave-vector-config
       configMap:

@@ -97,7 +97,7 @@ spec:
       volumeMounts:
         - name: bob-ipc
           mountPath: /node-ipc
-        - name: bob-postgres-run
+        - name: bob-cexplorer
           mountPath: /run/postgresql
     - name: postgres
       image: postgres:15.3
@@ -120,8 +120,8 @@ spec:
       volumeMounts:
         - name: bob-postgres-data
           mountPath: /var/lib/postgresql/data
-        - name: bob-postgres-run
-          mountPath: /run/postgresql
+        - name: bob-cexplorer
+          mountPath: /var/lib
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
       imagePullPolicy: IfNotPresent
@@ -197,7 +197,7 @@ spec:
       emptyDir: {}
     - name: bob-postgres-data
       emptyDir: {}
-    - name: bob-postgres-run
+    - name: bob-cexplorer
       emptyDir: {}
     - name: bob-vector-config
       configMap:

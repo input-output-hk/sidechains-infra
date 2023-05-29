@@ -97,8 +97,8 @@ spec:
       volumeMounts:
         - name: charlie-ipc
           mountPath: /node-ipc
-        - name: charlie-postgres-run
-          mountPath: /run/postgresql
+        - name: charlie-cexplorer
+          mountPath: /var/lib
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -120,7 +120,7 @@ spec:
       volumeMounts:
         - name: charlie-postgres-data
           mountPath: /var/lib/postgresql/data
-        - name: charlie-postgres-run
+        - name: charlie-cexplorer
           mountPath: /run/postgresql
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
@@ -197,7 +197,7 @@ spec:
       emptyDir: {}
     - name: charlie-postgres-data
       emptyDir: {}
-    - name: charlie-postgres-run
+    - name: charlie-cexplorer
       emptyDir: {}
     - name: charlie-vector-config
       configMap:

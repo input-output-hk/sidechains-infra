@@ -97,8 +97,8 @@ spec:
       volumeMounts:
         - name: alice-ipc
           mountPath: /node-ipc # /node-ipc/node.socket is a hardcoded path in the docker image
-        - name: alice-postgres-run # TODO: check again if docker image needs and access to this directory
-          mountPath: /run/postgresql
+        - name: alice-cexplorer # TODO: check again if docker image needs and access to this directory
+          mountPath: /var/lib
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -120,7 +120,7 @@ spec:
       volumeMounts:
         - name: alice-postgres-data
           mountPath: /var/lib/postgresql/data
-        - name: alice-postgres-run
+        - name: alice-cexplorer
           mountPath: /run/postgresql
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
@@ -197,7 +197,7 @@ spec:
       emptyDir: {}
     - name: alice-postgres-data
       emptyDir: {}
-    - name: alice-postgres-run
+    - name: alice-cexplorer
       emptyDir: {}
     - name: alice-vector-config
       configMap:
