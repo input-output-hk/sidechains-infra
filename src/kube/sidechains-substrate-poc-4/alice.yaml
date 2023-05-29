@@ -94,6 +94,8 @@ spec:
           value: "localhost"
         - name: POSTGRES_USER
           value: "postgres"
+        - name: POSTGRES_PASSWORD
+          value: "password123"
         - name: POSTGRES_PORT
           value: "5432"
       volumeMounts:
