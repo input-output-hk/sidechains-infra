@@ -97,8 +97,8 @@ spec:
       volumeMounts:
         - name: alice-ipc
           mountPath: /node-ipc # /node-ipc/node.socket is a hardcoded path in the docker image
-        - name: alice-cexplorer # TODO: check again if docker image needs and access to this directory
-          mountPath: /var/lib
+#        - name: alice-cexplorer # TODO: check again if docker image needs and access to this directory
+#          mountPath: /var/lib
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
