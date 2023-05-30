@@ -62,6 +62,20 @@ locals {
         Resource = "*"
     },
     {
+        Effect = "Allow"
+        Action = [
+            "eks:ListClusters"
+            "eks:ListTagsForResource",
+            "eks:DescribeIdentityProviderConfig",
+            "eks:DescribeUpdate",
+            "eks:AccessKubernetesApi",
+            "cloudshell:GetEnvironmentStatus",
+            "eks:DescribeCluster",
+            "cloudshell:CreateSession"
+        ]
+        Resource = "*"
+    },
+    {
       Effect = "Allow"
       Action = [
         "s3:ListAllMyBuckets"
