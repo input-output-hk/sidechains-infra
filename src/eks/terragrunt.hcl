@@ -1,7 +1,7 @@
 locals {
-    # Cannot have nested includes, so we read the config directly
-    common = read_terragrunt_config("${get_parent_terragrunt_dir()}/common.hcl").locals
-    state = local.common.state
+  # Cannot have nested includes, so we read the config directly
+  common = read_terragrunt_config("${get_parent_terragrunt_dir()}/common.hcl").locals
+  state  = local.common.state
 }
 
 remote_state {
@@ -13,7 +13,7 @@ remote_state {
   config = {
     bucket = local.state.bucket
 
-    key = "${split("envs/", path_relative_to_include())[1]}/terraform.tfstate"
+    key            = "${split("envs/", path_relative_to_include())[1]}/terraform.tfstate"
     region         = local.state.region
     encrypt        = true
     dynamodb_table = local.state.lock
@@ -21,9 +21,9 @@ remote_state {
 }
 
 generate "provider" {
-  path = "provider.tf"
+  path      = "provider.tf"
   if_exists = "overwrite"
-  contents = <<EOF
+  contents  = <<EOF
 provider "aws" {
   region = "${local.state.region}"
 }
@@ -36,11 +36,11 @@ EOF
 }
 
 inputs = {
-    label = {
-        namespace = local.common.namespace
-        environment = local.common.environment
-        stage = split("/", path_relative_to_include())[1]
-        name = split("/", path_relative_to_include())[2]
-    }
-    policy_templates = local.common.policy_templates
+  label = {
+    namespace   = local.common.namespace
+    environment = local.common.environment
+    stage       = split("/", path_relative_to_include())[1]
+    name        = split("/", path_relative_to_include())[2]
+  }
+  policy_templates = local.common.policy_templates
 }

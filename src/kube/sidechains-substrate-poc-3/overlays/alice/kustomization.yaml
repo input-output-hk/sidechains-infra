@@ -5,20 +5,20 @@ resources:
   - ../../base
 
 replacements:
-- source:
-    value: "alice"
-  targets:
-  - select: 
-      kind: Service
-    fieldPaths: 
-    - metadata.name
-    - spec.selector.node
-  - select: 
-      kind: ConfigMap
-    fieldPaths: 
-    - metadata.name
-  - select: 
-      kind: Pod
-    fieldPaths: 
-    - metadata.name
-    - metadata.labels.node
+  - source:
+      value: "alice"
+    targets:
+      - select:
+          kind: Service
+        fieldPaths:
+          - metadata.name
+          - spec.selector.node
+      - select:
+          kind: ConfigMap
+        fieldPaths:
+          - metadata.name
+      - select:
+          kind: Pod
+        fieldPaths:
+          - metadata.name
+          - metadata.labels.node

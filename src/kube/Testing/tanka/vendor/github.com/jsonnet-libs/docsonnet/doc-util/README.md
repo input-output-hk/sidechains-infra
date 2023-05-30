@@ -1,8 +1,7 @@
 # doc-util
 
 `doc-util` provides a Jsonnet interface for `docsonnet`,
- a Jsonnet API doc generator that uses structured data instead of comments.
-
+a Jsonnet API doc generator that uses structured data instead of comments.
 
 ## Install
 
@@ -18,27 +17,27 @@ local d = import "github.com/jsonnet-libs/docsonnet/doc-util/main.libsonnet"
 
 ## Index
 
-* [`fn arg(name, type, default, enums)`](#fn-arg)
-* [`fn fn(help, args)`](#fn-fn)
-* [`fn obj(help, fields)`](#fn-obj)
-* [`fn pkg(name, url, help, filename="", version="master")`](#fn-pkg)
-* [`fn render(obj)`](#fn-render)
-* [`fn val(type, help, default)`](#fn-val)
-* [`obj argument`](#obj-argument)
-  * [`fn new(name, type, default, enums)`](#fn-argumentnew)
-* [`obj func`](#obj-func)
-  * [`fn new(help, args)`](#fn-funcnew)
-  * [`fn withArgs(args)`](#fn-funcwithargs)
-  * [`fn withHelp(help)`](#fn-funcwithhelp)
-* [`obj object`](#obj-object)
-  * [`fn new(help, fields)`](#fn-objectnew)
-  * [`fn withFields(fields)`](#fn-objectwithfields)
-* [`obj value`](#obj-value)
-  * [`fn new(type, help, default)`](#fn-valuenew)
-* [`obj T`](#obj-t)
-* [`obj package`](#obj-package)
-  * [`fn new(name, url, help, filename="", version="master")`](#fn-packagenew)
-  * [`fn newSub(name, help)`](#fn-packagenewsub)
+- [`fn arg(name, type, default, enums)`](#fn-arg)
+- [`fn fn(help, args)`](#fn-fn)
+- [`fn obj(help, fields)`](#fn-obj)
+- [`fn pkg(name, url, help, filename="", version="master")`](#fn-pkg)
+- [`fn render(obj)`](#fn-render)
+- [`fn val(type, help, default)`](#fn-val)
+- [`obj argument`](#obj-argument)
+  - [`fn new(name, type, default, enums)`](#fn-argumentnew)
+- [`obj func`](#obj-func)
+  - [`fn new(help, args)`](#fn-funcnew)
+  - [`fn withArgs(args)`](#fn-funcwithargs)
+  - [`fn withHelp(help)`](#fn-funcwithhelp)
+- [`obj object`](#obj-object)
+  - [`fn new(help, fields)`](#fn-objectnew)
+  - [`fn withFields(fields)`](#fn-objectwithfields)
+- [`obj value`](#obj-value)
+  - [`fn new(type, help, default)`](#fn-valuenew)
+- [`obj T`](#obj-t)
+- [`obj package`](#obj-package)
+  - [`fn new(name, url, help, filename="", version="master")`](#fn-packagenew)
+  - [`fn newSub(name, help)`](#fn-packagenewsub)
 
 ## Fields
 
@@ -53,7 +52,7 @@ arg(name, type, default, enums)
 ### fn fn
 
 ```ts
-fn(help, args)
+fn(help, args);
 ```
 
 `fn` is a shorthand for `func.new`
@@ -61,7 +60,7 @@ fn(help, args)
 ### fn obj
 
 ```ts
-obj(help, fields)
+obj(help, fields);
 ```
 
 `obj` is a shorthand for `object.new`
@@ -69,7 +68,7 @@ obj(help, fields)
 ### fn pkg
 
 ```ts
-pkg(name, url, help, filename="", version="master")
+pkg(name, url, help, (filename = ""), (version = "master"));
 ```
 
 `new` is a shorthand for `package.new`
@@ -77,7 +76,7 @@ pkg(name, url, help, filename="", version="master")
 ### fn render
 
 ```ts
-render(obj)
+render(obj);
 ```
 
 `render` converts the docstrings to human readable Markdown files.
@@ -90,7 +89,6 @@ d.render(import 'main.libsonnet')
 ```
 
 Call with: `jsonnet -S -c -m docs/ docs.jsonnet`
-
 
 ### fn val
 
@@ -123,7 +121,6 @@ Examples:
 ]
 ```
 
-
 ### obj func
 
 Utilities for documenting Jsonnet methods (functions of objects)
@@ -131,7 +128,7 @@ Utilities for documenting Jsonnet methods (functions of objects)
 #### fn func.new
 
 ```ts
-new(help, args)
+new (help, args)();
 ```
 
 new creates a new function, optionally with description and arguments
@@ -139,7 +136,7 @@ new creates a new function, optionally with description and arguments
 #### fn func.withArgs
 
 ```ts
-withArgs(args)
+withArgs(args);
 ```
 
 The `withArgs` modifier overrides the arguments of that function
@@ -147,7 +144,7 @@ The `withArgs` modifier overrides the arguments of that function
 #### fn func.withHelp
 
 ```ts
-withHelp(help)
+withHelp(help);
 ```
 
 The `withHelp` modifier overrides the help text of that function
@@ -159,7 +156,7 @@ Utilities for documenting Jsonnet objects (`{ }`).
 #### fn object.new
 
 ```ts
-new(help, fields)
+new (help, fields)();
 ```
 
 new creates a new object, optionally with description and fields
@@ -167,7 +164,7 @@ new creates a new object, optionally with description and fields
 #### fn object.withFields
 
 ```ts
-withFields(fields)
+withFields(fields);
 ```
 
 The `withFields` modifier overrides the fields property of an already created object
@@ -186,46 +183,42 @@ new creates a new object of given type, optionally with description and default 
 
 ### obj T
 
-
-* `T.any` (`string`): `"any"` - argument of type "any"
-* `T.array` (`string`): `"array"` - argument of type "array"
-* `T.boolean` (`string`): `"bool"` - argument of type "boolean"
-* `T.func` (`string`): `"function"` - argument of type "func"
-* `T.null` (`string`): `"null"` - argument of type "null"
-* `T.number` (`string`): `"number"` - argument of type "number"
-* `T.object` (`string`): `"object"` - argument of type "object"
-* `T.string` (`string`): `"string"` - argument of type "string"
+- `T.any` (`string`): `"any"` - argument of type "any"
+- `T.array` (`string`): `"array"` - argument of type "array"
+- `T.boolean` (`string`): `"bool"` - argument of type "boolean"
+- `T.func` (`string`): `"function"` - argument of type "func"
+- `T.null` (`string`): `"null"` - argument of type "null"
+- `T.number` (`string`): `"number"` - argument of type "number"
+- `T.object` (`string`): `"object"` - argument of type "object"
+- `T.string` (`string`): `"string"` - argument of type "string"
 
 ### obj package
-
 
 #### fn package.new
 
 ```ts
-new(name, url, help, filename="", version="master")
+new (name, url, help, (filename = ""), (version = "master"))();
 ```
 
 `new` creates a new package
 
 Arguments:
 
-* given `name`
-* source `url` for jsonnet-bundler and the import
-* `help` text
-* `filename` for the import, defaults to blank for backward compatibility
-* `version` for jsonnet-bundler install, defaults to `master` just like jsonnet-bundler
-
+- given `name`
+- source `url` for jsonnet-bundler and the import
+- `help` text
+- `filename` for the import, defaults to blank for backward compatibility
+- `version` for jsonnet-bundler install, defaults to `master` just like jsonnet-bundler
 
 #### fn package.newSub
 
 ```ts
-newSub(name, help)
+newSub(name, help);
 ```
 
 `newSub` creates a package without the preconfigured install/usage templates.
 
 Arguments:
 
-* given `name`
-* `help` text
-
+- given `name`
+- `help` text

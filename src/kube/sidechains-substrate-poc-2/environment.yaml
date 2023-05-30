@@ -435,7 +435,7 @@ spec:
   ports:
     - name: tcp-5432
       port: 5432
-      targetPort: 5432 
+      targetPort: 5432
 ---
 apiVersion: v1
 kind: Pod
@@ -516,28 +516,28 @@ metadata:
     node: db-sync
 spec:
   containers:
-        - name: db-sync
-          image: inputoutput/cardano-db-sync:latest
-          env:
-            - name: NETWORK
-              value: "preview"
-            - name: PGPASSFILE
-              value: "/pgpass/pgpass"
-            - name: CARDANO_NODE_SOCKET_PATH
-              value: /ipc/node.socket
-            - name: CARDANO_NODE_SOCKET_TCP_HOST
-              value: "http://cardano-node-service"
-            - name: CARDANO_NODE_SOCKET_TCP_PORT
-              value: "3001"
-          volumeMounts:
-            - name: ipc
-              mountPath: /ipc
-            - name: postgres-run
-              mountPath: /run/postgresql
-            - name: pgpass
-              mountPath: /pgpass
-            - name: secrets
-              mountPath: /run/secrets
+    - name: db-sync
+      image: inputoutput/cardano-db-sync:latest
+      env:
+        - name: NETWORK
+          value: "preview"
+        - name: PGPASSFILE
+          value: "/pgpass/pgpass"
+        - name: CARDANO_NODE_SOCKET_PATH
+          value: /ipc/node.socket
+        - name: CARDANO_NODE_SOCKET_TCP_HOST
+          value: "http://cardano-node-service"
+        - name: CARDANO_NODE_SOCKET_TCP_PORT
+          value: "3001"
+      volumeMounts:
+        - name: ipc
+          mountPath: /ipc
+        - name: postgres-run
+          mountPath: /run/postgresql
+        - name: pgpass
+          mountPath: /pgpass
+        - name: secrets
+          mountPath: /run/secrets
   volumes:
     - name: ipc
       emptyDir: {}
@@ -564,7 +564,7 @@ spec:
   ports:
     - name: tcp-5432
       port: 5432
-      targetPort: 5432 
+      targetPort: 5432
 ---
 apiVersion: v1
 kind: Pod
@@ -579,10 +579,10 @@ spec:
     - name: bridge-backend
       image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
       volumeMounts:
-      - name: node-ipc
-        mountPath: /node-ipc
-      - name: postgres-data
-        mountPath: /var/lib/postgresql/data
+        - name: node-ipc
+          mountPath: /node-ipc
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
   volumes:
     - name: node-ipc
       emptyDir: {}

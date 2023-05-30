@@ -312,4 +312,3 @@ spec:
     - name: tcp-9934
       port: 9934
       targetPort: 9934
-

@@ -5,7 +5,6 @@ aws eks update-kubeconfig --region eu-central-1 --name iog-sidechain-substrate-k
 aws eks list-clusters --region eu-central-1
 kubectl config get-contexts
 
-
 # Apply
 
 kubectl apply -f alice.yaml

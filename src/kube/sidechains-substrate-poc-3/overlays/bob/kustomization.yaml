@@ -8,17 +8,17 @@ resources:
 namePrefix: bob
 
 replacements:
-- source:
-    kind: ConfigMap
-    name: bob-configmap
-  targets:
-  - select:
-      fieldPaths:
-      - spec.template.spec.containers.[name=substrate-node].env.[name=node-key].value
-    values:
-      - value: "0000000000000000000000000000000000000000000000000000000000000002" 
-  - select:
-      fieldPaths:
-      - spec.template.spec.containers.[name=substrate-node].args.[name=bootnodes].value
-    values:
-      - value: "/dns/bob-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/34D5KooXCvjhYWEF8RuS3fU4szM6huhseXQ6Ko5fxEXAuNqFr6Wz"
+  - source:
+      kind: ConfigMap
+      name: bob-configmap
+    targets:
+      - select:
+          fieldPaths:
+            - spec.template.spec.containers.[name=substrate-node].env.[name=node-key].value
+        values:
+          - value: "0000000000000000000000000000000000000000000000000000000000000002"
+      - select:
+          fieldPaths:
+            - spec.template.spec.containers.[name=substrate-node].args.[name=bootnodes].value
+        values:
+          - value: "/dns/bob-service.sidechains-substrate-poc.svc.cluster.local/tcp/30333/p2p/34D5KooXCvjhYWEF8RuS3fU4szM6huhseXQ6Ko5fxEXAuNqFr6Wz"

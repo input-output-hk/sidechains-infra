@@ -5,7 +5,7 @@ metadata:
   name: regcred
 type: kubernetes.io/dockerconfigjson
 data:
-#    echo -n '{"auths":{"305415268059.dkr.ecr.eu-central-1.amazonaws.com":{"auth":"'$(echo -n 'AWS:'$(aws ecr get-login-password --region eu-central-1) | base64 | tr -d '\n')'"}}}' | base64 | tr -d '\n'
+  #    echo -n '{"auths":{"305415268059.dkr.ecr.eu-central-1.amazonaws.com":{"auth":"'$(echo -n 'AWS:'$(aws ecr get-login-password --region eu-central-1) | base64 | tr -d '\n')'"}}}' | base64 | tr -d '\n'
   .dockerconfigjson: eyJhdXRocyI6eyIzMDU0MTUyNjgwNTkuZGtyLmVjci5ldS1jZW50cmFsLTEuYW1hem9uYXdzLmNvbSI6eyJhdXRoIjoiUVZkVE9tVjVTbmRaV0d4ellqSkdhMGxxYjJsWFIwWndUa1prV1U5V2FHaFdSMnN6WkVaWk5GVnRkSFpqTWxaUVpGZGtSRkpZV25oWlZtUkZWbFYwZW1KV1VrTk1NVlY0VVcxck5WbHRhM3BhUnpsb1RWZGFSRkpVYUhaWlZrSndXbnBTUWxNeWRIUk5iVVp5WTBac1QxTkhTazFOYlhoUVUwaEZNMkl3Vm05amJGWnRUbXRTZVZsWFVqUmhWR2cwV1ZVeGJsa3piek5VTURWeFZUTm9hVTFJVW1sa1JWcHlWV3N4TmxNeGJIaFhWbVJDWkc1cmQySXlUbFJPTW1OMlQwaEdkbVF4VmtkU00wcGFUbFJrV1UxSFZsZFRNSGd5VGxadk5GSkVTa1ZoYXpsd1pHc3hNV05GT1doV01IaDFZVWMxY21ScVNrdFJlazVyVGtkb2NtTkVWbkZTTW14d1pIcHNUV0l5UmsxV2JUbFhZMGhDVjFwNmJHaE5la3BaVmtSR1dHSlhhR2hYUlZKT1YwVjBWazFWTVRGV1JWWXlWbGRzZFZSWFdreFdiVVp5WlVkc1RGUXhaR2xhV0d4NlZFUlpNMk5yZEZSaFZrcHlZMVZPVFZKWE5XdFRWR2cxVlZkR2FGbFhjSE5pYkdONlRqRk9TMk5HVGt0YVZuQkRWbXBvTTFaNlRsQk5NbVJhWWtod01rc3lSbGRrYW1oVVl6SktWMDFyUlhwTWVrcElXakpTU2xveFVqSlRNbVJYVXpKR2RGWjZTbnBqVkVaSlZVUm5NVlF3Vm10T1dFSnVaVVUwZVZNd2JFcFNWRXBhV21zeFVWcHRXWGRVVlRoNVpVVXhTR0pyVm05V2EzUXlXakJ3YWxwRVZsRmpWVEZGVW1wQ1dFMVZNVmxaVmtWMllqSlNNMlZYTVZoU1ZHaEtWVEZhY21WRGRIcFRNblJEVlVac1dtRkhUVFZUUlhRelRVZG5lbGxXVW1GaFdFcEVaR3hOTkZaRmVESk9XRmsxVmpCR01tSnRhekJqVmxKU1N6TmtlVTVYUms1a1JVWnFUbGhLVGxvemJ6TlVSWGQzWVVSS2NHVnVhRkJQUlUxMlYwUlZNbFZJUW5kVVZVMXlVbGN3ZGxkcVFrZFNTR014VWpGT2NHUkdXbHBMZW1jeVdsaEdkbE5VV2xWak0wWjVaVWRaY21Gc2FIQlBSRTEzVWpKRk1sVldiRXBVTVd4aFUxUk9hVTFxVG10U1JUbDJZekZDZFZaNlZsRmtWRnBwWlVoS05WWlhPWFZqUkZJeVdWZDRjMlZWT0RGVWJscG9aVlpDVlZKSFNubE5iVVpVWkZSbk1Ga3hXbmRhUnpWWVVXeE9VbHBwT0RSa01XaHJZMnQ0V1dSSGRHeFVNRko1VDBSV1lVNVVXazVpUldONFdraEdiRTF0ZERGT1JtaERZV3MxY0VzemJGWlBSM0EyVkZOMFEyRlVVbTFYYTFKU1ZERkdOVlZJUVhsYVJXaEZVMWROZWxscmJFWmlSRVoxV21wS05sRnFaRlZXV0VwNFlqSm9jVmR1Um05WlYyeENZVlpXVEdKc1NtMVpNR1JMVDBkR2VVNHliRmhSTUZaeFZHdFdkMU5zVms5YVdHczBXbTVTYmxZelNUVlRlbFpMWWxVME1WRldSbkZXUjFGNllWTTVhMlF3YUZGT1JrNW9UREI0YVZkdFdtRlBWM0EwVWxSRk5HSnJTa1ZOUm1RMFZucGtRMUpWU2xkbFNHeDFaRWhOZDJOc1VsZGlNMFo2VTFkc1ZGUlZXbEJPTWxKMlpESmtNV0ZzV2xOU2JFNHhWMFZvYzFaWVRsQlNSVEZhVWtVeFUxWnFZekZpUjFaNVlrZEdUR050ZUUxaE1IaFJVa2hWZVdFd1l6TlNibWQzV210b2VFOVVTa1ZPYW14aFRURnZlV1F3VlRWVWEyeFJWVVZTU1ZJemFFSmhNREY2WkRCR2VVOUVVa2xaYTFJeFkzbDBVRkl5TlhsVFYzUXlWRWRrYVZreFZtMVZiRW8yVW0xR1FsSkhhR2hSYWtwWVpFUmFNR0pVUWt4VFYwcFlZekZaTVdSSWJ6TmFla0p1VERCYVFtSkhPRFZpYlZKQ1UxUkpNVTR5YkVWVlJURnlUa1ZvTVdJeWRFeGthWFF6Vm14V05GcFZOVk5PVjJjMFRrZEZkMVJ1WkRGYVZYUkhXbFZLY1dGRmEzaE9TRVpUWkRGa1YyTldTak5WV0VKUVlVVktSVTVJVWxOU1ZVcFdUVlpzZW1GdGRGbFZhVGswU3pKS05sRnNiM3BaYlhoSFlUSjBhMDFxWkZkUFNGcFhaV3BDU1ZreFVrTmlNbkJTWkZaV1drMHdUbE5sVm14RlZVUlNhV1ZHY0ZWaVZFSXpXbXRhY0dSRk1IWk1NbVJ0WTI1S1VHRnJielZaV0djeFlqQTRkbEV4V2tOalZsWlpUVVJqTWxvelRtOVRiRlpvWWtWNFlWSnJXazFaVjNkNFlWaHZNMk5FYTJsTVEwcHJXVmhTYUdFeVZqVkphbTlwVVZaR1JsRnJSa2xoUkU0MlYxVTVhMlJJUWtOUmJFNVhaSGs1V2sxdFJuVlBSVXBaVTFWUk1HRXpaRTFWVjFwMVlqRlNjVTVZY0ROWGJsSklVMnh3ZGxkc1JrSlJWVVpKVGtoa2JWRldiRXRUTWpsaFUxZG9NbGt3TlVKVlYwNUlZakJqTkdReVNsSlRWVXBDVWtWS2RsRnRaSEpqVjJoeVlWVmpOV1I2UWtOUmJtUkdaREJvYmxkVmNGcFRWbkJLVVZaa1ZsSkZTa0pTV0ZaT1VXdFdSbEpGWjNabGJtd3dUVWRHVWxOVVJuUlpiVkp6VlVVNWJsTlZTa1pUVlVVelZFaFNkMDVXUVhkTE0xVjZVMVU1UldNelFUUlhiV2d6VWpGS01HSXlSbTFrTVZaaFRqQnJNRTFHYUdwVlZURkVVa1ZyTlZWRlRrTlVSekZ0VFZWYWNWWkhkRFpVUkVKVFdXMXdTbE50Y0ZGVFZUbHZWa1pPVmxFd1RteGpiRVpEV1Zoc2NXTlhUa1ZrZWpCcFRFTktNbHBZU25waFZ6bDFTV3B2YVUxcFNYTkpibEkxWTBkVmFVOXBTa1ZSVmxKQ1dEQjBSbGRUU1hOSmJWWTBZMGRzZVZsWVVuQmlNalJwVDJwRk1rOUVVVEJPYW1ONVRYcFdPUT09In19fQ==
 ---
 apiVersion: v1
@@ -84,10 +84,8 @@ spec:
         app: sidechains-substrate-poc
     spec:
       containers:
-
-
         - name: substrate-node
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 30333
@@ -111,7 +109,6 @@ spec:
             - name: chain-data
               mountPath: /chain-data
 
-
         - name: cardano-node
           image: inputoutput/cardano-node:8.0.0
           ports:
@@ -127,7 +124,6 @@ spec:
             - name: datavol
               mountPath: /opt/cardano/data
 
-
         - name: postgres
           image: postgres:15.3
           ports:
@@ -136,14 +132,14 @@ spec:
           env:
             - name: POSTGRES_USERNAME
               valueFrom:
-               secretKeyRef:
-                name: postgres-username
-                key: postgres-username
+                secretKeyRef:
+                  name: postgres-username
+                  key: postgres-username
             - name: POSTGRES_PASSWORD
               valueFrom:
-               secretKeyRef:
-                name: postgres-password
-                key: postgres-password
+                secretKeyRef:
+                  name: postgres-password
+                  key: postgres-password
             - name: POSTGRES_HOST_AUTH_METHOD
               value: "trust"
             - name: POSTGRES_DB
@@ -153,7 +149,6 @@ spec:
               mountPath: /var/lib/postgresql/data
             - name: postgres-run
               mountPath: /run/postgresql
-
 
         - name: vector
           image: timberio/vector:nightly-alpine
@@ -165,14 +160,12 @@ spec:
             - name: logs
               mountPath: /var/log
 
-
         - name: bridge-backend
           image: 305415268059.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.15
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: postgres-run
               mountPath: /run/postgresql
-
 
         - name: cardano-db-sync
           image: inputoutput/cardano-db-sync:latest
@@ -184,13 +177,14 @@ spec:
             - name: CARDANO_NODE_SOCKET_TCP_HOST
               value: "localhost"
             - name: CARDANO_NODE_SOCKET_TCP_PORT
-              value: "3001"
+              value:
+                "3001"
                 #command: ["/bin/sh", "-c"]
                 #args:
                 #  - |
                 #    mkdir -p /configuration &&
                 #    cp /pgpass/pgpass /configuration/pgpass &&
-                #    chmod 600 /configuration/pgpass 
+                #    chmod 600 /configuration/pgpass
           volumeMounts:
             - name: node-ipc
               mountPath: /ipc
@@ -199,17 +193,14 @@ spec:
             - name: pgpass
               mountPath: /pgpass
 
-
-
-
       volumes:
-        - name: chain-data    
+        - name: chain-data
           emptyDir: {}
-        - name: node-ipc     
+        - name: node-ipc
           emptyDir: {}
-        - name: datavol       
+        - name: datavol
           emptyDir: {}
-        - name: keys         
+        - name: keys
           emptyDir: {}
         - name: postgres-data
           emptyDir: {}
@@ -218,8 +209,8 @@ spec:
         - name: pgpass
           configMap:
             name: pgpass
-        - name: vector-config-volume 
+        - name: vector-config-volume
           configMap:
             name: vector-config
-        - name: logs          
+        - name: logs
           emptyDir: {}

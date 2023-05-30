@@ -16,9 +16,8 @@ spec:
         app: sidechains-substrate-poc
     spec:
       containers:
-
         - name: alice
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -37,7 +36,7 @@ spec:
               mountPath: /data
 
         - name: bob
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -56,7 +55,7 @@ spec:
               mountPath: /data
 
         - name: charlie
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -75,7 +74,7 @@ spec:
               mountPath: /data
 
         - name: dave
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -94,7 +93,7 @@ spec:
               mountPath: /data
 
         - name: eve
-          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1 
+          image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains:v0.0.1
           imagePullPolicy: IfNotPresent
           resources:
             limits:

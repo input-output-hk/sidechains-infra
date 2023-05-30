@@ -47,7 +47,7 @@ metadata:
 spec:
   containers:
     - name: alice-cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       #resources:
       #  limits:
@@ -67,7 +67,7 @@ spec:
         - name: alice-data
           mountPath: /opt/cardano/data
     - name: alice-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+      image: inputoutput/cardano-db-sync:latest
       imagePullPolicy: IfNotPresent
       #resources:
       #  limits:
@@ -126,10 +126,10 @@ spec:
       #    memory: "512Mi"
       #    cpu: "1000m"
       volumeMounts:
-      - name: alice-ipc
-        mountPath: /node-ipc
-      - name: alice-data
-        mountPath: /var/lib/postgresql/data
+        - name: alice-ipc
+          mountPath: /node-ipc
+        - name: alice-data
+          mountPath: /var/lib/postgresql/data
     - name: alice-substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
@@ -140,26 +140,26 @@ spec:
       #  requests:
       #    memory: "512Mi"
       #    cpu: "300m"
-      args: 
-         - "--name"
-         - "alice"
-         - "--base-path"
-         - "/data/alice"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+      args:
+        - "--name"
+        - "alice"
+        - "--base-path"
+        - "/data/alice"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: alice-data
-           mountPath: /data
+        - name: alice-data
+          mountPath: /data
     - name: alice-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
@@ -171,7 +171,7 @@ spec:
       #    memory: "300Mi"
       #    cpu: "300m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: alice-vector-config
           mountPath: /etc/vector
@@ -237,7 +237,7 @@ metadata:
 spec:
   containers:
     - name: bob-cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -257,7 +257,7 @@ spec:
         - name: bob-data
           mountPath: /opt/cardano/data
     - name: bob-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+      image: inputoutput/cardano-db-sync:latest
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -316,10 +316,10 @@ spec:
           memory: "512Mi"
           cpu: "1000m"
       volumeMounts:
-      - name: bob-ipc
-        mountPath: /node-ipc
-      - name: bob-data
-        mountPath: /var/lib/postgresql/data
+        - name: bob-ipc
+          mountPath: /node-ipc
+        - name: bob-data
+          mountPath: /var/lib/postgresql/data
     - name: bob-substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
       imagePullPolicy: IfNotPresent
@@ -330,26 +330,26 @@ spec:
         requests:
           memory: "512Mi"
           cpu: "300m"
-      args: 
-         - "--name"
-         - "bob"
-         - "--base-path"
-         - "/data/bob"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+      args:
+        - "--name"
+        - "bob"
+        - "--base-path"
+        - "/data/bob"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: bob-data
-           mountPath: /data
+        - name: bob-data
+          mountPath: /data
     - name: bob-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
@@ -361,7 +361,7 @@ spec:
           memory: "300Mi"
           cpu: "300m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: bob-vector-config
           mountPath: /etc/vector
@@ -427,7 +427,7 @@ metadata:
 spec:
   containers:
     - name: charlie-cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -447,7 +447,7 @@ spec:
         - name: charlie-data
           mountPath: /opt/cardano/data
     - name: charlie-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+      image: inputoutput/cardano-db-sync:latest
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -506,10 +506,10 @@ spec:
           memory: "512Mi"
           cpu: "1000m"
       volumeMounts:
-      - name: charlie-ipc
-        mountPath: /node-ipc
-      - name: charlie-data
-        mountPath: /var/lib/postgresql/data
+        - name: charlie-ipc
+          mountPath: /node-ipc
+        - name: charlie-data
+          mountPath: /var/lib/postgresql/data
     - name: charlie-substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
       imagePullPolicy: IfNotPresent
@@ -520,26 +520,26 @@ spec:
         requests:
           memory: "512Mi"
           cpu: "300m"
-      args: 
-         - "--name"
-         - "charlie"
-         - "--base-path"
-         - "/data/charlie"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+      args:
+        - "--name"
+        - "charlie"
+        - "--base-path"
+        - "/data/charlie"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: charlie-data
-           mountPath: /data
+        - name: charlie-data
+          mountPath: /data
     - name: charlie-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
@@ -551,7 +551,7 @@ spec:
           memory: "300Mi"
           cpu: "300m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: charlie-vector-config
           mountPath: /etc/vector
@@ -617,7 +617,7 @@ metadata:
 spec:
   containers:
     - name: dave-cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -637,7 +637,7 @@ spec:
         - name: dave-data
           mountPath: /opt/cardano/data
     - name: dave-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+      image: inputoutput/cardano-db-sync:latest
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -696,10 +696,10 @@ spec:
           memory: "512Mi"
           cpu: "1000m"
       volumeMounts:
-      - name: dave-ipc
-        mountPath: /node-ipc
-      - name: dave-data
-        mountPath: /var/lib/postgresql/data
+        - name: dave-ipc
+          mountPath: /node-ipc
+        - name: dave-data
+          mountPath: /var/lib/postgresql/data
     - name: dave-substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
       imagePullPolicy: IfNotPresent
@@ -710,26 +710,26 @@ spec:
         requests:
           memory: "512Mi"
           cpu: "300m"
-      args: 
-         - "--name"
-         - "dave"
-         - "--base-path"
-         - "/data/dave"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+      args:
+        - "--name"
+        - "dave"
+        - "--base-path"
+        - "/data/dave"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: dave-data
-           mountPath: /data
+        - name: dave-data
+          mountPath: /data
     - name: dave-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
@@ -741,7 +741,7 @@ spec:
           memory: "300Mi"
           cpu: "300m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: dave-vector-config
           mountPath: /etc/vector
@@ -807,7 +807,7 @@ metadata:
 spec:
   containers:
     - name: eve-cardano-node
-      image: inputoutput/cardano-node:8.0.0 
+      image: inputoutput/cardano-node:8.0.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -827,7 +827,7 @@ spec:
         - name: eve-data
           mountPath: /opt/cardano/data
     - name: eve-db-sync
-      image: inputoutput/cardano-db-sync:latest 
+      image: inputoutput/cardano-db-sync:latest
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -886,10 +886,10 @@ spec:
           memory: "512Mi"
           cpu: "1000m"
       volumeMounts:
-      - name: eve-ipc
-        mountPath: /node-ipc
-      - name: eve-data
-        mountPath: /var/lib/postgresql/data
+        - name: eve-ipc
+          mountPath: /node-ipc
+        - name: eve-data
+          mountPath: /var/lib/postgresql/data
     - name: eve-substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node
       imagePullPolicy: IfNotPresent
@@ -900,26 +900,26 @@ spec:
         requests:
           memory: "512Mi"
           cpu: "300m"
-      args: 
-         - "--name"
-         - "eve"
-         - "--base-path"
-         - "/data/eve"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
+      args:
+        - "--name"
+        - "eve"
+        - "--base-path"
+        - "/data/eve"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: eve-data
-           mountPath: /data
+        - name: eve-data
+          mountPath: /data
     - name: eve-vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
@@ -931,7 +931,7 @@ spec:
           memory: "300Mi"
           cpu: "300m"
       ports:
-        - containerPort: 8686 
+        - containerPort: 8686
       volumeMounts:
         - name: eve-vector-config
           mountPath: /etc/vector

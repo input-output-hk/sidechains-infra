@@ -1,10 +1,10 @@
 include "root" {
-  path = find_in_parent_folders()
+  path   = find_in_parent_folders()
   expose = true
 }
 
 terraform {
-    source = "git@github.com:input-output-hk/catalyst-tf.git//modules/network?ref=v1.0.0"
+  source = "git@github.com:input-output-hk/catalyst-tf.git//modules/network?ref=v1.0.0"
 }
 
 inputs = {

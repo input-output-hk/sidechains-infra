@@ -139,8 +139,8 @@ spec:
         - name: CARDANO_FOLLOWER_JDBC_URL
           value: "jdbc:postgresql://localhost:5432/cexplorer"
       volumeMounts:
-      - name: alice-ipc
-        mountPath: /local
+        - name: alice-ipc
+          mountPath: /local
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
       imagePullPolicy: IfNotPresent
@@ -152,26 +152,26 @@ spec:
           memory: "512Mi"
           cpu: "300m"
       args:
-         - "--alice"
-         - "--base-path"
-         - "/data"
-         - "--chain"
-         - "local"
-         - "--validator"
-         - "--node-key"
-         - "0000000000000000000000000000000000000000000000000000000000000001"
-         - "--bootnodes"
-         - "/dns/alice-service.sidechains-substrate-poc-4.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+        - "--alice"
+        - "--base-path"
+        - "/data"
+        - "--chain"
+        - "local"
+        - "--validator"
+        - "--node-key"
+        - "0000000000000000000000000000000000000000000000000000000000000001"
+        - "--bootnodes"
+        - "/dns/alice-service.sidechains-substrate-poc-4.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
       ports:
-         - containerPort: 30333
-           name: p2p
-         - containerPort: 9945
-           name: ws-port
-         - containerPort: 9933
-           name: rcp-port
+        - containerPort: 30333
+          name: p2p
+        - containerPort: 9945
+          name: ws-port
+        - containerPort: 9933
+          name: rcp-port
       volumeMounts:
-         - name: alice-data
-           mountPath: /data
+        - name: alice-data
+          mountPath: /data
     - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
