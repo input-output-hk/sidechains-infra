@@ -1,22 +1,39 @@
+# overlays/alice/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
   - ../../base
 
-vars:
-  - name: POD_NAME
-    objref:
+replacements:
+- source:
+    value: "alice"
+  targets:
+  - select: 
+      kind: Service
+    fieldPaths: 
+    - metadata.name
+    - spec.selector.node
+  - select: 
       kind: ConfigMap
-      name: alice-vector-config
-      apiVersion: v1
-    fieldref:
-      fieldpath: metadata.name
-
-varReference:
-  - path: metadata/name
-  - path: metadata/labels
-  - path: spec/template/metadata/labels
-  - path: spec/containers/env/value
-  - path: spec/containers/args
-  - path: spec/volumes/configMap/name
+    fieldPaths: 
+    - metadata.name
+    - data.vector.toml
+  - select: 
+      kind: Pod
+    fieldPaths: 
+    - metadata.name
+    - metadata.labels.node
+    - spec.containers[0].name
+    - spec.containers[1].name
+    - spec.containers[2].name
+    - spec.containers[3].name
+    - spec.containers[4].name
+    - spec.containers[5].name
+    - spec.containers[6].name
+    - spec.volumes[0].name
+    - spec.volumes[1].name
+    - spec.volumes[2].name
+    - spec.volumes[3].name
+    - spec.volumes[4].name
+    - spec.volumes[5].name
