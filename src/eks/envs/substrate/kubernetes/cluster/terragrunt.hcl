@@ -12,14 +12,14 @@ terraform {
 }
 
 inputs = {
-  cluster_version = "1.24"
+  cluster_version = "1.25"
 
   cluster_desired_size = 4
   cluster_min_size     = 1
   cluser_max_size      = 5
 
   node_disk_size = "200"
-  instance_types = ["t2.large", "t3.large"]
+  instance_types = ["t2.2xlarge", "t3.2xlarge"]
 
   vpc_id     = dependency.network.outputs.vpc_id
   subnet_ids = dependency.network.outputs.private_subnets
