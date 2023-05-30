@@ -64,7 +64,7 @@ locals {
     {
         Effect = "Allow"
         Action = [
-            "eks:ListClusters"
+            "eks:ListClusters",
             "eks:ListTagsForResource",
             "eks:DescribeIdentityProviderConfig",
             "eks:DescribeUpdate",
