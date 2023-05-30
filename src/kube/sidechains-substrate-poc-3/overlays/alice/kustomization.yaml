@@ -4,13 +4,19 @@ kind: Kustomization
 resources:
   - ../../base
 
-replacements:
-- source:
-    kind: string
-    name: alice
-  targets:
-  - select:
-      name: hello
-      kind: Job
-    fieldPaths: 
-    - spec.template.spec.containers[3].args[0]
+vars:
+  - name: POD_NAME
+    objref:
+      kind: ConfigMap
+      name: alice-vector-config
+      apiVersion: v1
+    fieldref:
+      fieldpath: metadata.name
+
+varReference:
+  - path: metadata/name
+  - path: metadata/labels
+  - path: spec/template/metadata/labels
+  - path: spec/containers/env/value
+  - path: spec/containers/args
+  - path: spec/volumes/configMap/name
