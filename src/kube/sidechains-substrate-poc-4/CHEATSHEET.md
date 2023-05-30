@@ -1,5 +1,10 @@
-kubectl get pods -n sidechains-substrate-poc-4 
-kubectl describe pods -n sidechains-substrate-poc-4 
+# Local
+
+nix-shell -p kubectl awscli2
+aws eks update-kubeconfig --region eu-central-1 --name iog-sidechain-substrate-kubernetes
+aws eks list-clusters --region eu-central-1
+kubectl config get-contexts
+
 
 # Apply
 
