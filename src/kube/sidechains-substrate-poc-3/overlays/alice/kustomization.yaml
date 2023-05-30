@@ -1,4 +1,3 @@
-# overlays/alice/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -18,22 +17,33 @@ replacements:
       kind: ConfigMap
     fieldPaths: 
     - metadata.name
-    - data.vector.toml
   - select: 
       kind: Pod
     fieldPaths: 
     - metadata.name
     - metadata.labels.node
     - spec.containers[0].name
+    - spec.containers[0].volumeMounts[0].name
+    - spec.containers[0].volumeMounts[1].name
     - spec.containers[1].name
+    - spec.containers[1].volumeMounts[0].name
+    - spec.containers[1].volumeMounts[1].name
     - spec.containers[2].name
+    - spec.containers[2].volumeMounts[0].name
     - spec.containers[3].name
+    - spec.containers[3].volumeMounts[0].name
     - spec.containers[4].name
+    - spec.containers[4].volumeMounts[0].name
     - spec.containers[5].name
+    - spec.containers[5].volumeMounts[0].name
+    - spec.containers[5].args[0]
     - spec.containers[6].name
+    - spec.containers[6].volumeMounts[0].name
+    - spec.containers[6].volumeMounts[1].name
     - spec.volumes[0].name
     - spec.volumes[1].name
     - spec.volumes[2].name
     - spec.volumes[3].name
     - spec.volumes[4].name
+    - spec.volumes[4].configMap.name
     - spec.volumes[5].name
