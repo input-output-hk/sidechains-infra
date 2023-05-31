@@ -20,7 +20,7 @@ inputs = {
   }
   permissions = {
     developer = {
-      policy = "read"
+      policy = "super"
     }
     qa = {
       policy = "read"
