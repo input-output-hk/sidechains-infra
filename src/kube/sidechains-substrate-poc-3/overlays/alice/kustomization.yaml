@@ -3,22 +3,13 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - configmap.yaml
 
-replacements:
-  - source:
-      value: "alice"
-    targets:
-      - select:
-          kind: Service
-        fieldPaths:
-          - metadata.name
-          - spec.selector.node
-      - select:
-          kind: ConfigMap
-        fieldPaths:
-          - metadata.name
-      - select:
-          kind: Pod
-        fieldPaths:
-          - metadata.name
-          - metadata.labels.node
+vars:
+- name: POD_NAME
+  objref:
+    kind: ConfigMap
+    name: alice-configmap
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.podName
