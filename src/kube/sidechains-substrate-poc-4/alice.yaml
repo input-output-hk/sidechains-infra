@@ -57,11 +57,11 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "1024Mi"
-          cpu: "600m"
+          memory: "2048Mi"
+          cpu: "1000m"
         requests:
-          memory: "1024Mi"
-          cpu: "300m"
+          memory: "2048Mi"
+          cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -77,11 +77,11 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "2000Mi"
-          cpu: "600m"
+          memory: "4096Mi"
+          cpu: "2000m"
         requests:
-          memory: "2000Mi"
-          cpu: "400m"
+          memory: "4096Mi"
+          cpu: "2000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -105,11 +105,11 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "2000Mi"
-          cpu: "600m"
+          memory: "2048Mi"
+          cpu: "1000m"
         requests:
-          memory: "2000Mi"
-          cpu: "300m"
+          memory: "2048Mi"
+          cpu: "1000m"
       ports:
         - containerPort: 5432
           protocol: TCP
@@ -127,10 +127,10 @@ spec:
       resources:
         limits:
           memory: "512Mi"
-          cpu: "1000m"
+          cpu: "500m"
         requests:
           memory: "512Mi"
-          cpu: "200m"
+          cpu: "500m"
       env:
         - name: CARDANO_FOLLOWER_POSTGRES_USERNAME
           value: "postgres"
@@ -146,11 +146,11 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "512Mi"
+          memory: "1024Mi"
           cpu: "1000m"
         requests:
-          memory: "512Mi"
-          cpu: "300m"
+          memory: "1024Mi"
+          cpu: "1000m"
       args:
         - "--alice"
         - "--base-path"
