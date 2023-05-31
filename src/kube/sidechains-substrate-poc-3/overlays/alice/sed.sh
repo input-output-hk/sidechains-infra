@@ -1,0 +1,1 @@
+sed -i 's/$(POD_NAME)/alice/g; s/$(NODE_KEY)/0000000000000000000000000000000000000000000000000000000000000001/g; s|$(BOOTNODES)|/dns/alice-service.sidechains-substrate-poc-4.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp|g' ../../base/base.yaml
