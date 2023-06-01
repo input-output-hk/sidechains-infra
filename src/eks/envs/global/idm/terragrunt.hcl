@@ -56,9 +56,9 @@ locals {
   }
 
   account = include.common.locals.account
-  region = include.common.locals.region
-  bucket = include.common.locals.state.bucket
-  lock = include.common.locals.state.lock
+  region  = include.common.locals.region
+  bucket  = include.common.locals.state.bucket
+  lock    = include.common.locals.state.lock
   common = [
     {
       Effect = "Allow"
@@ -68,25 +68,25 @@ locals {
       Resource = "arn:aws:dynamodb:${local.region}:${local.account}:table/${local.lock}"
     },
     {
-        Effect = "Allow"
-        Action = [
-            "eks:ListClusters"
-        ]
-        Resource = "*"
+      Effect = "Allow"
+      Action = [
+        "eks:ListClusters"
+      ]
+      Resource = "*"
     },
     {
-        Effect = "Allow"
-        Action = [
-            "eks:ListClusters",
-            "eks:ListTagsForResource",
-            "eks:DescribeIdentityProviderConfig",
-            "eks:DescribeUpdate",
-            "eks:AccessKubernetesApi",
-            "cloudshell:GetEnvironmentStatus",
-            "eks:DescribeCluster",
-            "cloudshell:CreateSession"
-        ]
-        Resource = "*"
+      Effect = "Allow"
+      Action = [
+        "eks:ListClusters",
+        "eks:ListTagsForResource",
+        "eks:DescribeIdentityProviderConfig",
+        "eks:DescribeUpdate",
+        "eks:AccessKubernetesApi",
+        "cloudshell:GetEnvironmentStatus",
+        "eks:DescribeCluster",
+        "cloudshell:CreateSession"
+      ]
+      Resource = "*"
     },
     {
       Effect = "Allow"
@@ -96,15 +96,15 @@ locals {
       Resource = "*"
     },
     {
-        Effect = "Allow"
-        Action = [
-          "s3:Get*",
-          "s3:List*"
-        ]
-        Resource = [
-          "arn:aws:s3:::${local.bucket}",
-        ]
-      }
+      Effect = "Allow"
+      Action = [
+        "s3:Get*",
+        "s3:List*"
+      ]
+      Resource = [
+        "arn:aws:s3:::${local.bucket}",
+      ]
+    }
   ]
 }
 
@@ -113,26 +113,26 @@ include "root" {
 }
 
 include "common" {
-    path = find_in_parent_folders("common.hcl")
-    expose = true
+  path   = find_in_parent_folders("common.hcl")
+  expose = true
 }
 
 terraform {
-    source = "git@github.com:input-output-hk/catalyst-tf.git//modules/idm?ref=v1.0.0"
+  source = "git@github.com:input-output-hk/catalyst-tf.git//modules/idm?ref=v1.0.0"
 }
 
 inputs = {
   groups = {
     developer = {
-      users = local.groups.developer
+      users       = local.groups.developer
       policy_arns = []
-      policies = {}
+      policies    = {}
     }
 
     qa = {
-      users = local.groups.qa
+      users       = local.groups.qa
       policy_arns = []
-      policies = {}
+      policies    = {}
     }
 
     sre = {
@@ -144,5 +144,5 @@ inputs = {
     }
   }
   common_policies = local.common
-  users = local.users
+  users           = local.users
 }
