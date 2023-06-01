@@ -62,3 +62,40 @@ kubectl logs eve -c postgres -n sidechains-substrate-poc-4
 kubectl logs eve -c bridge-backend -n sidechains-substrate-poc-4
 kubectl logs eve -c substrate-node -n sidechains-substrate-poc-4
 kubectl logs eve -c vector -n sidechains-substrate-poc-4
+
+# Exec 
+
+kubectl exec alice -it -c cardano-node -n sidechains-substrate-poc-4 --sh
+kubectl exec alice -it -c db-sync -n sidechains-substrate-poc-4 --sh
+kubectl exec alice -it -c postgres -n sidechains-substrate-poc-4 --sh
+kubectl exec alice -it -c bridge-backend -n sidechains-substrate-poc-4 --sh
+kubectl exec alice -it -c substrate-node -n sidechains-substrate-poc-4 --sh
+kubectl exec alice -it -c vector -n sidechains-substrate-poc-4 --sh
+
+kubectl exec bob -it -c cardano-node -n sidechains-substrate-poc-4 --sh
+kubectl exec bob -it -c db-sync -n sidechains-substrate-poc-4 --sh
+kubectl exec bob -it -c postgres -n sidechains-substrate-poc-4 --sh
+kubectl exec bob -it -c bridge-backend -n sidechains-substrate-poc-4 --sh
+kubectl exec bob -it -c substrate-node -n sidechains-substrate-poc-4 --sh
+kubectl exec bob -it -c vector -n sidechains-substrate-poc-4 --sh
+
+kubectl exec charlie -it -c cardano-node -n sidechains-substrate-poc-4 --sh
+kubectl exec charlie -it -c db-sync -n sidechains-substrate-poc-4 --sh
+kubectl exec charlie -it -c postgres -n sidechains-substrate-poc-4 --sh
+kubectl exec charlie -it -c bridge-backend -n sidechains-substrate-poc-4 --sh
+kubectl exec charlie -it -c substrate-node -n sidechains-substrate-poc-4 --sh
+kubectl exec charlie -it -c vector -n sidechains-substrate-poc-4 --sh
+
+kubectl exec dave -it -c cardano-node -n sidechains-substrate-poc-4
+kubectl exec dave -it -c db-sync -n sidechains-substrate-poc-4
+kubectl exec dave -it -c postgres -n sidechains-substrate-poc-4
+kubectl exec dave -it -c bridge-backend -n sidechains-substrate-poc-4
+kubectl exec dave -it -c substrate-node -n sidechains-substrate-poc-4
+kubectl exec dave -it -c vector -n sidechains-substrate-poc-4
+
+kubectl exec eve -it -c cardano-node -n sidechains-substrate-poc-4
+kubectl exec eve -it -c db-sync -n sidechains-substrate-poc-4
+kubectl exec eve -it -c postgres -n sidechains-substrate-poc-4
+kubectl exec eve -it -c bridge-backend -n sidechains-substrate-poc-4
+kubectl exec eve -it -c substrate-node -n sidechains-substrate-poc-4
+kubectl exec eve -it -c vector -n sidechains-substrate-poc-4
