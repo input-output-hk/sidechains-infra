@@ -34,7 +34,7 @@ kubectl delete -f eve.yaml
 
 kubectl get pods -n sc          # high level summary
 kubectl describe pods -n sc     # detailed summary
-kubectl get sc                  # storage classes
+kubectl get sc -n sc            # storage classes
 
 # Logs
 
