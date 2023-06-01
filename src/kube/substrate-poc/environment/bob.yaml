@@ -198,6 +198,6 @@ spec:
       emptyDir: {}
     - name: vector-config
       configMap:
-        name: bob-vector-configmap
+        name: vector-configmap
     - name: vector-logs
       emptyDir: {}
