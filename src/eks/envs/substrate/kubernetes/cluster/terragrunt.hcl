@@ -14,7 +14,7 @@ terraform {
 inputs = {
   cluster_version = "1.25"
 
-  cluster_desired_size = 4
+  cluster_desired_size = 5
   cluster_min_size     = 1
   cluser_max_size      = 5
 
