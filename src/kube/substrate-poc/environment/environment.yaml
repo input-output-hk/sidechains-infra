@@ -3,42 +3,41 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: sc
-
-## single efs volume for environment
 #----
 #kind: StorageClass
 #apiVersion: storage.k8s.io/v1
 #metadata:
 #  name: efs-sc
+#  namespace: sc
 #provisioner: efs.csi.aws.com
 #parameters:
 #  provisioningMode: efs-ap
 #  fileSystemId: <AWS EFS Volume FileSystemId>
 #  directoryPerms: "700"
 
-# PVC for each pod
+ PVC for each pod
 
-# 
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: efs-claim-1
-# spec:
-#   accessModes:
-#     - ReadWriteMany
-#   storageClassName: efs-sc
-#   resources:
-#     requests:
-#       storage: 5Gi
-# 
-# ---
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: efs-app-1
-# spec:     
-#   volumes:
-#     - name: persistent-storage
-#       persistentVolumeClaim:
-#         claimName: efs-claim-1
+ 
+ ---
+ apiVersion: v1
+ kind: PersistentVolumeClaim
+ metadata:
+   name: efs-claim-1
+ spec:
+   accessModes:
+     - ReadWriteMany
+   storageClassName: aws-efs-storageclass
+   resources:
+     requests:
+       storage: 5Gi
+ 
+ ---
+ apiVersion: v1
+ kind: Pod
+ metadata:
+   name: efs-app-1
+ spec:     
+   volumes:
+     - name: persistent-storage
+       persistentVolumeClaim:
+         claimName: efs-claim-1

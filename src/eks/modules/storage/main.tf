@@ -61,6 +61,28 @@ resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = aws_iam_policy.this.arn
 }
 
+
+
+provider "aws" {
+  region = "eu-central-1"
+}
+
+data "aws_eks_cluster" "cluster" {
+  name = "iog-sidechain-substrate-kubernetes"
+}
+
+data "aws_eks_cluster_auth" "cluster" {
+  name = "iog-sidechain-substrate-kubernetes"
+}
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.cluster.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.cluster.token
+  load_config_file       = false
+}
+
+
 resource "kubernetes_service_account_v1" "example" {
   metadata {
     labels = {
@@ -72,4 +94,23 @@ resource "kubernetes_service_account_v1" "example" {
       "eks.amazonaws.com/role-arn" = aws_iam_role.this.arn
     }
   }
+}
+
+resource "kubernetes_storage_class" "efs" {
+  metadata {
+    name = "aws-efs-storageclass"
+  }
+  storage_provisioner = "efs.csi.aws.com"
+
+  parameters = {
+    provisioningMode = "efs-ap"
+    fileSystemId     = aws_efs_file_system.storage.id
+    directoryPerms   = "700"
+    gidRangeStart    = "1000"
+    gidRangeEnd      = "2000"
+    basePath         = "/dynamic_provisioning"
+  }
+
+  reclaim_policy  = "Retain"
+  volume_binding_mode = "WaitForFirstConsumer"
 }

@@ -1,5 +1,18 @@
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 150Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: alice-service
@@ -189,15 +202,20 @@ spec:
           mountPath: /var/log
   volumes:
     - name: cardano-node-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim
     - name: postgres-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim
     - name: substrate-node-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim
     - name: ipc
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim
     - name: vector-config
       configMap:
         name: vector-configmap
     - name: vector-logs
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim
