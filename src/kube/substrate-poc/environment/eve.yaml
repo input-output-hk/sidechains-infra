@@ -179,7 +179,7 @@ spec:
         - containerPort: 9945
           name: ws-port
         - containerPort: 9933
-          name: rcp-port
+          name: rpc-port
       volumeMounts:
         - name: substrate-node-data
           mountPath: /data
