@@ -1,5 +1,18 @@
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eve-claim
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 150Gi
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: eve-service
@@ -187,17 +200,23 @@ spec:
           mountPath: /etc/vector
         - name: vector-logs
           mountPath: /var/log
+
   volumes:
     - name: cardano-node-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: eve-claim
     - name: postgres-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: eve-claim
     - name: substrate-node-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: eve-claim
     - name: ipc
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: eve-claim
     - name: vector-config
       configMap:
         name: vector-configmap
     - name: vector-logs
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: eve-claim

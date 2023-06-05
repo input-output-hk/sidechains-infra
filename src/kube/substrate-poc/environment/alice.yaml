@@ -200,6 +200,7 @@ spec:
           mountPath: /etc/vector
         - name: vector-logs
           mountPath: /var/log
+  
   volumes:
     - name: cardano-node-data
       persistentVolumeClaim:
