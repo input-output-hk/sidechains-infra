@@ -168,6 +168,8 @@ spec:
           value: "password123"
         - name: POSTGRES_DB
           value: "cexplorer"
+        - name: POSTGRES_INITDB_ARGS
+          value: --nosync --no-secure
       volumeMounts:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
