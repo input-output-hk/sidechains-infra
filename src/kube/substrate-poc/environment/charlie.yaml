@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: charlie-claim
+  name: charlie-claim-cardano-node-data
   namespace: sc
 spec:
   accessModes:
@@ -10,7 +10,46 @@ spec:
   storageClassName: aws-efs-storageclass
   resources:
     requests:
-      storage: 150Gi
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: charlie-claim-postgres-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 90Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: charlie-claim-substrate-node-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: charlie-claim-vector-logs
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
@@ -36,7 +75,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: vector-configmap
+  name: charlie-vector-configmap
   namespace: sc
 data:
   vector.toml: |
@@ -204,19 +243,19 @@ spec:
   volumes:
     - name: cardano-node-data
       persistentVolumeClaim:
-        claimName: charlie-claim
+        claimName: charlie-claim-cardano-node-data
     - name: postgres-data
       persistentVolumeClaim:
-        claimName: charlie-claim
+        claimName: charlie-claim-postgres-data
     - name: substrate-node-data
       persistentVolumeClaim:
-        claimName: charlie-claim
+        claimName: charlie-claim-substrate-node-data
     - name: ipc
       persistentVolumeClaim:
         claimName: charlie-claim
     - name: vector-config
       configMap:
-        name: vector-configmap
+        name: charlie-vector-configmap
     - name: vector-logs
       persistentVolumeClaim:
-        claimName: charlie-claim
+        claimName: charlie-claim-vector-logs
