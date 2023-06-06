@@ -13,4 +13,6 @@ provisioner: efs.csi.aws.com
 parameters:
   provisioningMode: efs-ap
   fileSystemId: fs-0d2f790fb12d9c152
+  gidRangeStart: "999"
+  gidRangeEnd: "2000"
   directoryPerms: "777"
