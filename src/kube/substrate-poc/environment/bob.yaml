@@ -251,8 +251,7 @@ spec:
       persistentVolumeClaim:
         claimName: bob-claim-substrate-node-data
     - name: ipc
-      persistentVolumeClaim:
-        claimName: bob-claim
+      emptyDir: {}
     - name: vector-config
       configMap:
         name: bob-vector-configmap

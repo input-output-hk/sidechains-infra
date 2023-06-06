@@ -251,8 +251,7 @@ spec:
       persistentVolumeClaim:
         claimName: charlie-claim-substrate-node-data
     - name: ipc
-      persistentVolumeClaim:
-        claimName: charlie-claim
+      emptyDir: {}
     - name: vector-config
       configMap:
         name: charlie-vector-configmap

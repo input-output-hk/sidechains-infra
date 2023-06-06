@@ -251,8 +251,7 @@ spec:
       persistentVolumeClaim:
         claimName: alice-claim-substrate-node-data
     - name: ipc
-      persistentVolumeClaim:
-        claimName: alice-claim
+      emptyDir: {}
     - name: vector-config
       configMap:
         name: alice-vector-configmap

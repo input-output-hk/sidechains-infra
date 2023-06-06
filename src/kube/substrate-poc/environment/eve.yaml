@@ -251,8 +251,7 @@ spec:
       persistentVolumeClaim:
         claimName: eve-claim-substrate-node-data
     - name: ipc
-      persistentVolumeClaim:
-        claimName: eve-claim
+      emptyDir: {}
     - name: vector-config
       configMap:
         name: eve-vector-configmap

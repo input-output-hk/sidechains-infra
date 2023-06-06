@@ -251,8 +251,7 @@ spec:
       persistentVolumeClaim:
         claimName: dave-claim-substrate-node-data
     - name: ipc
-      persistentVolumeClaim:
-        claimName: dave-claim
+      emptyDir: {}
     - name: vector-config
       configMap:
         name: dave-vector-configmap
