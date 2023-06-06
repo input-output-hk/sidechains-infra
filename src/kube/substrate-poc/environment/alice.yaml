@@ -103,6 +103,17 @@ metadata:
     app: sidechains-substrate-poc
     node: alice
 spec:
+  initContainers:
+  - name: init-postgres
+    image: busybox
+    command:
+    - chown
+    - '-R'
+    - '999:999'
+    - '/var/lib/postgresql/data'
+    volumeMounts:
+    - mountPath: /var/lib/postgresql/data
+      name: postgres-data
   containers:
     - name: cardano-node
       image: inputoutput/cardano-node:8.0.0
