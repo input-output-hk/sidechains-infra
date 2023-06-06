@@ -245,8 +245,7 @@ spec:
       persistentVolumeClaim:
         claimName: charlie-claim-cardano-node-data
     - name: postgres-data
-      persistentVolumeClaim:
-        claimName: charlie-claim-postgres-data
+      emptyDir: {}
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: charlie-claim-substrate-node-data
