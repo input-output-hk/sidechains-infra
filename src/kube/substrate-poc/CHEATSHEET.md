@@ -130,8 +130,14 @@ kubectl exec eve -it -c vector -n sc -- sh
 1. List all PVCs
 kubectl get pvc -n sc
 
-2. Delete target PVC
+2. Delete target pod
+kubectl delete -f <pod_name>.yaml
+
+3. Delete target PVC
 kubectl delete pvc <pvc_name> -n sc
 
-3. Recreate PVC
+4. Recreate PVC
 kubectl apply -f pvc.yaml
+
+5. Recreate pod
+kubectl apply -f <pod_name>.yaml
