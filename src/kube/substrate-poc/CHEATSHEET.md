@@ -1,3 +1,8 @@
+# Documentation: 
+
+https://input-output.atlassian.net/wiki/spaces/EMU/pages/3869081650/Sidechains+Substrate+POC+Environment
+
+
 # Setup Local Shell
 
 nix-shell -p kubectl awscli2
@@ -30,11 +35,21 @@ kubectl delete -f charlie.yaml
 kubectl delete -f dave.yaml
 kubectl delete -f eve.yaml
 
-# Query 
+# Get Queries
 
 kubectl get pods -n sc          # high level summary
-kubectl describe pods -n sc     # detailed summary
 kubectl get sc -n sc            # storage classes
+kubectl get pvc -n sc           # persistent volume claims
+kubectl get pv -n sc            # persistent volumes
+kubectl get svc -n sc           # services
+
+# Describe Queries
+
+kubectl describe pods -n sc          # detailed summary
+kubectl describe sc -n sc            # storage classes
+kubectl describe pvc -n sc           # persistent volume claims
+kubectl describe pv -n sc            # persistent volumes
+kubectl describe svc -n sc           # services
 
 # Logs
 
@@ -109,3 +124,14 @@ kubectl exec eve -it -c postgres -n sc -- sh
 kubectl exec eve -it -c bridge-backend -n sc -- sh
 kubectl exec eve -it -c substrate-node -n sc -- sh
 kubectl exec eve -it -c vector -n sc -- sh
+
+# Wipe Persistent Data
+
+1. List all PVCs
+kubectl get pvc -n sc
+
+2. Delete target PVC
+kubectl delete pvc <pvc_name> -n sc
+
+3. Recreate PVC
+kubectl apply -f pvc.yaml

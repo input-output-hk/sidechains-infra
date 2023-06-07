@@ -31,5 +31,14 @@ http://eve-service:<port>
 ## Access
 
 For this early stage proof-of-concept environment, access to the Kubernetes cluster can be provided via AWS CloudShell.
+
 The AWS IAM Policy EKS_CloudShell_Access should contain all the necessary permissions to access a CloudShell environment.
+
 CloudShell will have kubectl available, authenticated to the EKS cluster.
+
+## Documentation
+
+The below confluence page contains documentation on the environment:
+
+https://input-output.atlassian.net/wiki/spaces/EMU/pages/3869081650/Sidechains+Substrate+POC+Environment
+
