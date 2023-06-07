@@ -225,8 +225,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: eve-claim-postgres-data
   namespace: sc
-  annotations:
-    volume.beta.kubernetes.io/mount-options: "dir_mode=0777,file_mode=0777,uid=999,gid=999"
 spec:
   accessModes:
     - ReadWriteMany
