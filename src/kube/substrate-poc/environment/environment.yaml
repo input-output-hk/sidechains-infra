@@ -19,6 +19,7 @@ kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
   name: eve-ebs-sc
+  namespace: sc
 provisioner: ebs.csi.aws.com
 parameters:
   type: gp2
