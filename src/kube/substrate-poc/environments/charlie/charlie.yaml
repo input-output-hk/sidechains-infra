@@ -58,10 +58,10 @@ spec:
       resources:
         limits:
           memory: "2048Mi"
-          cpu: "2000m"
+          cpu: "1000m"
         requests:
           memory: "2048Mi"
-          cpu: "2000m"
+          cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -78,10 +78,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "2000m"
+          cpu: "1000m"
         requests:
           memory: "4096Mi"
-          cpu: "2000m"
+          cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -104,10 +104,10 @@ spec:
       resources:
         limits:
           memory: "2048Mi"
-          cpu: "2000m"
+          cpu: "1000m"
         requests:
           memory: "2048Mi"
-          cpu: "2000m"
+          cpu: "1000m"
       ports:
         - containerPort: 5432
           protocol: TCP
@@ -129,10 +129,10 @@ spec:
       resources:
         limits:
           memory: "512Mi"
-          cpu: "2000m"
+          cpu: "1000m"
         requests:
           memory: "512Mi"
-          cpu: "2000m"
+          cpu: "1000m"
       env:
         - name: CARDANO_FOLLOWER_POSTGRES_USERNAME
           value: "postgres"
@@ -149,10 +149,10 @@ spec:
       resources:
         limits:
           memory: "1024Mi"
-          cpu: "2000m"
+          cpu: "1000m"
         requests:
           memory: "1024Mi"
-          cpu: "2000m"
+          cpu: "1000m"
       args:
         - "--charlie"
         - "--base-path"
@@ -180,10 +180,10 @@ spec:
       resources:
         limits:
           memory: "300Mi"
-          cpu: "200m"
+          cpu: "1000m"
         requests:
           memory: "300Mi"
-          cpu: "200m"
+          cpu: "1000m"
       ports:
         - containerPort: 8686
       volumeMounts:
