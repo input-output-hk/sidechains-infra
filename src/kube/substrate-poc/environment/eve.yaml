@@ -99,15 +99,15 @@ spec:
         - name: ipc
           mountPath: /node-ipc
     - name: postgres
-      image: bitnami/postgresql
+      image: postgres:15.3
       imagePullPolicy: IfNotPresent
-      #resources:
-      #  limits:
-      #    memory: "2048Mi"
-      #    cpu: "1000m"
-      #  requests:
-      #    memory: "2048Mi"
-      #    cpu: "1000m"
+      resources:
+        limits:
+          memory: "2048Mi"
+          cpu: "1000m"
+        requests:
+          memory: "2048Mi"
+          cpu: "1000m"
       ports:
         - containerPort: 5432
           protocol: TCP
