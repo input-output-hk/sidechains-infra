@@ -113,7 +113,7 @@ spec:
           protocol: TCP
       env:
         - name: POSTGRES_USER
-          value: root
+          value: "postgres"
         - name: POSTGRES_PASSWORD
           value: "password123"
         - name: POSTGRES_DB
