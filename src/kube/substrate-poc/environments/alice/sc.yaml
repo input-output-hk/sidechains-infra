@@ -2,7 +2,29 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: alice-ebs-sc
+  name: alice-cardano-node-data-ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4 
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: alice-postgres-data-ebs-sc
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4 
+---
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: alice-vector-logs-ebs-sc
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: kubernetes.io/aws-ebs
