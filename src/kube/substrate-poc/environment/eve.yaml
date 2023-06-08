@@ -99,7 +99,7 @@ spec:
         - name: ipc
           mountPath: /node-ipc
     - name: postgres
-      image: postgres:15.3
+      image: bitnami/postgresql
       imagePullPolicy: IfNotPresent
       resources:
         limits:
