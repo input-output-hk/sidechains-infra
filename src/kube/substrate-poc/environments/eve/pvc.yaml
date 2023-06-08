@@ -32,7 +32,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   storageClassName: aws-efs-storageclass
   resources:
     requests:

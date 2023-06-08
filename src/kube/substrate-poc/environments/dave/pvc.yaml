@@ -6,7 +6,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: dave-ebs-sc
   resources:
     requests:
@@ -19,7 +19,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: dave-ebs-sc
   resources:
     requests:
@@ -45,7 +45,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: dave-ebs-sc
   resources:
     requests:
