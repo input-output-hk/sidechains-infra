@@ -199,7 +199,6 @@ spec:
     - name: postgres-data
       persistentVolumeClaim:
         claimName: eve-claim-postgres-data
-      #emptyDir: {}
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: eve-claim-substrate-node-data
