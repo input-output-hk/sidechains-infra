@@ -7,7 +7,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 30Gi
@@ -46,7 +46,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 10Gi
