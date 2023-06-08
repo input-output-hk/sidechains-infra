@@ -193,7 +193,8 @@ spec:
       persistentVolumeClaim:
         claimName: alice-claim-cardano-node-data
     - name: postgres-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim-postgres-data
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: alice-claim-substrate-node-data

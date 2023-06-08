@@ -6,7 +6,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany 
   storageClassName: alice-cardano-node-data-ebs-sc
   resources:
     requests:
@@ -45,7 +45,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany 
   storageClassName: alice-vector-logs-ebs-sc
   resources:
     requests:
