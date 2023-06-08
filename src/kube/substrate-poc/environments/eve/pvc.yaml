@@ -6,7 +6,7 @@
 #  namespace: sc
 #spec:
 #  accessModes:
-#    - ReadWriteMany
+#    - ReadWriteOnce
 #  storageClassName: aws-efs-storageclass
 #  resources:
 #    requests:
@@ -19,7 +19,7 @@
 #  namespace: sc
 #spec:
 #  accessModes:
-#    - ReadWriteMany
+#    - ReadWriteOnce
 #  storageClassName: aws-efs-storageclass
 #  resources:
 #    requests:
@@ -32,7 +32,7 @@
 #  namespace: sc
 #spec:
 #  accessModes:
-#    - ReadWriteMany
+#    - ReadWriteOnce
 #  storageClassName: aws-efs-storageclass
 #  resources:
 #    requests:
@@ -45,7 +45,7 @@
 #  namespace: sc
 #spec:
 #  accessModes:
-#    - ReadWriteMany
+#    - ReadWriteOnce
 #  storageClassName: aws-efs-storageclass
 #  resources:
 #    requests:
@@ -58,7 +58,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: eve-ebs-sc
   resources:
     requests:
@@ -71,7 +71,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: eve-ebs-sc
   resources:
     requests:
@@ -84,7 +84,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: eve-ebs-sc
   resources:
     requests:
@@ -97,7 +97,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   storageClassName: eve-ebs-sc
   resources:
     requests:
