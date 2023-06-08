@@ -7,7 +7,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany 
-  storageClassName: alice-cardano-node-data-ebs-sc
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 30Gi
@@ -46,7 +46,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany 
-  storageClassName: alice-vector-logs-ebs-sc
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 10Gi
