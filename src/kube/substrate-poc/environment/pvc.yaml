@@ -206,6 +206,58 @@ spec:
   resources:
     requests:
       storage: 10Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: eve-claim-cardano-node-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 30Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: eve-claim-postgres-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 90Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: eve-claim-substrate-node-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 30Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: eve-claim-vector-logs
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 10Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -215,7 +267,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 30Gi
@@ -228,7 +280,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 90Gi
@@ -241,7 +293,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 30Gi
@@ -254,7 +306,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: aws-efs-storageclass
+  storageClassName: eve-ebs-sc
   resources:
     requests:
       storage: 10Gi
