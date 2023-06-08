@@ -14,14 +14,3 @@ parameters:
   provisioningMode: efs-ap
   fileSystemId: fs-0d2f790fb12d9c152
   directoryPerms: "700"
----
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: eve-ebs-sc
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"
-provisioner: kubernetes.io/aws-ebs
-parameters:
-  type: gp2
-  fsType: ext4 
