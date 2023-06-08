@@ -101,13 +101,13 @@ spec:
     - name: postgres
       image: bitnami/postgresql
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "2048Mi"
-          cpu: "1000m"
-        requests:
-          memory: "2048Mi"
-          cpu: "1000m"
+      #resources:
+      #  limits:
+      #    memory: "2048Mi"
+      #    cpu: "1000m"
+      #  requests:
+      #    memory: "2048Mi"
+      #    cpu: "1000m"
       ports:
         - containerPort: 5432
           protocol: TCP
