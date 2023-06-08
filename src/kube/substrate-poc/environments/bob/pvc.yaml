@@ -6,8 +6,8 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: dave-ebs-sc
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass 
   resources:
     requests:
       storage: 30Gi
@@ -20,7 +20,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: dave-ebs-sc
+  storageClassName: bob-postgres-data-ebs-sc
   resources:
     requests:
       storage: 90Gi
@@ -45,8 +45,8 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: dave-ebs-sc
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 10Gi

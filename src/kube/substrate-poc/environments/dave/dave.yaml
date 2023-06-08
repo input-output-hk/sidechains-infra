@@ -112,6 +112,8 @@ spec:
         - containerPort: 5432
           protocol: TCP
       env:
+        - name: POSTGRES_USER
+          value: "postgres"
         - name: POSTGRES_PASSWORD
           value: "password123"
         - name: POSTGRES_DB
@@ -195,7 +197,8 @@ spec:
       persistentVolumeClaim:
         claimName: dave-claim-cardano-node-data
     - name: postgres-data
-      emptyDir: {}
+      persistentVolumeClaim:
+        claimName: alice-claim-postgres-data
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: dave-claim-substrate-node-data
