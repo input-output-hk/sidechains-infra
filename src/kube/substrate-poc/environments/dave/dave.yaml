@@ -209,7 +209,7 @@ spec:
         claimName: dave-claim-cardano-node-data
     - name: postgres-data
       persistentVolumeClaim:
-        claimName: alice-claim-postgres-data
+        claimName: dave-claim-postgres-data
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: dave-claim-substrate-node-data
