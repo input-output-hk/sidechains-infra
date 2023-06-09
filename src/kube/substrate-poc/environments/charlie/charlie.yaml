@@ -50,7 +50,18 @@ metadata:
   labels:
     app: sidechains-substrate-poc
     node: charlie
+    substrate-node: 'true'
 spec:
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: substrate-node
+            operator: In
+            values:
+            - 'true'
+        topologyKey: "kubernetes.io/hostname"
   containers:
     - name: cardano-node
       image: inputoutput/cardano-node:8.0.0
@@ -58,10 +69,10 @@ spec:
       resources:
         limits:
           memory: "2048Mi"
-          cpu: "1000m"
+          cpu: "1500m"
         requests:
           memory: "2048Mi"
-          cpu: "1000m"
+          cpu: "1500m"
       env:
         - name: NETWORK
           value: "preview"
@@ -149,10 +160,10 @@ spec:
       resources:
         limits:
           memory: "1024Mi"
-          cpu: "1000m"
+          cpu: "1500m"
         requests:
           memory: "1024Mi"
-          cpu: "1000m"
+          cpu: "1500m"
       args:
         - "--charlie"
         - "--base-path"
