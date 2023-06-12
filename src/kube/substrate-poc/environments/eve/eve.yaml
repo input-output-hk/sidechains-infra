@@ -126,7 +126,6 @@ spec:
           cpu: "1000m"
       securityContext:
         runAsUser: 999
-        fsGroup: 999
       ports:
         - containerPort: 5432
           protocol: TCP
