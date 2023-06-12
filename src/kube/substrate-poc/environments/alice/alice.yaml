@@ -62,6 +62,8 @@ spec:
             values:
             - 'true'
         topologyKey: "kubernetes.io/hostname"
+  nodeSelector:
+    pod: alice
   containers:
     - name: cardano-node
       image: inputoutput/cardano-node:8.0.0
