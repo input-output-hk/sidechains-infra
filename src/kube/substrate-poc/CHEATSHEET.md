@@ -42,6 +42,7 @@ kubectl get sc -n sc            # storage classes
 kubectl get pvc -n sc           # persistent volume claims
 kubectl get pv -n sc            # persistent volumes
 kubectl get svc -n sc           # services
+kubectl get node -n sc          # nodes
 
 # Describe Queries
 
@@ -50,6 +51,17 @@ kubectl describe sc -n sc            # storage classes
 kubectl describe pvc -n sc           # persistent volume claims
 kubectl describe pv -n sc            # persistent volumes
 kubectl describe svc -n sc           # services
+kubectl describe node -n sc          # nodes
+
+# Show what node a pod is running on
+
+kubectl get pods -o wide -n sc       # full summary
+
+kubectl get pod alice -o jsonpath='{.spec.nodeName}' -n sc
+kubectl get pod bob -o jsonpath='{.spec.nodeName}' -n sc
+kubectl get pod charlie -o jsonpath='{.spec.nodeName}' -n sc
+kubectl get pod dave -o jsonpath='{.spec.nodeName}' -n sc
+kubectl get pod eve -o jsonpath='{.spec.nodeName}' -n sc
 
 # Logs
 
