@@ -19,11 +19,24 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: eve-postgres-data-ebs-sc
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 90Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: eve-claim-postgres-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: eve-postgres-data-ebs-sc
+#  resources:
+#    requests:
+#      storage: 90Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
