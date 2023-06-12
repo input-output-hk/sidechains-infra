@@ -65,6 +65,7 @@ spec:
   nodeSelector:
     pod: eve
   securityContext:
+    runAsUser: 999
     fsGroup: 999
   containers:
     - name: cardano-node
@@ -125,6 +126,7 @@ spec:
           cpu: "1000m"
       securityContext:
         runAsUser: 999
+        fsGroup: 999
       ports:
         - containerPort: 5432
           protocol: TCP
