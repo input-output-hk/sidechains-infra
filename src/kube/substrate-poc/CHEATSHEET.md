@@ -35,6 +35,14 @@ kubectl delete -f charlie.yaml
 kubectl delete -f dave.yaml
 kubectl delete -f eve.yaml
 
+# Nuke stacks (including persistent data)
+
+kubectl delete -f alice/
+kubectl delete -f bob/
+kubectl delete -f charlie/
+kubectl delete -f dave/
+kubectl delete -f eve/
+
 # Get Queries
 
 kubectl get pods -n sc          # high level summary
