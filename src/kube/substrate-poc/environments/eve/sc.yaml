@@ -7,5 +7,7 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: kubernetes.io/aws-ebs
 parameters:
-  type: gp2
+  type: io2
+  #type: gp2
   fsType: ext4 
+  multiAttach: "enabled"
