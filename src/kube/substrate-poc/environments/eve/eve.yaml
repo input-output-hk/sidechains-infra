@@ -63,6 +63,8 @@ spec:
             - 'true'
         topologyKey: "kubernetes.io/hostname"
   nodeSelector:
+    pod: eve
+  securityContext:
     fsGroup: 999
   containers:
     - name: cardano-node
