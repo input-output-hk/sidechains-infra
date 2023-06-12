@@ -20,7 +20,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: bob-postgres-data-ebs-sc
+  storageClassName: bob-postgres-data-ebs-sc-2
   resources:
     requests:
       storage: 90Gi
