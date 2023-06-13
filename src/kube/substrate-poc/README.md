@@ -11,22 +11,22 @@
 
 This environment contains the following nodes:
 
-alice
-bob
-charlie
-dave
-eve
+* alice
+* bob
+* charlie
+* dave
+* eve
 
 ## Services
 
 Every container has its own Service, exposing relevant ports outside its Pod.
 Each container can talk to containers in other pods via the following Service hostnames:
 
-http://alice-service:<port>
-http://bob-service:<port>
-http://charlie-service:<port>
-http://dave-service:<port>
-http://eve-service:<port>
+* http://alice-service:<port>
+* http://bob-service:<port>
+* http://charlie-service:<port>
+* http://dave-service:<port>
+* http://eve-service:<port>
 
 ## Access
 
