@@ -46,10 +46,10 @@ locals {
       "lglo",
       "vvviiimmm",
       "mpskowron",
+      "rsporny",
       "ginnun"
     ],
     qa = [
-      "rsporny",
       "chrispalaskas"
     ],
     sre = [
