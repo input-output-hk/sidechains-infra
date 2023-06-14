@@ -64,9 +64,6 @@ spec:
         topologyKey: "kubernetes.io/hostname"
   nodeSelector:
     pod: eve
-  securityContext:
-    runAsUser: 999
-    fsGroup: 999
   containers:
     - name: cardano-node
       image: inputoutput/cardano-node:8.0.0
@@ -124,8 +121,6 @@ spec:
         requests:
           memory: "2048Mi"
           cpu: "1000m"
-      securityContext:
-        runAsUser: 999
       ports:
         - containerPort: 5432
           protocol: TCP
