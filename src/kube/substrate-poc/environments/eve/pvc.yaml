@@ -22,7 +22,7 @@ spec:
     storage: 90Gi
   accessModes:
     - ReadWriteOnce
-  storageClassName: ebs-sc
+  storageClassName: aws-ebs-storageclass
   awsElasticBlockStore:
     volumeID: vol-084129b14eaa60d8a
     fsType: ext4
