@@ -84,7 +84,7 @@ spec:
         - name: ipc
           mountPath: /ipc
         - name: cardano-node-data
-          mountPath: /opt/cardano/data
+          mountPath: /data
     - name: db-sync
       image: inputoutput/cardano-db-sync:13.1.1.0
       imagePullPolicy: IfNotPresent
@@ -204,7 +204,7 @@ spec:
           mountPath: /etc/vector
         - name: vector-logs
           mountPath: /var/log
-  
+
   volumes:
     - name: cardano-node-data
       persistentVolumeClaim:
