@@ -50,6 +50,7 @@ locals {
       "vvviiimmm",
       "mpskowron",
       "rsporny",
+      "rsporny2",
       "ginnun"
     ],
     qa = [
