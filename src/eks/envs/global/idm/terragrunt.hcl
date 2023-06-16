@@ -49,14 +49,12 @@ locals {
       "lglo",
       "vvviiimmm",
       "mpskowron",
+      "chrispalaskas",
       "rsporny",
-      "rsporny2",
+      "alexromanov",
       "ginnun"
     ],
     qa = [
-      "chrispalaskas",
-      "rsporny",
-      "alexromanov"
     ],
     sre = [
       "const-iohk",
