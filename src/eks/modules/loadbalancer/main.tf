@@ -22,15 +22,24 @@ provider "kubernetes" {
 
 # NLB Configuration
 
-data "aws_subnet" "selected" {
-  id = ["subnet-0245772cf491e28da", "subnet-0dcd319e426813a6c", "subnet-034a9423a9ac17ed7"]
+
+data "aws_subnet" "selected_1" {
+  id = "subnet-0245772cf491e28da"
+}
+
+data "aws_subnet" "selected_2" {
+  id = "subnet-0dcd319e426813a6c"
+}
+
+data "aws_subnet" "selected_3" {
+  id = "subnet-034a9423a9ac17ed7"
 }
 
 resource "aws_lb" "nlb" {
   name               = "eks-nlb"
   internal           = false
   load_balancer_type = "network"
-  subnets            = data.aws_subnet.selected.*.id
+  subnets            = [data.aws_subnet.selected_1.id, data.aws_subnet.selected_2.id, data.aws_subnet.selected_3.id]
 }
 
 # Alice p2p port
