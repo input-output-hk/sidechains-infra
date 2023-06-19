@@ -9,8 +9,28 @@ data:
   mapUsers: |
     - "groups":
       - "system:masters"
-      "userarn": "arn:aws:iam::689191102645:user/*"
-      "username": "*"
+      "userarn": "arn:aws:iam::689191102645:user/AmbientTea"
+      "username": "AmbientTea"
+    - "groups":
+      - "system:masters"
+      "userarn": "arn:aws:iam::689191102645:user/const-iohk"
+      "username": "const-iohk"
+    - "groups":
+      - "system:masters"
+      "userarn": "arn:aws:iam::689191102645:user/lglo"
+      "username": "lglo"
+    - "groups":
+      - "system:masters"
+      "userarn": "arn:aws:iam::689191102645:user/nrdxp"
+      "username": "nrdxp"
+    - "groups":
+      - "system:masters"
+      "userarn": "arn:aws:iam::689191102645:user/skylar-simoncelli"
+      "username": "skylar-simoncelli"
+    - "groups":
+      - "system:masters"
+      "userarn": "arn:aws:iam::689191102645:user/vvviiimmm"
+      "username": "vvviiimmm"
 kind: ConfigMap
 metadata:
   creationTimestamp: "2023-05-10T16:48:41Z"
@@ -18,3 +38,4 @@ metadata:
   namespace: kube-system
   resourceVersion: "4529333"
   uid: 7b01bfed-a8ee-420a-b3ef-22ce19559ddf
+
