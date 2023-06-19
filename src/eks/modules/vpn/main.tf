@@ -53,7 +53,7 @@ locals {
 resource "aws_ec2_client_vpn_network_association" "subnet" {
   for_each = toset(local.subnet_ids)
 
-  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.client_vpn_endpoint.id
+  client_vpn_endpoint_id = aws_ec2_client_vpn_endpoint.vpn_endpoint.id
   subnet_id              = each.key
 }
 
