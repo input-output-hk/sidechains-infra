@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: postgres-data
+  name: eve-postgres-data
   namespace: sc
 spec:
   capacity:
