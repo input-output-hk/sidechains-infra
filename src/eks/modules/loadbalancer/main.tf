@@ -46,14 +46,14 @@ resource "aws_lb" "nlb" {
 
 resource "aws_lb_target_group" "alice" {
   name     = "tg-alice"
-  port     = 8001
+  port     = 30001
   protocol = "TCP"
   vpc_id   = data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
 }
 
 resource "aws_lb_listener" "alice" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = 8001
+  port              = 30001
   protocol          = "TCP"
 
   default_action {
@@ -66,14 +66,14 @@ resource "aws_lb_listener" "alice" {
 
 resource "aws_lb_target_group" "bob" {
   name     = "tg-bob"
-  port     = 8002
+  port     = 30002
   protocol = "TCP"
   vpc_id   = data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
 }
 
 resource "aws_lb_listener" "bob" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = 8002
+  port              = 30002
   protocol          = "TCP"
 
   default_action {
@@ -86,14 +86,14 @@ resource "aws_lb_listener" "bob" {
 
 resource "aws_lb_target_group" "charlie" {
   name     = "tg-charlie"
-  port     = 8003
+  port     = 30003
   protocol = "TCP"
   vpc_id   = data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
 }
 
 resource "aws_lb_listener" "charlie" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = 8003
+  port              = 30003
   protocol          = "TCP"
 
   default_action {
@@ -106,14 +106,14 @@ resource "aws_lb_listener" "charlie" {
 
 resource "aws_lb_target_group" "dave" {
   name     = "tg-dave"
-  port     = 8004
+  port     = 30004
   protocol = "TCP"
   vpc_id   = data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
 }
 
 resource "aws_lb_listener" "dave" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = 8004
+  port              = 30004
   protocol          = "TCP"
 
   default_action {
@@ -126,14 +126,14 @@ resource "aws_lb_listener" "dave" {
 
 resource "aws_lb_target_group" "eve" {
   name     = "tg-eve"
-  port     = 8005
+  port     = 30005
   protocol = "TCP"
   vpc_id   = data.aws_eks_cluster.cluster.vpc_config.0.vpc_id
 }
 
 resource "aws_lb_listener" "eve" {
   load_balancer_arn = aws_lb.nlb.arn
-  port              = 8005
+  port              = 30005
   protocol          = "TCP"
 
   default_action {
