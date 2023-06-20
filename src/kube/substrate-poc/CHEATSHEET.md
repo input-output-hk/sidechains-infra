@@ -3,10 +3,10 @@
 https://input-output.atlassian.net/wiki/spaces/EMU/pages/3869081650/Sidechains+Substrate+POC+Environment
 
 # Install AWS EFS+EBS Drivers
-
+```
 kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.5"
 kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.19"
-
+```
 # Setup Local Shell
 ```
 nix-shell -p kubectl awscli2
@@ -30,6 +30,14 @@ kubectl apply -f bob.yaml
 kubectl apply -f charlie.yaml
 kubectl apply -f dave.yaml
 kubectl apply -f eve.yaml
+```
+# Deploy stacks
+```
+kubectl apply -f alice/
+kubectl apply -f bob/
+kubectl apply -f charlie/
+kubectl apply -f dave/
+kubectl apply -f eve/
 ```
 # Nuke pods
 ```
