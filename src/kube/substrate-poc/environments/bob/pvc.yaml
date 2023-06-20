@@ -24,7 +24,8 @@ spec:
     - ReadWriteOnce
   storageClassName: aws-ebs-storageclass
   awsElasticBlockStore:
-    volumeID: vol-01a45e5df96ac8fcc
+    #volumeID: vol-084129b14eaa60d8a
+    volumeID: vol-008f5715693f1fa5c
     fsType: ext4
 ---
 apiVersion: v1

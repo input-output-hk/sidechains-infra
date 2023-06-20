@@ -7,6 +7,17 @@ https://input-output.atlassian.net/wiki/spaces/EMU/pages/3869081650/Sidechains+S
 kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.5"
 kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.19"
 ```
+# Label Nodes
+
+Stacks are assigned to nodes via labels, in the order they are displayed in the `kubectl get nodes' command. 
+The following commands will label the nodes in the cluster.
+```
+kubectl label nodes ip-10-0-10-127.eu-central-1.compute.internal pod=alice
+kubectl label nodes ip-10-0-10-42.eu-central-1.compute.internal pod=bob
+kubectl label nodes ip-10-0-11-134.eu-central-1.compute.internal pod=charlie
+kubectl label nodes ip-10-0-11-244.eu-central-1.compute.internal pod=dave
+kubectl label nodes ip-10-0-12-134.eu-central-1.compute.internal pod=eve
+```
 # Setup Local Shell
 ```
 nix-shell -p kubectl awscli2
