@@ -19,10 +19,6 @@ provider "kubernetes" {
   load_config_file       = false
 }
 
-####################################################################################
-####################################################################################
-####################################################################################
-
 # AWS Client VPN Endpoint
 
 resource "aws_ec2_client_vpn_endpoint" "vpn_endpoint" {
@@ -57,16 +53,42 @@ resource "aws_ec2_client_vpn_network_association" "subnet" {
   subnet_id              = each.key
 }
 
-# Generate server certificate for VPN (You can use your own certificates too)
+# Generate server certificate for VPN
 resource "aws_acm_certificate" "cert" {
   domain_name       = "vpn.sc.iog.io" # Replace with your domain
   validation_method = "DNS"
 }
 
-# Generate root certificate for VPN client authentication (You can use your own certificates too)
+resource "aws_route53_record" "cert_validation" {
+  name    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_name
+  type    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_type
+  zone_id = aws_route53_zone.Z0930546192C92TNWGRO0.zone_id
+  records = [aws_acm_certificate.cert.domain_validation_options.0.resource_record_value]
+  ttl     = 60
+}
+
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.cert.arn
+  validation_record_fqdns = [aws_route53_record.cert_validation.fqdn]
+}
+
+# Generate root certificate for VPN client authentication
 resource "aws_acm_certificate" "root_cert" {
   domain_name       = "vpn.sc.iog.io" # Replace with your domain
   validation_method = "DNS"
+}
+
+resource "aws_route53_record" "root_cert_validation" {
+  name    = aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_name
+  type    = aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_type
+  zone_id = aws_route53_zone.Z0930546192C92TNWGRO0.zone_id
+  records = [aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_value]
+  ttl     = 60
+}
+
+resource "aws_acm_certificate_validation" "root_cert" {
+  certificate_arn         = aws_acm_certificate.root_cert.arn
+  validation_record_fqdns = [aws_route53_record.root_cert_validation.fqdn]
 }
 
 # Set up a CloudWatch Log Group and Log Stream for VPN connection logging
@@ -78,5 +100,3 @@ resource "aws_cloudwatch_log_stream" "ls" {
   name           = "VPN-Connection-Log-Stream"
   log_group_name = aws_cloudwatch_log_group.lg.name
 }
-
-
