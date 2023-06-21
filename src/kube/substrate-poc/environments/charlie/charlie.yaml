@@ -138,7 +138,7 @@ spec:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
     - name: bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.0.17
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend-mock:0.0.1
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -156,9 +156,12 @@ spec:
           value: "jdbc:postgresql://localhost:5432/cexplorer"
       volumeMounts:
         - name: ipc
-          mountPath: /local
+          mountPath: /ipc
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/sidechains-substrate-node:v0.0.3
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:v0.0.6-pre2
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -167,6 +170,13 @@ spec:
         requests:
           memory: "1024Mi"
           cpu: "1500m"
+      env:
+        - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
+          value: "1666656000000"
+        - name: MC_FIRST_EPOCH_NUMBER
+          value: "0"
+        - name: MC_EPOCH_DURATION_MILLIS
+          value: "86400000"
       args:
         - "--charlie"
         - "--base-path"
@@ -188,6 +198,8 @@ spec:
       volumeMounts:
         - name: substrate-node-data
           mountPath: /data
+        - name: ipc
+          mountPath: /ipc
     - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
