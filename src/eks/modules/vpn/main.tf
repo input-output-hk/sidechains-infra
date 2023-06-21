@@ -53,17 +53,27 @@ resource "aws_ec2_client_vpn_network_association" "subnet" {
   subnet_id              = each.key
 }
 
+# Route53 Zone
+data "aws_route53_zone" "selected" {
+  zone_id = "Z0930546192C92TNWGRO0"
+}
+
 # Generate server certificate for VPN
 resource "aws_acm_certificate" "cert" {
   domain_name       = "vpn.sc.iog.io" # Replace with your domain
   validation_method = "DNS"
 }
 
+locals {
+  cert_validation_domain = tolist(aws_acm_certificate.cert.domain_validation_options)[0]
+  root_cert_validation_domain = tolist(aws_acm_certificate.root_cert.domain_validation_options)[0]
+}
+
 resource "aws_route53_record" "cert_validation" {
-  name    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.cert.domain_validation_options.0.resource_record_type
-  zone_id = aws_route53_zone.Z0930546192C92TNWGRO0.zone_id
-  records = [aws_acm_certificate.cert.domain_validation_options.0.resource_record_value]
+  name    = local.cert_validation_domain.resource_record_name
+  type    = local.cert_validation_domain.resource_record_type
+  zone_id = data.aws_route53_zone.selected.zone_id
+  records = [local.cert_validation_domain.resource_record_value]
   ttl     = 60
 }
 
@@ -79,10 +89,10 @@ resource "aws_acm_certificate" "root_cert" {
 }
 
 resource "aws_route53_record" "root_cert_validation" {
-  name    = aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_name
-  type    = aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_type
-  zone_id = aws_route53_zone.Z0930546192C92TNWGRO0.zone_id
-  records = [aws_acm_certificate.root_cert.domain_validation_options.0.resource_record_value]
+  name    = local.root_cert_validation_domain.resource_record_name
+  type    = local.root_cert_validation_domain.resource_record_type
+  zone_id = data.aws_route53_zone.selected.zone_id
+  records = [local.root_cert_validation_domain.resource_record_value]
   ttl     = 60
 }
 
