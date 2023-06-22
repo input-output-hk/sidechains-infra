@@ -17,9 +17,11 @@ spec:
     - name: ws-port
       port: 9945
       targetPort: 9945
+      nodePort: 30015
     - name: rcp-port
       port: 9933
       targetPort: 9933
+      nodePort: 30025
 ---
 apiVersion: v1
 kind: ConfigMap

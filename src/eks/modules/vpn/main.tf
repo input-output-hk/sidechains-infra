@@ -24,11 +24,11 @@ provider "kubernetes" {
 resource "aws_ec2_client_vpn_endpoint" "vpn_endpoint" {
   description            = "VPN access to services"
   server_certificate_arn = aws_acm_certificate.cert.arn
-  client_cidr_block      = "172.20.0.0/16" # iog-sidechain-substrate-kubernetes cluster cidr
+  client_cidr_block      = "172.20.0.0/16"
 
   authentication_options {
-    type                       = "certificate-authentication"
-    root_certificate_chain_arn = aws_acm_certificate.root_cert.arn
+    type                       = "federated-authentication"
+    saml_provider_arn          = aws_iam_saml_provider.example.arn
   }
 
   connection_log_options {
