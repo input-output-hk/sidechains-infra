@@ -36,11 +36,11 @@ kubectl config get-contexts
 ```
 # Deploy pods
 ```
-kubectl apply -f alice.yaml
-kubectl apply -f bob.yaml
-kubectl apply -f charlie.yaml
-kubectl apply -f dave.yaml
-kubectl apply -f eve.yaml
+kubectl apply -f alice/alice.yaml
+kubectl apply -f bob/bob.yaml
+kubectl apply -f charlie/charlie.yaml
+kubectl apply -f dave/dave.yaml
+kubectl apply -f eve/eve.yaml
 ```
 # Deploy stacks
 ```
@@ -52,11 +52,11 @@ kubectl apply -f eve/
 ```
 # Nuke pods
 ```
-kubectl delete -f alice.yaml
-kubectl delete -f bob.yaml
-kubectl delete -f charlie.yaml
-kubectl delete -f dave.yaml
-kubectl delete -f eve.yaml
+kubectl delete -f alice/alice.yaml
+kubectl delete -f bob/bob.yaml
+kubectl delete -f charlie/charlie.yaml
+kubectl delete -f dave/dave.yaml
+kubectl delete -f eve/eve.yaml
 ```
 # Nuke stacks (including persistent data)
 ```
