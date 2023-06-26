@@ -18,7 +18,7 @@ spec:
       port: 9945
       targetPort: 9945
       nodePort: 30013
-    - name: rcp-port
+    - name: rpc-port
       port: 9933
       targetPort: 9933
       nodePort: 30023
@@ -190,6 +190,12 @@ spec:
         - "0000000000000000000000000000000000000000000000000000000000000003"
         - "--bootnodes"
         - "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+        - "--unsafe-rpc-external"
+        - "--rpc-port"
+        - "9933"
+        - "--unsafe-ws-external"
+        - "--ws-port"
+        - "9945"
       ports:
         - containerPort: 30333
           name: p2p
