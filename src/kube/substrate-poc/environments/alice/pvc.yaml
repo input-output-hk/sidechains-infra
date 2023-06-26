@@ -34,7 +34,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany 
+    - ReadWriteMany
   storageClassName: aws-efs-storageclass
   resources:
     requests:
@@ -47,7 +47,7 @@ metadata:
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany 
+    - ReadWriteMany
   storageClassName: aws-efs-storageclass
   resources:
     requests:
@@ -56,11 +56,24 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  name: alice-claim-db-sync-state-dir
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
   name: alice-claim-vector-logs
   namespace: sc
 spec:
   accessModes:
-    - ReadWriteMany 
+    - ReadWriteMany
   storageClassName: aws-efs-storageclass
   resources:
     requests:

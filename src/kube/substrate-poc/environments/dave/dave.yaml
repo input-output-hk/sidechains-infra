@@ -114,6 +114,8 @@ spec:
       volumeMounts:
         - name: ipc
           mountPath: /node-ipc
+        - name: db-sync-state-dir
+          mountPath: /var/lib
     - name: postgres
       image: postgres:15.3
       imagePullPolicy: IfNotPresent
@@ -236,6 +238,9 @@ spec:
     - name: substrate-node-data
       persistentVolumeClaim:
         claimName: dave-claim-substrate-node-data
+    - name: db-sync-state-dir
+      persistentVolumeClaim:
+        claimName: dave-claim-db-sync-state-dir
     - name: ipc
       emptyDir: {}
     - name: vector-config

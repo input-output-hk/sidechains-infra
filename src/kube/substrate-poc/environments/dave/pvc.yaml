@@ -48,10 +48,23 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
-  storageClassName: aws-efs-storageclass 
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dave-claim-db-sync-state-dir
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
