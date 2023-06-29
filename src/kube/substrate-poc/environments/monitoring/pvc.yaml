@@ -1,0 +1,52 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: monitoring-claim-vector
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: monitoring-claim-loki
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 40Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: monitoring-claim-prometheus
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 40Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: monitoring-claim-grafana
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi

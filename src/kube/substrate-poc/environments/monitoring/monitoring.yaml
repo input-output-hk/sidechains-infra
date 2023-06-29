@@ -1,0 +1,134 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-vector-configmap
+  namespace: sc
+data:
+  vector.toml: |
+    [api]
+    enabled = true
+    address = "0.0.0.0:8686"
+    [sources.log_file]
+    type = "file"
+    include = ["/var/log/*.log"]
+    # [sinks.prometheus]
+    # type = "prometheus_exporter"
+    # inputs = [ "my-source-or-transform-id" ]
+    [sinks.console]
+    inputs = ["log_file"]
+    target = "stdout"
+    type = "console"
+    encoding.codec = "json"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitoring-service
+  namespace: sc
+spec:
+  type: NodePort
+  selector:
+    app: monitoring-pod
+  ports:
+    - name: grafana
+      port: 3000
+      targetPort: 3000
+    - name: prometheus
+      port: 9090
+      targetPort: 9090
+    - name: loki
+      port: 3100
+      targetPort: 3100
+    - name: vector
+      port: 8686
+      targetPort: 8686
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: monitoring
+  namespace: sc
+  labels:
+    app: monitoring-pod
+spec:
+  containers:
+    - name: vector
+      image: timberio/vector:nightly-alpine
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
+        requests:
+          memory: "1024Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 8686
+      volumeMounts:
+        - name: vector-config
+          mountPath: /etc/vector
+        - name: vector-data
+          mountPath: /var/log
+    - name: loki
+      image: grafana/loki:2.4.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
+        requests:
+          memory: "1024Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 3100
+      volumeMounts:
+        - name: loki-data
+          mountPath: /loki
+    - name: prometheus
+      image: prom/prometheus:v2.45.0
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
+        requests:
+          memory: "1024Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 9090
+      volumeMounts:
+        - name: prometheus-data
+          mountPath: /prometheus
+    - name: grafana
+      image: grafana/grafana:10.0.1
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "1024Mi"
+          cpu: "500m"
+        requests:
+          memory: "1024Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 3000
+      volumeMounts:
+        - name: grafana-data
+          mountPath: /var/lib/grafana
+
+  volumes:
+    - name: vector-config
+      configMap:
+        name: monitoring-vector-configmap
+    - name: vector-data
+      persistentVolumeClaim:
+        claimName: monitoring-claim-vector
+    - name: loki-data
+      persistentVolumeClaim:
+        claimName: monitoring-claim-loki
+    - name: prometheus-data
+      persistentVolumeClaim:
+        claimName: monitoring-claim-prometheus
+    - name: grafana-data
+      persistentVolumeClaim:
+        claimName: monitoring-claim-grafana
