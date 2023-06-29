@@ -56,13 +56,13 @@ spec:
     - name: vector
       image: timberio/vector:nightly-alpine
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-        requests:
-          memory: "1024Mi"
-          cpu: "500m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
       ports:
         - containerPort: 8686
       volumeMounts:
@@ -73,13 +73,13 @@ spec:
     - name: loki
       image: grafana/loki:2.4.1
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-        requests:
-          memory: "1024Mi"
-          cpu: "500m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
       ports:
         - containerPort: 3100
       volumeMounts:
@@ -88,13 +88,13 @@ spec:
     - name: prometheus
       image: prom/prometheus:v2.45.0
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-        requests:
-          memory: "1024Mi"
-          cpu: "500m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
       ports:
         - containerPort: 9090
       volumeMounts:
@@ -103,13 +103,13 @@ spec:
     - name: grafana
       image: grafana/grafana:10.0.1
       imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "1024Mi"
-          cpu: "500m"
-        requests:
-          memory: "1024Mi"
-          cpu: "500m"
+      #resources:
+      #  limits:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
+      #  requests:
+      #    memory: "1024Mi"
+      #    cpu: "500m"
       ports:
         - containerPort: 3000
       volumeMounts:
