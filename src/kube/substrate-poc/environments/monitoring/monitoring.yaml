@@ -6,20 +6,131 @@ metadata:
   namespace: sc
 data:
   vector.toml: |
+
+    # GLOBAL
+
     [api]
     enabled = true
     address = "0.0.0.0:8686"
+
+    # SOURCES
+
     [sources.log_file]
     type = "file"
     include = ["/var/log/*.log"]
-    # [sinks.prometheus]
-    # type = "prometheus_exporter"
-    # inputs = [ "my-source-or-transform-id" ]
+
+    [sources.kubernetes_logs]
+    type = "kubernetes_logs"
+    auto_partial_merge = true
+
+    [sources.prometheus_metrics]
+    type = "prometheus"
+    hosts = ["http://monitoring-service.sc:8686/metrics"]
+
+    # SINKS
+
     [sinks.console]
     inputs = ["log_file"]
     target = "stdout"
     type = "console"
     encoding.codec = "json"
+
+    [sinks.prometheus]
+    type = "prometheus_exporter"
+    inputs = ["prometheus_metrics"]
+    address = "0.0.0.0:9283"
+    default_namespace = "sc"
+
+    [sinks.loki]
+    type = "loki"
+    inputs = ["kubernetes_logs"]
+    endpoint = "http://monitoring-service.sc:3100"
+    encoding = "json"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: loki-config
+  namespace: sc
+data:
+  loki-local-config.yaml: |
+    auth_enabled: false
+    server:
+      http_listen_port: 3100
+    ingester:
+      lifecycler:
+        address: 127.0.0.1
+        ring:
+          kvstore:
+            store: inmemory
+          replication_factor: 1
+        final_sleep: 0s
+      chunk_idle_period: 1h       # Any chunk not receiving new logs in this time will be flushed
+      max_chunk_age: 1h           # All chunks will be flushed when they hit this age, default is 1h
+      chunk_target_size: 1048576  # Loki will attempt to build chunks up to 1.5MB, flushing first if chunk_idle_period or max_chunk_age is reached first
+      chunk_retain_period: 30s    # Must be less than or equal to chunk_idle_period
+      max_transfer_retries: 0     # Chunk transfers disabled
+    schema_config:
+      configs:
+        - from: 2020-05-15
+          store: boltdb-shipper
+          object_store: filesystem
+          schema: v11
+          index:
+            prefix: index_
+            period: 24h
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /loki/boltdb-shipper-active
+        cache_location: /loki/boltdb-shipper-cache
+        cache_ttl: 24h          # Can be increased for faster performance over longer query periods, uses more disk space
+        shared_store: filesystem
+    compactor:
+      working_directory: /loki/boltdb-shipper-compactor
+      shared_store: filesystem
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+    chunk_store_config:
+      max_look_back_period: 0s
+    table_manager:
+      retention_deletes_enabled: false
+      retention_period: 0s
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: sc
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:     15s
+      evaluation_interval: 15s
+    scrape_configs:
+      - job_name: 'vector'
+        static_configs:
+          - targets: ['monitoring-service.sc:9283', 'alice-service.sc:9283', 'bob-service.sc:9283', 'charlie-service.sc:9283','dave-service.sc:9283','eve-service.sc:9283']
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: sc
+data:
+  datasources.yaml: |
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://localhost:9090
+        access: proxy
+        isDefault: true
+      - name: Loki
+        type: loki
+        url: http://localhost:3100
+        access: proxy
 ---
 apiVersion: v1
 kind: Service
@@ -34,15 +145,23 @@ spec:
     - name: grafana
       port: 3000
       targetPort: 3000
+      nodePort: 30000
     - name: prometheus
       port: 9090
       targetPort: 9090
+      nodePort: 30010
     - name: loki
       port: 3100
       targetPort: 3100
-    - name: vector
+      nodePort: 30020
+    - name: vector-api
       port: 8686
       targetPort: 8686
+      nodePort: 30030
+    - name: vector-prometheus
+      port: 9283
+      targetPort: 9283
+      nodePort: 30040
 ---
 apiVersion: v1
 kind: Pod
@@ -82,9 +201,13 @@ spec:
       #    cpu: "500m"
       ports:
         - containerPort: 3100
+      args:
+        - -config.file=/etc/loki/loki-local-config.yaml
       volumeMounts:
         - name: loki-data
           mountPath: /loki
+        - name: loki-config
+          mountPath: /etc/loki
     - name: prometheus
       image: prom/prometheus:v2.45.0
       imagePullPolicy: IfNotPresent
@@ -100,6 +223,9 @@ spec:
       volumeMounts:
         - name: prometheus-data
           mountPath: /prometheus
+        - name: prometheus-config
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
     - name: grafana
       image: grafana/grafana:10.0.1
       imagePullPolicy: IfNotPresent
@@ -115,6 +241,8 @@ spec:
       volumeMounts:
         - name: grafana-data
           mountPath: /var/lib/grafana
+        - name: grafana-config
+          mountPath: /etc/grafana/provisioning/datasources
 
   volumes:
     - name: vector-config
@@ -126,9 +254,18 @@ spec:
     - name: loki-data
       persistentVolumeClaim:
         claimName: monitoring-claim-loki
+    - name: loki-config
+      configMap:
+        name: loki-config
     - name: prometheus-data
       persistentVolumeClaim:
         claimName: monitoring-claim-prometheus
+    - name: prometheus-config
+      configMap:
+        name: prometheus-config
     - name: grafana-data
       persistentVolumeClaim:
         claimName: monitoring-claim-grafana
+    - name: grafana-config
+      configMap:
+        name: grafana-config
