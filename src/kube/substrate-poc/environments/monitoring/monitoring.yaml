@@ -171,6 +171,18 @@ metadata:
   labels:
     app: monitoring-pod
 spec:
+  #affinity:
+  #  podAntiAffinity:
+  #    requiredDuringSchedulingIgnoredDuringExecution:
+  #    - labelSelector:
+  #        matchExpressions:
+  #        - key: substrate-node
+  #          operator: In
+  #          values:
+  #          - 'true'
+  #      topologyKey: "kubernetes.io/hostname"
+  #nodeSelector:
+  #  pod: monitoring
   containers:
     - name: vector
       image: timberio/vector:nightly-alpine
