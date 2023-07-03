@@ -22,6 +22,8 @@ data:
     [sources.kubernetes_logs]
     type = "kubernetes_logs"
     auto_partial_merge = true
+    self_node_name = "${VECTOR_SELF_NODE_NAME}"
+
 
     [sources.prometheus_metrics]
     type = "prometheus_scrape"
@@ -203,6 +205,11 @@ spec:
       #    cpu: "500m"
       ports:
         - containerPort: 8686
+      env:
+        - name: VECTOR_SELF_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
       volumeMounts:
         - name: vector-config
           mountPath: /etc/vector
