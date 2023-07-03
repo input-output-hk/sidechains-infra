@@ -7,6 +7,13 @@ https://input-output.atlassian.net/wiki/spaces/EMU/pages/3869081650/Sidechains+S
 kubectl apply -k "github.com/kubernetes-sigs/aws-efs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.5"
 kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.19"
 ```
+# Kube-State-Metrics
+```
+helm install kube-state-metrics prometheus-community/kube-state-metrics -n sc
+helm uninstall kube-state-metrics
+kubectl get pods -n sc -l app.kubernetes.io/name=kube-state-metrics
+kubectl logs -l app.kubernetes.io/name=kube-state-metrics -n sc
+```
 # Label Nodes
 
 Stacks are assigned to nodes via labels, in the order they are displayed in the `kubectl get nodes' command. 
