@@ -112,6 +112,10 @@ data:
       - job_name: 'vector'
         static_configs:
           - targets: ['monitoring-service.sc:9283', 'alice-service.sc:9283', 'bob-service.sc:9283', 'charlie-service.sc:9283','dave-service.sc:9283','eve-service.sc:9283']
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['kube-state-metrics.sc.svc.cluster.local:8080']
+
 ---
 apiVersion: v1
 kind: ConfigMap
