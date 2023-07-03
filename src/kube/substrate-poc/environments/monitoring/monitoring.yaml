@@ -24,8 +24,9 @@ data:
     auto_partial_merge = true
 
     [sources.prometheus_metrics]
-    type = "prometheus"
-    hosts = ["http://monitoring-service.sc:8686/metrics"]
+    type = "prometheus_scrape"
+    endpoints = ["http://monitoring-service.sc:8686/metrics"]
+
 
     # SINKS
 
