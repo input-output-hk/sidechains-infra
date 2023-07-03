@@ -45,7 +45,8 @@ data:
     type = "loki"
     inputs = ["kubernetes_logs"]
     endpoint = "http://monitoring-service.sc:3100"
-    encoding = "json"
+    encoding.codec = "json"
+
 ---
 apiVersion: v1
 kind: ConfigMap
