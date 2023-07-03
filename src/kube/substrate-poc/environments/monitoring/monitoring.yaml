@@ -46,7 +46,8 @@ data:
     inputs = ["kubernetes_logs"]
     endpoint = "http://monitoring-service.sc:3100"
     encoding.codec = "json"
-
+    labels = { host = "{{ host }}" }
+ 
 ---
 apiVersion: v1
 kind: ConfigMap
