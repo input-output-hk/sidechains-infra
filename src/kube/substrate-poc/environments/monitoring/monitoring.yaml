@@ -20,23 +20,20 @@ spec:
         - containerPort: 9100
           name: scrape
         volumeMounts:
-        - name: /proc
+        - name: proc
           mountPath: /host/proc
-          readOnly: true
-        - name: /sys
+        - name: sys
           mountPath: /host/sys
-          readOnly: true
-        - name: /rootfs
+        - name: rootfs
           mountPath: /host/rootfs
-          readOnly: true
       volumes:
-      - name: /proc
+      - name: proc
         hostPath:
           path: /proc
-      - name: /sys
+      - name: sys
         hostPath:
           path: /sys
-      - name: /rootfs
+      - name: rootfs
         hostPath:
           path: /
 ---
