@@ -100,6 +100,7 @@ kubectl get pod bob -o jsonpath='{.spec.nodeName}' -n sc
 kubectl get pod charlie -o jsonpath='{.spec.nodeName}' -n sc
 kubectl get pod dave -o jsonpath='{.spec.nodeName}' -n sc
 kubectl get pod eve -o jsonpath='{.spec.nodeName}' -n sc
+kubectl get pod monitoring -o jsonpath='{.spec.nodeName}' -n sc
 ```
 # Logs
 ```
