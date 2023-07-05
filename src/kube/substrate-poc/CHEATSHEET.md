@@ -137,6 +137,12 @@ kubectl logs eve -c postgres -n sc
 kubectl logs eve -c bridge-backend -n sc
 kubectl logs eve -c substrate-node -n sc
 kubectl logs eve -c vector -n sc
+
+kubectl logs monitoring grafana -n sc
+kubectl logs monitoring prometheus -n sc
+kubectl logs monitoring loki -n sc
+kubectl logs monitoring vector -n sc
+
 ```
 # Exec 
 ```
@@ -174,6 +180,11 @@ kubectl exec eve -it -c postgres -n sc -- sh
 kubectl exec eve -it -c bridge-backend -n sc -- sh
 kubectl exec eve -it -c substrate-node -n sc -- sh
 kubectl exec eve -it -c vector -n sc -- sh
+
+kubectl exec monitoring -it -c grafana -n sc -- sh
+kubectl exec monitoring -it -c prometheus -n sc -- sh
+kubectl exec monitoring -it -c loki -n sc -- sh
+kubectl exec monitoring -it -c vector -n sc -- sh
 ```
 # Wipe Persistent Data
 
