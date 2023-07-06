@@ -73,10 +73,10 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "2048Mi"
+          memory: "4096Mi"
           cpu: "1500m"
         requests:
-          memory: "2048Mi"
+          memory: "4096Mi"
           cpu: "1500m"
       env:
         - name: NETWORK
@@ -182,10 +182,10 @@ spec:
       imagePullPolicy: IfNotPresent
       resources:
         limits:
-          memory: "1024Mi"
+          memory: "4096Mi"
           cpu: "1500m"
         requests:
-          memory: "1024Mi"
+          memory: "4096Mi"
           cpu: "1500m"
       env:
         - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
