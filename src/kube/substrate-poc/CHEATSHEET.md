@@ -83,6 +83,11 @@ kubectl get pv -n sc            # persistent volumes
 kubectl get svc -n sc           # services
 kubectl get node -n sc          # nodes
 ```
+# Get AWS Availability Zones for each node
+```
+kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.labels.topology\.kubernetes\.io/zone}{"\n"}{end}'
+```
+
 # Describe Queries
 ```
 kubectl describe pods -n sc          # detailed summary
