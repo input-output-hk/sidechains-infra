@@ -222,3 +222,20 @@ kubectl apply -f pvc.yaml
 ```
 kubectl apply -f <pod_name>.yaml
 ```
+# Update Grafana Dashboard
+
+1. Edit dashboard in Grafana
+2. Export dashboard as JSON
+3. Copy JSON to clipboard
+4. Edit src/kube/substrate-poc/environments/monitoring/grafana-dashboard.json
+5. Paste JSON into grafana-dashboard.json
+6. Commit and push changes to git
+7. Delete the current grafana-dashboard ConfigMap
+```
+kubectl delete configmap grafana-dashboard -n sc
+```
+8. Create the new grafana-dashboard ConfigMap
+```
+kubectl create configmap grafana-dashboard --from-file=grafana-dashboard.json -n sc
+```
+
