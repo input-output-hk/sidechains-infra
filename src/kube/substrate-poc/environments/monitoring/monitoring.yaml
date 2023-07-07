@@ -390,8 +390,8 @@ spec:
           mountPath: /var/lib/grafana
         - name: grafana-config
           mountPath: /etc/grafana/provisioning/datasources
-        - name: grafana-dashboard
-          mountPath: /etc/grafana/dashboards/grafana-dashboard.json
+       # - name: grafana-dashboard
+       #   mountPath: /etc/grafana/dashboards/grafana-dashboard.json
 
   volumes:
     - name: vector-config
