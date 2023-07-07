@@ -341,7 +341,6 @@ spec:
           mountPath: /etc/grafana/provisioning/datasources
         - name: grafana-dashboard
           mountPath: /etc/grafana/provisioning/dashboards/
-          subPath: grafana-dashboard.json
         - name: grafana-dashboards-provisioning
           mountPath: /etc/grafana/provisioning/dashboards
   volumes:
