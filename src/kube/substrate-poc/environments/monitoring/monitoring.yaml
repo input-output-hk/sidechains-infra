@@ -340,7 +340,7 @@ spec:
         - name: grafana-config
           mountPath: /etc/grafana/provisioning/datasources
         - name: grafana-dashboard
-          mountPath: /etc/grafana/provisioning/dashboards/grafana-dashboard.json
+          mountPath: /etc/grafana/provisioning/dashboards/
           subPath: grafana-dashboard.json
         - name: grafana-dashboards-provisioning
           mountPath: /etc/grafana/provisioning/dashboards
