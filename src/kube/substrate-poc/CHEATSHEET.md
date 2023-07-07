@@ -14,6 +14,12 @@ helm uninstall kube-state-metrics
 kubectl get pods -n sc -l app.kubernetes.io/name=kube-state-metrics
 kubectl logs -l app.kubernetes.io/name=kube-state-metrics -n sc
 ```
+
+# Install  Prometheus Node Exporter DaemonSet
+```
+wget https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/release-0.66/bundle.yaml
+kubectl create -f bundle.yaml
+```
 # Label Nodes
 
 Stacks are assigned to nodes via labels, in the order they are displayed in the `kubectl get nodes' command. 
