@@ -209,7 +209,7 @@ metadata:
   name: grafana-dashboards-provisioning
   namespace: sc
 data:
-  grafana-dashboards-provisioning.yaml: |-
+  dashboards.yaml: |-
     apiVersion: 1
     providers:
       - name: 'default'
@@ -219,7 +219,7 @@ data:
         disableDeletion: false
         editable: true
         options:
-          path: /etc/grafana/provisioning/dashboards
+          path: /etc/grafana/dashboards/default
 ---
 apiVersion: v1
 kind: Service
@@ -342,7 +342,7 @@ spec:
         - name: grafana-dashboard
           mountPath: /etc/grafana/provisioning/dashboards
         - name: grafana-dashboards-provisioning
-          mountPath: /etc/grafana/provisioning/dashboards/grafana-dashboards-provisioning.yaml
+          mountPath: /etc/grafana/provisioning/dashboards/dashboards.yaml
   volumes:
     - name: vector-config
       configMap:
