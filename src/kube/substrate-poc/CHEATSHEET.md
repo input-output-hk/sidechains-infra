@@ -238,4 +238,8 @@ kubectl delete configmap grafana-dashboard -n sc
 ```
 kubectl create configmap grafana-dashboard --from-file=grafana-dashboard.json -n sc
 ```
-
+# Promtail
+```
+kubectl get pods -n sc -l name=promtail
+kubectl get pods -n sc -l name=promtail -o jsonpath='{.items[*].metadata.name}' | xargs -n 1 kubectl logs -n sc
+```
