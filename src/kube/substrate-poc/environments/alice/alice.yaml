@@ -53,6 +53,8 @@ data:
     inputs = ["remap"]
     endpoint = "http://monitoring-service.sc:3100"
     encoding.codec = "json"
+    labels.environment = "production"
+    labels.application = "alice-service"
 
     # Prometheus Metrics
     [sinks.prometheus]
