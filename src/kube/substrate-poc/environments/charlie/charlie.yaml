@@ -56,7 +56,7 @@ data:
     type = "loki"
     inputs = ["remap"]
     endpoint = "http://monitoring-service.sc:3100"
-    encoding = "json"
+    encoding.codec = "json"
 
     # Prometheus Metrics
     [sinks.prometheus]
