@@ -246,6 +246,11 @@ spec:
         requests:
           memory: "300Mi"
           cpu: "1000m"
+      env:
+        - name: VECTOR_SELF_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
       ports:
         - containerPort: 8686
         - containerPort: 9182
