@@ -14,9 +14,9 @@ terraform {
 inputs = {
   cluster_version = "1.25"
 
-  cluster_desired_size = 5
+  cluster_desired_size = 8
   cluster_min_size     = 1
-  cluser_max_size      = 5
+  cluser_max_size      = 8
 
   node_disk_size = "200"
   instance_types = ["t2.2xlarge", "t3.2xlarge"]
