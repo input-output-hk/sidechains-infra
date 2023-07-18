@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stack-6-claim-postgres-data
+  name: greg-claim-postgres-data
   namespace: sc
 spec:
   accessModes:
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: stack-6-postgres-data
+  name: greg-postgres-data
   namespace: sc
 spec:
   capacity:
@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stack-6-claim-cardano-node-data
+  name: greg-claim-cardano-node-data
   namespace: sc
 spec:
   accessModes:
@@ -43,7 +43,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stack-6-claim-substrate-node-data
+  name: greg-claim-substrate-node-data
   namespace: sc
 spec:
   accessModes:
@@ -56,7 +56,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stack-6-claim-db-sync-state-dir
+  name: greg-claim-db-sync-state-dir
   namespace: sc
 spec:
   accessModes:
@@ -69,7 +69,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: stack-6-claim-vector-logs
+  name: greg-claim-vector-logs
   namespace: sc
 spec:
   accessModes:

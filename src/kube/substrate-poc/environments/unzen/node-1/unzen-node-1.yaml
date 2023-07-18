@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unzen-cardano-node-1
+  namespace: unzen
+spec:
+  containers:
+  - name: cardano-node
+    image: inputoutput/cardano-node:1.35.7
+    imagePullPolicy: IfNotPresent
+    resources:
+        limits:
+          memory: "4096Mi"
+          cpu: "1500m"
+        requests:
+          memory: "4096Mi"
+          cpu: "1500m"
+    env:
+    - name: NETWORK
+      value: preview
+    - name: CARDANO_NODE_SOCKET_PATH
+      value: /ipc/node.socket
+    volumeMounts:
+    - name: ipc
+      mountPath: /ipc
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: ipc
+    emptyDir: {}
+  - name: data
+    persistentVolumeClaim:
+      claimName: unzen-claim-cardano-node-1-data
