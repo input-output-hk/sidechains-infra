@@ -411,7 +411,7 @@ spec:
         - name: vector-data
           mountPath: /var/log
     - name: loki
-      image: grafana/loki:2.4.1
+      image: grafana/loki
       imagePullPolicy: IfNotPresent
       resources:
         limits:
