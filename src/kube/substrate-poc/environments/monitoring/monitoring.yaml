@@ -92,6 +92,16 @@ data:
       - source_labels: [__meta_kubernetes_pod_node_name]
         action: replace
         target_label: __host__
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: pod
+      - source_labels: [__meta_kubernetes_container_name]
+        action: replace
+        target_label: container
+
 ---
 apiVersion: apps/v1
 kind: DaemonSet
