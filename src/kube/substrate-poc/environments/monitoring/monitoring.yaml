@@ -289,6 +289,15 @@ data:
       - job_name: 'kube-state-metrics'
         static_configs:
           - targets: ['kube-state-metrics.sc.svc.cluster.local:8080']
+      - job_name: 'node-exporter'
+        scrape_interval: 5s
+        kubernetes_sd_configs:
+        - role: node
+        relabel_configs:
+        - source_labels: [__address__]
+          regex: '(.+):(.+)'
+          replacement: '${1}:9100'
+          target_label: __address__
 ---
 apiVersion: v1
 kind: ConfigMap
