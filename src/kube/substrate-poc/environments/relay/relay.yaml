@@ -94,8 +94,8 @@ spec:
         - name: cardano-node-data
           mountPath: /data
 
-    - name: postgres
-      image: postgres:15.3
+    - name: relay
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/relay:1.1
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -105,86 +105,8 @@ spec:
           memory: "4096Mi"
           cpu: "1500m"
       env:
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_PASSWORD
-          value: "password123"
-        - name: POSTGRES_DB
-          value: "cexplorer"
-      volumeMounts:
-        - name: postgres-data
-          mountPath: /var/lib/postgresql/data
-
-    - name: db-sync
-      image: inputoutput/cardano-db-sync:13.1.1.0
-      imagePullPolicy: IfNotPresent
-      resources:
-        limits:
-          memory: "4096Mi"
-          cpu: "1500m"
-        requests:
-          memory: "4096Mi"
-          cpu: "1500m"
-      env:
-        - name: NETWORK
-          value: "preview"
-        - name: POSTGRES_HOST
-          value: "localhost"
-        - name: POSTGRES_DB
-          value: "cexplorer"
-        - name: POSTGRES_USER
-          value: "postgres"
-        - name: POSTGRES_PASSWORD
-          value: "password123"
-        - name: POSTGRES_PORT
-          value: "5432"
-      volumeMounts:
-        - name: ipc
-          mountPath: /node-ipc
-        - name: db-sync-state-dir
-          mountPath: /var/lib
-
-    - name: bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.1.0
-      imagePullPolicy: IfNotPresent
-      command: ["-Dmainchain.epoch-duration=$MC_EPOCH_DURATION_MILLIS"]
-      resources:
-        limits:
-          memory: "4096Mi"
-          cpu: "1500m"
-        requests:
-          memory: "4096Mi"
-          cpu: "1500m"
-      env:
-        - name: BRIDGE_BACKEND_SOCKET_PATH
-          value: /ipc/bridge.socket
-        - name: CARDANO_FOLLOWER_POSTGRES_USERNAME
-          value: postgres
-        - name: CARDANO_FOLLOWER_POSTGRES_PASSWORD
-          value: password123
-        - name: CARDANO_FOLLOWER_JDBC_URL
-          value: jdbc:postgresql://postgres:5432/cexplorer
-        - name: FUEL_MINTING_POLICY_ID
-          value: $SC_FUEL_MINTING_POLICY_ID
-        - name: COMMITTEE_CANDIDATE_ADDRESS
-          value: $SC_COMMITTEE_CANDIDATE_ADDRESS
-        - name: COMMITTEE_NFT_POLICY_ID
-          value: $SC_COMMITTEE_NFT_POLICY_ID
-        - name: MERKLE_ROOT_NFT_POLICY_ID
-          value: $SC_MERKLE_ROOT_NFT_POLICY_ID
-        - name: DISTRIBUTED_SET_POLICY_ID
-          value: deadbeef
-        - name: METRICS_ENABLED
-          value: "true"
-        - name: METRICS_PORT
-          value: "25678"
-        - name: APP_LOGGING_LEVEL
-          value: debug
-      ports:
-        - containerPort: 25678
-      volumeMounts:
-        - name: ipc
-          mountPath: /ipc
+        - name: NODE_URL
+          value: "http://alice-service"
 
     - name: ogmios
       image: cardanosolutions/ogmios:v5.5.7-preview
