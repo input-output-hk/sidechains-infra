@@ -1,9 +1,10 @@
+---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: github-runner
+  name: sidechains-test-github-runner
 spec:
   replicas: 1
   template:
     spec:
-      repository: input-output-hk/mamba-world
+      repository: input-output-hk/sidechains-test
