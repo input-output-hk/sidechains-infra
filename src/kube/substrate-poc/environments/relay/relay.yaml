@@ -172,17 +172,8 @@ spec:
     - name: cardano-node-data
       persistentVolumeClaim:
         claimName: relay-claim-cardano-node-data
-    - name: db-sync-state-dir
-      persistentVolumeClaim:
-        claimName: relay-claim-db-sync-state-dir
     - name: ipc
       emptyDir: {}
-    - name: postgres-data
-      persistentVolumeClaim:
-        claimName: relay-claim-postgres-data
-    - name: db-sync-data
-      persistentVolumeClaim:
-        claimName: relay-claim-db-sync-data
     - name: substrate-data
       persistentVolumeClaim:
         claimName: relay-claim-substrate-data

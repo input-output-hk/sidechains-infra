@@ -28,32 +28,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: relay-claim-postgres-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: aws-ebs-storageclass
-  resources:
-    requests:
-      storage: 90Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: relay-claim-db-sync-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 10Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: relay-claim-substrate-data
   namespace: sc
 spec:
