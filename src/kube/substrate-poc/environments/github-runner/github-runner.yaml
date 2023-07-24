@@ -22,10 +22,10 @@ spec:
       - name: github-runner
         image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v2.307.0
         imagePullPolicy: IfNotPresent
-        resources:
-          limits:
-            memory: "300Mi"
-            cpu: "1000m"
-          requests:
-            memory: "300Mi"
-            cpu: "1000m"
+        #resources:
+        #  limits:
+        #    memory: "300Mi"
+        #    cpu: "1000m"
+        #  requests:
+        #    memory: "300Mi"
+        #    cpu: "1000m"
