@@ -181,10 +181,10 @@ kubectl exec eve -it -c bridge-backend -n sc -- sh
 kubectl exec eve -it -c substrate-node -n sc -- sh
 kubectl exec eve -it -c vector -n sc -- sh
 
-kubectl exec monitoring -it -c grafana -n sc -- sh
-kubectl exec monitoring -it -c prometheus -n sc -- sh
-kubectl exec monitoring -it -c loki -n sc -- sh
-kubectl exec monitoring -it -c vector -n sc -- sh
+kubectl exec monitoring -it -c grafana -n monitoring -- sh
+kubectl exec monitoring -it -c prometheus -n monitoring -- sh
+kubectl exec monitoring -it -c loki -n monitoring -- sh
+kubectl exec monitoring -it -c vector -n monitoring -- sh
 ```
 # Wipe Persistent Data
 
@@ -219,14 +219,14 @@ kubectl apply -f <pod_name>.yaml
 6. Commit and push changes to git
 7. Delete the current grafana-dashboard ConfigMap
 ```
-kubectl delete configmap grafana-dashboard -n sc
+kubectl delete configmap grafana-dashboard -n monitoring
 ```
 8. Create the new grafana-dashboard ConfigMap
 ```
-kubectl create configmap grafana-dashboard --from-file=grafana-dashboard.json -n sc
+kubectl create configmap grafana-dashboard --from-file=grafana-dashboard.json -n monitoring
 ```
 # Promtail
 ```
 kubectl get pods -n sc -l name=promtail
-kubectl get pods -n sc -l name=promtail -o jsonpath='{.items[*].metadata.name}' | xargs -n 1 kubectl logs -n sc
+kubectl get pods -n sc -l name=promtail -o jsonpath='{.items[*].metadata.name}' | xargs -n 1 kubectl logs -n monitoring
 ```
