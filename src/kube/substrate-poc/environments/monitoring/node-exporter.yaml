@@ -55,7 +55,6 @@ spec:
           path: /
         name: root
 ---
----
 kind: Service
 apiVersion: v1
 metadata:
