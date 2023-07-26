@@ -11,13 +11,13 @@ spec:
     node: greg
   ports:
     - name: p2p-port
-      port: 30733
-      targetPort: 30733
-      nodePort: 30001
+      port: 30333
+      targetPort: 30333
+      nodePort: 30007
     - name: rpc-port
       port: 9933
       targetPort: 9933
-      nodePort: 30721
+      nodePort: 30027
     - name: vector-metrics
       port: 9182
       targetPort: 9182

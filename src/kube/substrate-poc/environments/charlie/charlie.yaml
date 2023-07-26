@@ -14,10 +14,6 @@ spec:
       port: 30333
       targetPort: 30333
       nodePort: 30003
-    - name: ws-port
-      port: 9945
-      targetPort: 9945
-      nodePort: 30013
     - name: rpc-port
       port: 9933
       targetPort: 9933
