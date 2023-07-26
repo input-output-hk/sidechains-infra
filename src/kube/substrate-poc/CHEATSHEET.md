@@ -14,10 +14,13 @@ The following commands will label the nodes in the cluster.
 ```
 kubectl label nodes <node> pod=<pod>
 ```
-
 The bash script below can label the nodes correctly:
 ```
 src/kube/substrate-poc/environments/label-nodes.sh
+```
+Labels can be verified with:
+```
+kubectl get nodes -o json | jq -r '.items[] | {name: .metadata.name, pod: .metadata.labels.pod}'
 ```
 # Setup Local Shell
 ```
