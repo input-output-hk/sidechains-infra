@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the labels for the 6 nodes
-labels=("alice" "bob" "charlie" "dave" "eve" "monitoring")
+labels=("alice" "bob" "charlie" "dave" "eve" "ferdie" "greg" "monitoring" "relay")
 
 # Get the list of nodes
 nodes=$(kubectl get nodes -o jsonpath='{.items[*].metadata.name}')
