@@ -191,18 +191,17 @@ metadata:
   name: grafana-config
   namespace: monitoring
 data:
-  datasources.yaml: |
+  dashboards.yaml: |-
     apiVersion: 1
-    datasources:
-      - name: Prometheus
-        type: prometheus
-        url: http://localhost:9090
-        access: proxy
-        isDefault: true
-      - name: Loki
-        type: loki
-        url: http://localhost:3100
-        access: proxy
+    providers:
+      - name: 'default'
+        orgId: 1
+        folder: ''
+        type: file
+        disableDeletion: false
+        editable: true
+        options:
+          path: /etc/grafana/provisioning/dashboards/default
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -341,7 +340,7 @@ spec:
         - name: grafana-config
           mountPath: /etc/grafana/provisioning/datasources
         - name: grafana-dashboard
-          mountPath: /etc/grafana/provisioning/dashboards/
+          mountPath: /etc/grafana/provisioning/dashboards/default
         - name: grafana-dashboards-provisioning
           mountPath: /etc/grafana/provisioning/dashboards
   volumes:
