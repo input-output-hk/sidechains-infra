@@ -2,22 +2,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: greg-service
+  name: relay-service
   namespace: sc
 spec:
   type: NodePort
   selector:
     app: sidechains-substrate-poc
-    node: greg
+    node: relay
   ports:
-    - name: p2p-port
-      port: 30333
-      targetPort: 30333
-      nodePort: 30001
-    - name: rpc-port
-      port: 9933
-      targetPort: 9933
-      nodePort: 30021
     - name: vector-metrics
       port: 9182
       targetPort: 9182
@@ -182,7 +174,7 @@ spec:
         claimName: relay-claim-kupo-workdir
     - name: vector-config
       configMap:
-        name: greg-vector-configmap
+        name: relay-vector-configmap
     - name: vector-logs
       persistentVolumeClaim:
         claimName: relay-claim-vector-logs
