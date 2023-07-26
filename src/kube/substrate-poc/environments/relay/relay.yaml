@@ -109,13 +109,13 @@ spec:
         requests:
           memory: "4096Mi"
           cpu: "1500m"
-        args:
-          - "--node-socket"
-          - "/ipc/node.socket"
-          - "--node-config"
-          - "/config/preview/config.json"
-          - "--host"
-          - "localhost"
+      args:
+        - "--node-socket"
+        - "/ipc/node.socket"
+        - "--node-config"
+        - "/config/preview/config.json"
+        - "--host"
+        - "localhost"
       #command: ["--node-socket", "/ipc/node.socket", "--node-config", "/config/preview/config.json", "--host", "localhost"]
       volumeMounts:
         - name: ipc
@@ -132,19 +132,19 @@ spec:
         requests:
           memory: "4096Mi"
           cpu: "1500m"
-        args:
-          - "--node-socket"
-          - "/ipc/node.socket"
-          - "--node-config"
-          - "/config/preview/config.json"
-          - "--host"
-          - "localhost"
-          - "--workdir"
-          - "/db"
-          - "--match"
-          - "\"*\""
-          - "--since"
-          - "origin"
+      args:
+        - "--node-socket"
+        - "/ipc/node.socket"
+        - "--node-config"
+        - "/config/preview/config.json"
+        - "--host"
+        - "localhost"
+        - "--workdir"
+        - "/db"
+        - "--match"
+        - "\"*\""
+        - "--since"
+        - "origin"
       #command: ["--node-socket", "/ipc/node.socket", "--node-config", "/config/preview/config.json", "--host", "localhost", "--workdir", "/db", "--match", "\"*\"", "--since", "origin"]
       volumeMounts:
         - name: kupo-workdir
