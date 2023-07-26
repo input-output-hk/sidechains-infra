@@ -202,7 +202,7 @@ data:
 
     [dashboards]
     # The path to the default home dashboard
-    default_home_dashboard_path = /etc/grafana/provisioning/dashboards/default/grafana-dashboard.json
+    default_home_dashboard_path = /etc/grafana/dashboards/default/grafana-dashboard.json
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -339,7 +339,7 @@ spec:
         - name: grafana-data
           mountPath: /var/lib/grafana
         - name: grafana-config
-          mountPath: /etc/grafana/grafana.ini
+          mountPath: /etc/grafana
         - name: grafana-dashboard
           mountPath: /etc/grafana/dashboards/default
         - name: grafana-dashboards-provisioning
