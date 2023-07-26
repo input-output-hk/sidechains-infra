@@ -169,9 +169,9 @@ data:
           - source_labels: [__meta_kubernetes_pod_container_port_number]
             action: keep
             regex: "9182"
-       - job_name: 'vector-static'
-         static_configs:
-           - targets: ['monitoring-service.monitoring.svc.cluster.local:9182', 'alice-service.monitoring.svc.cluster.local:9182', 'bob-service.monitoring.svc.cluster.local:9182', 'charlie-service.monitoring.svc.cluster.local:9182','dave-service.monitoring.svc.cluster.local:9182','eve-service.monitoring.svc.cluster.local:9182']
+      - job_name: 'vector-static'
+        static_configs:
+          - targets: ['monitoring-service.monitoring.svc.cluster.local:9182', 'alice-service.monitoring.svc.cluster.local:9182', 'bob-service.monitoring.svc.cluster.local:9182', 'charlie-service.monitoring.svc.cluster.local:9182','dave-service.monitoring.svc.cluster.local:9182','eve-service.monitoring.svc.cluster.local:9182']
       - job_name: 'kube-state-metrics'
         static_configs:
           - targets: ['kube-state-metrics.monitoring.svc.cluster.local:8080']
