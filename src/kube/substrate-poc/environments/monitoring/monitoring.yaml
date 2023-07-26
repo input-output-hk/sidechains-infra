@@ -191,17 +191,18 @@ metadata:
   name: grafana-config
   namespace: monitoring
 data:
-  dashboards.yaml: |-
-    apiVersion: 1
-    providers:
-      - name: 'default'
-        orgId: 1
-        folder: ''
-        type: file
-        disableDeletion: false
-        editable: true
-        options:
-          path: /etc/grafana/provisioning/dashboards/default
+  grafana.ini: |-
+    [auth.anonymous]
+    # enable anonymous access
+    enabled = true
+    # specify organization
+    org_name = Main Org.
+    # specify role for unauthenticated users
+    org_role = Viewer
+
+    [dashboards]
+    # The path to the default home dashboard
+    default_home_dashboard_path = /etc/grafana/provisioning/dashboards/default/grafana-dashboard.json
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -338,7 +339,7 @@ spec:
         - name: grafana-data
           mountPath: /var/lib/grafana
         - name: grafana-config
-          mountPath: /etc/grafana/provisioning/datasources
+          mountPath: /etc/grafana/grafana.ini
         - name: grafana-dashboard
           mountPath: /etc/grafana/dashboards/default
         - name: grafana-dashboards-provisioning
