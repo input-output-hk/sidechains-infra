@@ -141,6 +141,26 @@ kubectl logs eve -c bridge-backend -n sc
 kubectl logs eve -c substrate-node -n sc
 kubectl logs eve -c vector -n sc
 
+kubectl logs ferdie -c cardano-node -n sc
+kubectl logs ferdie -c db-sync -n sc
+kubectl logs ferdie -c postgres -n sc
+kubectl logs ferdie -c bridge-backend -n sc
+kubectl logs ferdie -c substrate-node -n sc
+kubectl logs ferdie -c vector -n sc
+
+kubectl logs greg -c cardano-node -n sc
+kubectl logs greg -c db-sync -n sc
+kubectl logs greg -c postgres -n sc
+kubectl logs greg -c bridge-backend -n sc
+kubectl logs greg -c substrate-node -n sc
+kubectl logs greg -c vector -n sc
+
+kubectl logs relay -c cardano-node -n sc
+kubectl logs relay -c relay -n sc
+kubectl logs relay -c ogmios -n sc
+kubectl logs relay -c kupo -n sc
+kubectl logs relay -c vector -n sc
+
 kubectl logs monitoring grafana -n sc
 kubectl logs monitoring prometheus -n sc
 kubectl logs monitoring loki -n sc
