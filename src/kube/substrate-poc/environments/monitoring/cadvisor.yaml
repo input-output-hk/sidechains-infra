@@ -72,6 +72,8 @@ spec:
         - name: http
           containerPort: 8080
           protocol: TCP
+        securityContext:
+          privileged: true
       terminationGracePeriodSeconds: 30
       volumes:
       - name: rootfs
