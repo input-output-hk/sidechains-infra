@@ -204,4 +204,4 @@ spec:
         claimName: relay-claim-vector-logs
     - name: config
       configMap:
-        name: config
+        name: relay-configmap
