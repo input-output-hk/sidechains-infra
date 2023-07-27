@@ -17,7 +17,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: byron-genesis
+  name: config
   namespace: sc
 data:
   byron-genesis.json: |
@@ -138,13 +138,6 @@ data:
     , "protocolConsts": { "k": 432 , "protocolMagic": 2 }
     , "avvmDistr": {}
     }
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-json
-  namespace: sc
-data:
   config.json: |
     {
       "AlonzoGenesisFile": "alonzo-genesis.json",
@@ -366,9 +359,7 @@ spec:
           mountPath: /ipc
         - name: cardano-node-config
           mountPath: /config
-        - name: config-json
-          mountPath: /config/preview
-        - name: byron-genesis
+        - name: config
           mountPath: /config/preview
     - name: kupo
       image: cardanosolutions/kupo:v2.2.0
@@ -401,9 +392,7 @@ spec:
           mountPath: /ipc
         - name: cardano-node-config
           mountPath: /config
-        - name: config-json
-          mountPath: /config/preview
-        - name: byron-genesis
+        - name: config
           mountPath: /config/preview
     - name: vector
       image: timberio/vector:nightly-alpine
@@ -450,9 +439,6 @@ spec:
     - name: vector-logs
       persistentVolumeClaim:
         claimName: relay-claim-vector-logs
-    - name: config-json
+    - name: config
       configMap:
-        name: config-json
-    - name: byron-genesis
-      configMap:
-        name: byron-genesis
+        name: config
