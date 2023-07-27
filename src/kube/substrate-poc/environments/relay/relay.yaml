@@ -142,7 +142,7 @@ spec:
         - "--workdir"
         - "/db"
         - "--match"
-        - "\"*\""
+        - "*"
         - "--since"
         - "origin"
       #command: ["--node-socket", "/ipc/node.socket", "--node-config", "/config/preview/config.json", "--host", "localhost", "--workdir", "/db", "--match", "\"*\"", "--since", "origin"]
