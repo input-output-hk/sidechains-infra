@@ -20,33 +20,3 @@ spec:
   resources:
     requests:
       storage: 90Gi
-
-
-#---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: gh-actions-postgres-claim-postgres-data
-#  namespace: sc
-#spec:
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: aws-ebs-storageclass
-#  resources:
-#    requests:
-#      storage: 90Gi
-#---
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: gh-actions-postgres-data
-#  namespace: sc
-#spec:
-#  capacity:
-#    storage: 90Gi
-#  accessModes:
-#    - ReadWriteOnce
-#  storageClassName: aws-ebs-storageclass
-#  awsElasticBlockStore:
-#    volumeID: vol-0d205571e5e547202 
-#    fsType: ext4
