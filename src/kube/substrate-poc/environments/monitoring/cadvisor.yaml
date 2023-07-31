@@ -33,6 +33,9 @@ kind: DaemonSet
 metadata:
   name: cadvisor
   namespace: monitoring
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port:   '8080'
 spec:
   selector:
     matchLabels:
