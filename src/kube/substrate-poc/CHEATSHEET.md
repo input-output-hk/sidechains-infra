@@ -38,6 +38,10 @@ aws eks update-kubeconfig --region eu-central-1 --name iog-sidechain-substrate-k
 aws eks list-clusters --region eu-central-1
 kubectl config get-contexts
 ```
+# View all pods in all namespaces
+```
+kubectl get pods --all-namespaces -o wide
+```
 # Deploy pods
 ```
 kubectl apply -f alice/alice.yaml
