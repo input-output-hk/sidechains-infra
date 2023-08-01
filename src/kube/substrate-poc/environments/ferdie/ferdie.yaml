@@ -21,6 +21,9 @@ spec:
     - name: vector-metrics
       port: 9182
       targetPort: 9182
+    - name: substrate-node-metrics
+      port: 9615
+      targetPort: 9615
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -197,6 +200,10 @@ spec:
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:v0.0.6-pre3
       imagePullPolicy: IfNotPresent
+      metadata:
+        annotations:
+          prometheus.io/scrape: 'true'
+          prometheus.io/port: '9615'
       resources:
         limits:
           memory: "4096Mi"
@@ -229,8 +236,12 @@ spec:
       ports:
         - containerPort: 30333
           name: p2p
+        - containerPort: 9945
+          name: ws-port
         - containerPort: 9933
           name: rpc-port
+        - containerPort: 9615
+          name: prometheus 
       volumeMounts:
         - name: substrate-node-data
           mountPath: /data
