@@ -74,6 +74,9 @@ metadata:
     app: sidechains-substrate-poc
     node: ferdie
     substrate-node: 'true'
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/port: '9615'
 spec:
   affinity:
     podAntiAffinity:
@@ -200,10 +203,6 @@ spec:
     - name: substrate-node
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:v0.0.6-pre3
       imagePullPolicy: IfNotPresent
-      metadata:
-        annotations:
-          prometheus.io/scrape: 'true'
-          prometheus.io/port: '9615'
       resources:
         limits:
           memory: "4096Mi"
