@@ -42,7 +42,7 @@ spec:
         - name: POSTGRES_USER
           value: "postgres"
         - name: POSTGRES_PASSWORD
-          value: "password"
+          value: "sidechains"
         - name: POSTGRES_DB
           value: "gh-actions-postgres"
         - name: PGDATA
