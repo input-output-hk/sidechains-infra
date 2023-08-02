@@ -11,6 +11,9 @@ spec:
       port: 5432
       targetPort: 5432
       nodePort: 30432
+  selector:
+    app: sidechains-substrate-poc
+    node: gh-actions-postgres
 ---
 apiVersion: v1
 kind: Pod
