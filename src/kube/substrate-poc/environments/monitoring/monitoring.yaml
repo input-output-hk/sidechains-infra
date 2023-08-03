@@ -265,6 +265,39 @@ data:
           action: replace
           target_label: kubernetes_service_name
 
+      - job_name: 'alice-service-static'
+        static_configs:
+          - targets: ['alice-service.sc.svc.cluster.local:9615', 'alice-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'bob-service-static'
+        static_configs:
+          - targets: ['bob-service.sc.svc.cluster.local:9615', 'bob-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'charlie-service-static'
+        static_configs:
+          - targets: ['charlie-service.sc.svc.cluster.local:9615', 'charlie-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'dave-service-static'
+        static_configs:
+          - targets: ['dave-service.sc.svc.cluster.local:9615', 'dave-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'eve-service-static'
+        static_configs:
+          - targets: ['eve-service.sc.svc.cluster.local:9615', 'eve-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'ferdie-service-static'
+        static_configs:
+          - targets: ['ferdie-service.sc.svc.cluster.local:9615', 'ferdie-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'gh-actions-postgres-static'
+        static_configs:
+          - targets: ['gh-actions-postgres-service.sc.svc.cluster.local:5432']
+    
+      - job_name: 'relay-service-static'
+        static_configs:
+          - targets: ['relay-service.sc.svc.cluster.local:9615', 'relay-service.sc.svc.cluster.local:9182']
+     
+
       
 ---
 apiVersion: v1
