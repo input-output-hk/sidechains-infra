@@ -49,6 +49,8 @@ kubectl apply -f bob/bob.yaml
 kubectl apply -f charlie/charlie.yaml
 kubectl apply -f dave/dave.yaml
 kubectl apply -f eve/eve.yaml
+kubectl apply -f ferdie/ferdie.yaml
+kubectl apply -f greg/greg.yaml
 ```
 # Deploy stacks
 ```
@@ -57,6 +59,8 @@ kubectl apply -f bob/
 kubectl apply -f charlie/
 kubectl apply -f dave/
 kubectl apply -f eve/
+kubectl apply -f ferdie/
+kubectl apply -f greg/
 ```
 # Nuke pods
 ```
@@ -65,6 +69,8 @@ kubectl delete -f bob/bob.yaml
 kubectl delete -f charlie/charlie.yaml
 kubectl delete -f dave/dave.yaml
 kubectl delete -f eve/eve.yaml
+kubectl delete -f ferdie/ferdie.yaml
+kubectl delete -f greg/greg.yaml
 ```
 # Nuke stacks (including persistent data)
 ```
@@ -73,6 +79,8 @@ kubectl delete -f bob/
 kubectl delete -f charlie/
 kubectl delete -f dave/
 kubectl delete -f eve/
+kubectl delete -f ferdie/
+kubectl delete -f greg/
 ```
 # Get Queries
 ```
