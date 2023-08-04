@@ -47,7 +47,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -61,7 +61,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -72,7 +72,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "description": "",
         "fieldConfig": {
@@ -139,7 +139,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_pod_info{node=~\"$node\"}) / sum(kube_node_status_allocatable{resource=\"pods\", node=~\"$node\"}) * 100",
@@ -157,7 +157,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -223,7 +223,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_pod_container_resource_requests{node=~\"$node\"}) / sum(kube_node_status_allocatable{node=~\"$node\"}) * 100",
@@ -240,7 +240,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -306,7 +306,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\", node=~\"$node\"}) / sum(kube_node_status_allocatable{resource=\"memory\", node=~\"$node\"}) * 100",
@@ -323,7 +323,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -389,7 +389,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "(sum (node_filesystem_size_bytes{node=~\"$node\"}) - sum (node_filesystem_free_bytes{node=~\"$node\"})) / sum (node_filesystem_size_bytes{node=~\"$node\"}) * 100",
@@ -410,7 +410,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -451,7 +451,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_node_status_allocatable_pods{node=~\"$node\"})",
             "format": "time_series",
@@ -462,7 +462,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_node_status_capacity_pods{node=~\"$node\"})",
             "format": "time_series",
@@ -473,7 +473,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_pod_info{node=~\"$node\"})",
             "format": "time_series",
@@ -522,7 +522,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -563,7 +563,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_status_capacity{resource=\"cpu\", node=~\"$node\"})",
@@ -576,7 +576,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_status_allocatable{resource=\"cpu\", node=~\"$node\"})",
@@ -589,7 +589,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_resource_requests{resource=\"cpu\", node=~\"$node\"})",
@@ -640,7 +640,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -681,7 +681,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_status_allocatable{resource=\"memory\", node=~\"$node\"})",
@@ -694,7 +694,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_status_capacity{resource=\"memory\", node=~\"$node\"})",
@@ -707,7 +707,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\", node=~\"$node\"})",
@@ -757,7 +757,7 @@
         "dashes": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fill": 1,
         "fillGradient": 0,
@@ -798,7 +798,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(node_filesystem_size_bytes{node=~\"$node\"}) - sum(node_filesystem_free_bytes{node=~\"$node\"})",
@@ -811,7 +811,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(node_filesystem_size_bytes{node=~\"$node\"})",
@@ -858,7 +858,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -872,7 +872,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -890,7 +890,7 @@
         ],
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fontSize": "100%",
         "gridPos": {
@@ -959,7 +959,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "kube_deployment_status_replicas{namespace=~\"$namespace\"}",
@@ -978,7 +978,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1040,7 +1040,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_deployment_status_replicas{namespace=~\"$namespace\"})",
             "format": "time_series",
@@ -1054,7 +1054,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1116,7 +1116,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_deployment_status_replicas_updated{namespace=~\"$namespace\"})",
@@ -1133,7 +1133,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1195,7 +1195,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_deployment_status_replicas_unavailable{namespace=~\"$namespace\"})",
@@ -1213,7 +1213,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -1227,7 +1227,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -1238,7 +1238,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1300,7 +1300,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_info{node=~\"$node\"})",
@@ -1317,7 +1317,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1382,7 +1382,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_status_condition{condition=\"DiskPressure\", node=~\"$node\", status=\"true\"})",
@@ -1399,7 +1399,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1464,7 +1464,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_node_spec_unschedulable{node=~\"$node\"})",
@@ -1482,7 +1482,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -1496,7 +1496,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -1507,7 +1507,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1570,7 +1570,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\", phase=\"Running\"})",
             "format": "time_series",
@@ -1585,7 +1585,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1648,7 +1648,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\", phase=\"Pending\"})",
             "format": "time_series",
@@ -1663,7 +1663,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1726,7 +1726,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\", phase=\"Failed\"})",
@@ -1743,7 +1743,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1806,7 +1806,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\", phase=\"Succeeded\"})",
@@ -1823,7 +1823,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1886,7 +1886,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "expr": "sum(kube_pod_status_phase{namespace=~\"$namespace\", phase=\"Unknown\"})",
             "format": "time_series",
@@ -1902,7 +1902,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -1916,7 +1916,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -1927,7 +1927,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -1990,7 +1990,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_status_running{namespace=~\"$namespace\"})",
@@ -2007,7 +2007,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2070,7 +2070,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_status_waiting{namespace=~\"$namespace\"})",
@@ -2087,7 +2087,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2150,7 +2150,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_status_terminated{namespace=~\"$namespace\"})",
@@ -2167,7 +2167,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2231,7 +2231,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(delta(kube_pod_container_status_restarts_total{namespace=\"$namespace\"}[30m]))",
@@ -2248,7 +2248,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2311,7 +2311,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_resource_requests{resource=~\"cpu\", namespace=~\"$namespace\", node=~\"$node\"})",
@@ -2328,7 +2328,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2391,7 +2391,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": true,
             "expr": "sum(kube_pod_container_resource_requests{resource=\"memory\", namespace=~\"$namespace\", node=~\"$node\"})",
@@ -2409,7 +2409,7 @@
         "collapsed": false,
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "gridPos": {
           "h": 1,
@@ -2423,7 +2423,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "refId": "A"
           }
@@ -2434,7 +2434,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2499,7 +2499,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_job_status_succeeded{namespace=~\"$namespace\"})",
@@ -2516,7 +2516,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2581,7 +2581,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_job_status_active{namespace=~\"$namespace\"})",
@@ -2598,7 +2598,7 @@
       {
         "datasource": {
           "type": "prometheus",
-          "uid": "PBFA97CFB590B2093"
+          "uid": "P8E80F9AEF21F6940"
         },
         "fieldConfig": {
           "defaults": {
@@ -2663,7 +2663,7 @@
           {
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "P8E80F9AEF21F6940"
             },
             "exemplar": false,
             "expr": "sum(kube_job_status_failed{namespace=~\"$namespace\"})",
@@ -2713,7 +2713,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "P8E80F9AEF21F6940"
           },
           "definition": "label_values(kube_node_labels{account =~ \"$account\"}, node)",
           "hide": 0,
@@ -2741,7 +2741,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "P8E80F9AEF21F6940"
           },
           "definition": "label_values(kube_pod_info, account)",
           "hide": 0,
@@ -2768,7 +2768,7 @@
           },
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "P8E80F9AEF21F6940"
           },
           "definition": "label_values(kube_pod_info, namespace)",
           "hide": 0,
