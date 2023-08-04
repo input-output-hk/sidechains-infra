@@ -360,10 +360,12 @@ data:
         url: http://localhost:9090
         access: proxy
         isDefault: true
+        uid: prometheus_uid
       - name: Loki
         type: loki
         url: http://localhost:3100
         access: proxy
+        uid: loki_uid 
 ---
 apiVersion: v1
 kind: ConfigMap
