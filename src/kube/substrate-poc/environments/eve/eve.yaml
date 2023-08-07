@@ -42,6 +42,15 @@ data:
     [sources.kubernetes_logs]
     type = "kubernetes_logs"
 
+    # Collect Vector's internal metrics
+    [sources.internal_metrics]
+    type = "internal_metrics"
+
+    # Collect Host metrics
+    [sources.host_metrics]
+    type = "host_metrics"
+    collectors = ["cpu", "disk", "memory", "network"]
+
     # Transform data
     [transforms.remap]
     type = "remap"
@@ -62,7 +71,7 @@ data:
     # Prometheus Metrics
     [sinks.prometheus]
     type = "prometheus_exporter"
-    inputs = ["remap"]
+    inputs = ["remap", "internal_metrics", "host_metrics"]
     address = "0.0.0.0:9182"
 ---
 apiVersion: v1
