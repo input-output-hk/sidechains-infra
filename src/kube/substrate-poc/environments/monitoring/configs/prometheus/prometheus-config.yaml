@@ -11,6 +11,11 @@ data:
       evaluation_interval: 15s
     rule_files:
     - "/path/to/alert-rules.yaml"
+    alerting:
+      alertmanagers:
+      - static_configs:
+        - targets:
+          - "localhost:9093"
     scrape_configs:
       - job_name: 'vector'
         kubernetes_sd_configs:
