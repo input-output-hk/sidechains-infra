@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-config
+  namespace: monitoring
+data:
+  grafana.ini: |-
+    [auth.anonymous]
+    # enable anonymous access
+    enabled = true
+    # specify organization
+    org_name = Main Org.
+    # specify role for unauthenticated users
+    org_role = Viewer
+
+    [dashboards]
+    # The path to the default home dashboard
+    default_home_dashboard_path = /etc/grafana/dashboards/default/grafana-dashboard.json

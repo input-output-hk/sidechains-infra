@@ -1,0 +1,182 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yaml: |
+    global:
+      scrape_interval:     15s
+      evaluation_interval: 15s
+    rule_files:
+    - "/path/to/alert-rules.yaml"
+    scrape_configs:
+      - job_name: 'vector'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_label_app]
+            action: keep
+            regex: sidechains-substrate-poc
+          - source_labels: [__meta_kubernetes_pod_label_node]
+            action: keep
+            regex: eve
+          - source_labels: [__meta_kubernetes_pod_container_port_number]
+            action: keep
+            regex: "9182"
+      - job_name: 'vector-static'
+        static_configs:
+          - targets: ['monitoring-service.monitoring:9182', 'alice-service.sc:9182', 'bob-service.sc:9182', 'charlie-service.sc:9182','dave-service.sc:9182','eve-service.sc:9182']
+      - job_name: 'kube-state-metrics'
+        static_configs:
+          - targets: ['kube-state-metrics.monitoring.svc.cluster.local:8080']
+      - job_name: 'node-exporter-dynamic'
+        scrape_interval: 5s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          target_label: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+      - job_name: 'cadvisor-dynamic'
+        scrape_interval: 5s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          target_label: __address__
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+      - job_name: 'substrate-node-dynamic'
+        scrape_interval: 5s
+        kubernetes_sd_configs:
+        - role: pod
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_pod_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_pod_name]
+          action: replace
+          target_label: kubernetes_pod_name
+      - job_name: 'substrate-node-static'
+        kubernetes_sd_configs:
+        - role: service
+        relabel_configs:
+        - source_labels: [__meta_kubernetes_service_label_app]
+          action: keep
+          regex: sidechains-substrate-poc
+        - source_labels: [__meta_kubernetes_service_name]
+          action: keep
+          regex: '(alice|bob|charlie|dave|eve|ferdie|greg)-service'
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]
+          action: keep
+          regex: true
+        - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
+          action: replace
+          target_label: __metrics_path__
+          regex: (.+)
+        - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
+          action: replace
+          regex: ([^:]+)(?::\d+)?;(\d+)
+          replacement: $1:$2
+          target_label: __address__
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_service_name
+
+      - job_name: 'alice-service-static'
+        static_configs:
+          - targets: ['alice-service.sc.svc.cluster.local:9615', 'alice-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'bob-service-static'
+        static_configs:
+          - targets: ['bob-service.sc.svc.cluster.local:9615', 'bob-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'charlie-service-static'
+        static_configs:
+          - targets: ['charlie-service.sc.svc.cluster.local:9615', 'charlie-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'dave-service-static'
+        static_configs:
+          - targets: ['dave-service.sc.svc.cluster.local:9615', 'dave-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'eve-service-static'
+        static_configs:
+          - targets: ['eve-service.sc.svc.cluster.local:9615', 'eve-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'ferdie-service-static'
+        static_configs:
+          - targets: ['ferdie-service.sc.svc.cluster.local:9615', 'ferdie-service.sc.svc.cluster.local:9182']
+    
+      - job_name: 'gh-actions-postgres-static'
+        static_configs:
+          - targets: ['gh-actions-postgres-service.sc.svc.cluster.local:5432']
+    
+      - job_name: 'relay-service-static'
+        static_configs:
+          - targets: ['relay-service.sc.svc.cluster.local:9615', 'relay-service.sc.svc.cluster.local:9182']
+
+      - job_name: 'node-exporter-static'
+        scrape_interval: 5s
+        static_configs:
+        - targets:
+          - '10.0.10.171:9100'
+          - '10.0.10.194:9100'
+          - '10.0.10.233:9100'
+          - '10.0.11.120:9100'
+          - '10.0.11.184:9100'
+          - '10.0.11.224:9100'
+          - '10.0.12.174:9100'
+          - '10.0.12.184:9100'
+          - '10.0.12.21:9100'
+       
+      - job_name: 'cadvisor-static'
+        scrape_interval: 5s
+        static_configs:
+        - targets:
+          - '10.0.10.171:8080'
+          - '10.0.10.194:8080'
+          - '10.0.10.233:8080'
+          - '10.0.11.120:8080'
+          - '10.0.11.184:8080'
+          - '10.0.11.224:8080'
+          - '10.0.12.174:8080'
+          - '10.0.12.184:8080'
+          - '10.0.12.21:8080'

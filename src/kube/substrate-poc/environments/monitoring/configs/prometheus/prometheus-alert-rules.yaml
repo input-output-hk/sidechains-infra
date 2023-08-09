@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-alert-rules
+  namespace: monitoring
+data:
+  alert-rules.yaml: |
+     groups:
+     - name: pod_alerts
+       rules:
+       - alert: PodDown
+         expr: kube_pod_status_ready{condition="false"} == 1
+         for: 10m
+         labels:
+           severity: critical
+         annotations:
+           summary: "Pod is down"
+           description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has been down for more than 10 minutes."
+ 

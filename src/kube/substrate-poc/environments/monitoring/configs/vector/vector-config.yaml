@@ -1,0 +1,53 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-vector-configmap
+  namespace: monitoring
+data:
+  vector.toml: |
+
+    # GLOBAL
+
+    [api]
+    enabled = true
+    address = "0.0.0.0:8686"
+
+    # SOURCES
+
+    [sources.log_file]
+    type = "file"
+    include = ["/var/log/*.log"]
+
+    [sources.kubernetes_logs]
+    type = "kubernetes_logs"
+    auto_partial_merge = true
+    self_node_name = "${VECTOR_SELF_NODE_NAME}"
+
+
+    [sources.prometheus_metrics]
+    type = "prometheus_scrape"
+    endpoints = ["http://monitoring-service.sc:8686/metrics"]
+
+
+    # SINKS
+
+    [sinks.console]
+    inputs = ["log_file"]
+    target = "stdout"
+    type = "console"
+    encoding.codec = "json"
+
+    [sinks.prometheus]
+    type = "prometheus_exporter"
+    inputs = ["prometheus_metrics"]
+    address = "0.0.0.0:9283"
+    default_namespace = "sc"
+
+    [sinks.loki]
+    type = "loki"
+    inputs = ["kubernetes_logs"]
+    endpoint = "http://monitoring-service.sc:3100"
+    encoding.codec = "json"
+    labels = { host = "{{ host }}" }
+ 

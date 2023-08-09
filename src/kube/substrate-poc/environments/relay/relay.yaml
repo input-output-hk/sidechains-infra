@@ -13,6 +13,12 @@ spec:
     - name: vector-metrics
       port: 9182
       targetPort: 9182
+    - name: ogmios
+      port: 1337
+      targetPort: 1337
+    - name: kupo
+      port: 1442
+      targetPort: 1442
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -116,7 +122,9 @@ spec:
         - "/config/preview/config.json"
         - "--host"
         - "localhost"
-      #command: ["--node-socket", "/ipc/node.socket", "--node-config", "/config/preview/config.json", "--host", "localhost"]
+      ports:
+       - containerPort: 1337
+         name: ogmios
       volumeMounts:
         - name: ipc
           mountPath: /ipc
@@ -147,7 +155,9 @@ spec:
         - "*"
         - "--since"
         - "origin"
-      #command: ["--node-socket", "/ipc/node.socket", "--node-config", "/config/preview/config.json", "--host", "localhost", "--workdir", "/db", "--match", "\"*\"", "--since", "origin"]
+      ports:
+       - containerPort: 1442
+         name: kupo
       volumeMounts:
         - name: kupo-workdir
           mountPath: /db
