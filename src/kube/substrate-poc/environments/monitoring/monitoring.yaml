@@ -103,6 +103,22 @@ spec:
         - name: prometheus-alert-rules
           mountPath: /etc/prometheus/alert-rules.yaml
           subPath: alert-rules.yaml
+    - name: alertmanager
+      image: prom/alertmanager:v0.25.0
+      imagePullPolicy: IfNotPresent
+      resources:
+        limits:
+          memory: "512Mi"
+          cpu: "500m"
+        requests:
+          memory: "512Mi"
+          cpu: "500m"
+      ports:
+        - containerPort: 9093
+      volumeMounts:
+        - name: alertmanager-config
+          mountPath: /etc/alertmanager/alertmanager.yaml
+          subPath: alertmanager.yaml
     - name: grafana
       image: grafana/grafana:10.0.1
       imagePullPolicy: IfNotPresent
@@ -148,6 +164,9 @@ spec:
     - name: prometheus-alert-rules
       configMap:
         name: prometheus-alert-rules
+    - name: alertmanager-config
+      configMap:
+        name: alertmanager-config
     - name: grafana-data
       persistentVolumeClaim:
         claimName: monitoring-claim-grafana
