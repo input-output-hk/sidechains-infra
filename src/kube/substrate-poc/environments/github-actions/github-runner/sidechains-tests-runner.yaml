@@ -8,10 +8,19 @@ spec:
   template:
     spec:
       repository: input-output-hk/sidechains-tests
-      resources:
-        requests:
-          cpu: "1"
-          memory: "1Gi"
-        limits:
-          cpu: "2"
-          memory: "2Gi"
+      volumes:
+      - name: shared-binaries-volume
+        persistentVolumeClaim:
+          claimName: shared-binaries-pvc
+      containers:
+      - name: runner-container
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+          limits:
+            cpu: "2"
+            memory: "2Gi"
+        volumeMounts:
+        - name: shared-binaries-volume
+          mountPath: /shared-bin

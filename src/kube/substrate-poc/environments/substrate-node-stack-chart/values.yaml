@@ -1,0 +1,73 @@
+# values.yaml
+
+pods:
+  alice:
+    service:
+      nodePorts:
+        p2p: 300001
+        rpc: 300021
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  bob:
+    service:
+      nodePorts:
+        p2p: 300002
+        rpc: 300022
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000002"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  charlie:
+    service:
+      nodePorts:
+        p2p: 300003
+        rpc: 300023
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000003"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  dave:
+    service:
+      nodePorts:
+        p2p: 300004
+        rpc: 300024
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000004"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  eve:
+    service:
+      nodePorts:
+        p2p: 300005
+        rpc: 300025
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000005"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  ferdie:
+    service:
+      nodePorts:
+        p2p: 300006
+        rpc: 300026
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000006"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
+  greg:
+    service:
+      nodePorts:
+        p2p: 300007
+        rpc: 300027
+    pod:
+      containers:
+        substrate-node:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000007"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"

@@ -1,0 +1,27 @@
+{{- define "service.template" }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alice-service
+  namespace: sc
+spec:
+  type: NodePort
+  selector:
+    app: sidechains-substrate-poc
+    node: alice
+  ports:
+    - name: p2p-port
+      port: 30333
+      targetPort: 30333
+      nodePort:  
+    - name: rpc-port
+      port: 9933
+      targetPort: 9933
+      nodePort: 
+    - name: vector-metrics
+      port: 9182
+      targetPort: 9182
+    - name: substrate-node-metrics
+      port: 9615
+      targetPort: 9615
