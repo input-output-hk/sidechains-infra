@@ -14,33 +14,7 @@ spec:
       labels:
         app: binary-host
     spec:
-      volumes:
-      - name: shared-binaries
-        persistentVolumeClaim:
-          claimName: binary-data-pvc
-      initContainers:
-      - name: init-copy-binaries
-        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.0
-        command: ["/bin/sh", "-c"]
-        args: ["cp /bin/cardano-cli /bin/sc-evm-cli /bin/trustless-sidechain-ctl /shared-bin/"]
-        volumeMounts:
-        - name: shared-binaries
-          mountPath: /shared-bin
       containers:
       - name: binary-host-container
-        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.0
+        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.1
         imagePullPolicy: IfNotPresent
-        volumeMounts:
-        - name: shared-binaries
-          mountPath: /shared-bin
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: binary-data-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
