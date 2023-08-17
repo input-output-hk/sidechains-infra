@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: binary-host-container
-        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.1
+        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.2
         imagePullPolicy: IfNotPresent
