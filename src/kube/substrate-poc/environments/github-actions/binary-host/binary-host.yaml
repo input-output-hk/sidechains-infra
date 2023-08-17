@@ -19,4 +19,4 @@ spec:
         image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.2
         imagePullPolicy: IfNotPresent
         command: ["/bin/sh"]
-        args: ["-c", "while true; do sleep 3600; done"]
+        args: ["-c", "tail -f /dev/null"] 
