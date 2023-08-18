@@ -226,6 +226,14 @@ spec:
           value: "0"
         - name: MC_EPOCH_DURATION_MILLIS
           value: "86400000"
+        - name: CHAIN_ID
+          value: 0
+        - name: THRESHOLD_NUMERATOR
+          value: 2
+        - name: THRESHOLD_DENOMINATOR
+          value: 3
+        - name: GENESIS_COMMITTEE_UTXO
+          value: "f17e6d3aa72095e04489d13d776bf05a66b5a8c49d89397c28b18a1784b9950e#0"
       args:
         - "--ferdie"
         - "--base-path"
