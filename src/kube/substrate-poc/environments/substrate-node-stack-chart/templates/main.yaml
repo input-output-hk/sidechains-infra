@@ -256,71 +256,73 @@ spec:
     - name: substrate-node-metrics
       port: 9615
       targetPort: 9615
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $podName }}-claim-postgres-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: ebs-sc
-  resources:
-    requests:
-      storage: 90Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $podName }}-claim-cardano-node-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 30Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $podName }}-claim-substrate-node-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 30Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $podName }}-claim-db-sync-state-dir
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 10Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ $podName }}-claim-vector-logs
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 10Gi
+
+# For now all PVCs are managed with the legacy pvc.yaml files, until postgres affinity issues ironed out
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ $podName }}-claim-postgres-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: ebs-sc
+#  resources:
+#    requests:
+#      storage: 90Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ $podName }}-claim-cardano-node-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 30Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ $podName }}-claim-substrate-node-data
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 30Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ $podName }}-claim-db-sync-state-dir
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 10Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ $podName }}-claim-vector-logs
+#  namespace: sc
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: aws-efs-storageclass
+#  resources:
+#    requests:
+#      storage: 10Gi
 ---
 apiVersion: v1
 kind: ConfigMap
