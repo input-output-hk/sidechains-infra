@@ -1,8 +1,5 @@
 {{- range $name, $podSpec in .Values.pods }}
 {{- with $podSpec }}
 {{- include "pod.template" . | nindent 0 }}
-{{- include "service.template" . | nindent 0 }}
-{{- include "config.template" . | nindent 0 }}
-{{- include "pvc.template" . | nindent 0 }}
 {{- end }}
 {{- end }}
