@@ -2,8 +2,8 @@ pods:
   eve:
     service:
       nodePorts:
-        p2p: 300005
-        rpc: 300025
+        p2p: 30005
+        rpc: 30025
     pod:
       containers:
         substrateNode:

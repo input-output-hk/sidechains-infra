@@ -2,8 +2,8 @@ pods:
   ferdie:
     service:
       nodePorts:
-        p2p: 300006
-        rpc: 300026
+        p2p: 30006
+        rpc: 30026
     pod:
       containers:
         substrateNode:

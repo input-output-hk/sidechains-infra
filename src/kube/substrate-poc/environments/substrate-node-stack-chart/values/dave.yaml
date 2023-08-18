@@ -2,8 +2,8 @@ pods:
   dave:
     service:
       nodePorts:
-        p2p: 300004
-        rpc: 300024
+        p2p: 30004
+        rpc: 30024
     pod:
       containers:
         substrateNode:

@@ -2,8 +2,8 @@ pods:
   charlie:
     service:
       nodePorts:
-        p2p: 300003
-        rpc: 300023
+        p2p: 30003
+        rpc: 30023
     pod:
       containers:
         substrateNode:

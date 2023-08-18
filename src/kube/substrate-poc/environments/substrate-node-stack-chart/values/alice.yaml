@@ -2,8 +2,8 @@ pods:
   alice:
     service:
       nodePorts:
-        p2p: 300001
-        rpc: 300021
+        p2p: 30001
+        rpc: 30021
     pod:
       containers:
         substrateNode:

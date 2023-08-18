@@ -2,8 +2,8 @@ pods:
   bob:
     service:
       nodePorts:
-        p2p: 300002
-        rpc: 300022
+        p2p: 30002
+        rpc: 30022
     pod:
       containers:
         substrateNode:
