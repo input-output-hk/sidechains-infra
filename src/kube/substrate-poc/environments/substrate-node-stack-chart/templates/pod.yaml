@@ -161,10 +161,9 @@ spec:
         - "local"
         - "--validator"
         - "--node-key"
-        - {{ $podValues.pod.containers.substrate-node.nodeKey }}
-
+        - "{{ $podValues.pod.containers.substrate-node.nodeKey }}"
         - "--bootnodes"
-        - {{ $podValues.pod.containers.substrate-node.bootNodes }}
+        - "{{ $podValues.pod.containers.substrate-node.bootNodes }}"
         - "--unsafe-rpc-external"
         - "--rpc-port"
         - "9933"
