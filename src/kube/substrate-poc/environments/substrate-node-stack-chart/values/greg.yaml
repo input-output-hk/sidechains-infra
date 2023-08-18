@@ -2,8 +2,8 @@ pods:
   greg:
     service:
       nodePorts:
-        p2p: 300007
-        rpc: 300027
+        p2p: 30007
+        rpc: 30027
     pod:
       containers:
         substrateNode:
