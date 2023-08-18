@@ -1,0 +1,11 @@
+pods:
+  alice:
+    service:
+      nodePorts:
+        p2p: 300001
+        rpc: 300021
+    pod:
+      containers:
+        substrateNode:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"

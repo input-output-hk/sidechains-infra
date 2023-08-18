@@ -1,0 +1,11 @@
+pods:
+  greg:
+    service:
+      nodePorts:
+        p2p: 300007
+        rpc: 300027
+    pod:
+      containers:
+        substrateNode:
+          nodeKey: "0000000000000000000000000000000000000000000000000000000000000007"
+          bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
