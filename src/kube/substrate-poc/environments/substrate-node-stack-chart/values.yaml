@@ -8,7 +8,7 @@ pods:
         rpc: 300021
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000001"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   bob:
@@ -18,7 +18,7 @@ pods:
         rpc: 300022
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000002"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   charlie:
@@ -28,7 +28,7 @@ pods:
         rpc: 300023
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000003"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   dave:
@@ -38,7 +38,7 @@ pods:
         rpc: 300024
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000004"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   eve:
@@ -48,7 +48,7 @@ pods:
         rpc: 300025
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000005"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   ferdie:
@@ -58,7 +58,7 @@ pods:
         rpc: 300026
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000006"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
   greg:
@@ -68,6 +68,6 @@ pods:
         rpc: 300027
     pod:
       containers:
-        substrate-node:
+        substrateNode:
           nodeKey: "0000000000000000000000000000000000000000000000000000000000000007"
           bootNodes: "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
