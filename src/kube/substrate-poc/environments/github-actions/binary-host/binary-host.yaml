@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: binary-host
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.3
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.4
     imagePullPolicy: IfNotPresent
     command: ["/bin/sh"]
     args: ["-c", "tail -f /dev/null"] 
