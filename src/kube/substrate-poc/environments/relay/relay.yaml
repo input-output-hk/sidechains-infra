@@ -121,7 +121,7 @@ spec:
         - "--node-config"
         - "/config/preview/config.json"
         - "--host"
-        - "localhost"
+        - "0.0.0.0"
       ports:
        - containerPort: 1337
          name: ogmios
@@ -148,7 +148,7 @@ spec:
         - "--node-config"
         - "/config/preview/config.json"
         - "--host"
-        - "localhost"
+        - "0.0.0.0"
         - "--workdir"
         - "/db"
         - "--match"
