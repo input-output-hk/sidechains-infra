@@ -1,22 +1,67 @@
-apiVersion: apps/v1
-kind: Deployment
+---
+apiVersion: v1
+kind: Pod
 metadata:
   name: binary-host
+  namespace: sc 
   labels:
     app: binary-host
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: binary-host
-  template:
-    metadata:
-      labels:
-        app: binary-host
-    spec:
-      containers:
-      - name: binary-host-container
-        image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.3
-        imagePullPolicy: IfNotPresent
-        command: ["/bin/sh"]
-        args: ["-c", "tail -f /dev/null"] 
+  containers:
+  - name: binary-host
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.3
+    imagePullPolicy: IfNotPresent
+    command: ["/bin/sh"]
+    args: ["-c", "tail -f /dev/null"] 
+    env:
+    - name: SOCKET
+      value: /ipc/node.socket
+    volumeMounts:
+    - name: ipc
+      mountPath: /ipc
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "500m"
+      requests:
+        memory: "256Mi"
+        cpu: "250m"
+  - name: cardano-node
+    image: inputoutput/cardano-node:8.0.0
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "1024Mi"
+        cpu: "1000m"
+      requests:
+        memory: "1024Mi"
+        cpu: "1000m"
+    env:
+    - name: NETWORK
+      value: "preview"
+    - name: CARDANO_NODE_SOCKET_PATH
+      value: /ipc/node.socket
+    volumeMounts:
+    - name: ipc
+      mountPath: /ipc
+    - name: cardano-node-data
+      mountPath: /data
+  volumes:
+  - name: ipc
+    emptyDir: {}
+  - name: cardano-node-data
+    persistentVolumeClaim:
+      claimName: binary-host-claim-cardano-node-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: binary-host-claim-cardano-node-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 30Gi
