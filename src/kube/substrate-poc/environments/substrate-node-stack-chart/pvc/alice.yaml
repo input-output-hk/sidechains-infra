@@ -1,0 +1,80 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim-postgres-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-ebs-storageclass
+  resources:
+    requests:
+      storage: 90Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: alice-postgres-data
+  namespace: sc
+spec:
+  capacity:
+    storage: 90Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: aws-ebs-storageclass
+  awsElasticBlockStore:
+    volumeID: vol-0f9b984aae6ecf403
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim-cardano-node-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim-substrate-node-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 30Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim-db-sync-state-dir
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alice-claim-vector-logs
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 10Gi
