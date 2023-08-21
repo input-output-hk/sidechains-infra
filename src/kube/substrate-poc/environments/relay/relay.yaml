@@ -67,7 +67,7 @@ metadata:
   namespace: sc
   labels:
     app: sidechains-substrate-poc
-    substrate-node: 'true'
+    relay: 'true'
 spec:
   nodeSelector:
     pod: relay
