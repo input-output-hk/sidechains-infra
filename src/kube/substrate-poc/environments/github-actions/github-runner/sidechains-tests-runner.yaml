@@ -2,7 +2,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: sidechains-test-github-runner
+  name: sidechains-tests-github-runner
 spec:
   replicas: 1
   template:
