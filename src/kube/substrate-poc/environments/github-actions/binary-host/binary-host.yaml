@@ -27,7 +27,7 @@ spec:
         memory: "256Mi"
         cpu: "250m"
   - name: cardano-node
-    image: inputoutput/cardano-node:8.0.0
+    image: inputoutput/cardano-node:1.35.4
     imagePullPolicy: IfNotPresent
     resources:
       limits:
