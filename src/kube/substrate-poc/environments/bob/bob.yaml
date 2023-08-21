@@ -194,13 +194,13 @@ spec:
         - name: CARDANO_FOLLOWER_JDBC_URL
           value: "jdbc:postgresql://localhost:5432/cexplorer"
         - name: FUEL_MINTING_POLICY_ID
-          value: "6623b6923de2d6b98fdf6da3c008f10c262b5a2499ffe61155787a17"
+          value: "072fe74f60d91354571ca4998cd37a4b6cc08e7fb83f1dc0e674bbb3"
         - name: COMMITTEE_CANDIDATE_ADDRESS
-          value: "addr_test1wr5duga03765fz7e457txh6587racmyj89vxu46m8vfnt2sw43exq"
+          value: "addr_test1wpqekcukhfrd5estselvpzgne5swwk6wmn0dyeu28xuzh8s48jmng"
         - name: COMMITTEE_NFT_POLICY_ID
           value: "4a79ec984902f69f254a5618540221711f33cbdc30558b99f27aafa6"
         - name: MERKLE_ROOT_NFT_POLICY_ID
-          value: "b85c9969fd281f5d5f0bf453a104b960a7bc16464abe515de3439535"
+          value: "fe3facc6390d808b0d68d727288dd94e482614ca92e756c602930685"
         - name: DISTRIBUTED_SET_POLICY_ID
           value: "deadbeef"
       volumeMounts:
@@ -210,7 +210,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:784f47f2fd3cae7cc703a85ee826de0bac8cef7a
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:v0.0.6-pre3
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -227,11 +227,11 @@ spec:
         - name: MC_EPOCH_DURATION_MILLIS
           value: "86400000"
         - name: CHAIN_ID
-          value: 0
+          value: "0"
         - name: THRESHOLD_NUMERATOR
-          value: 2
+          value: "2"
         - name: THRESHOLD_DENOMINATOR
-          value: 3
+          value: "3"
         - name: GENESIS_COMMITTEE_UTXO
           value: "f17e6d3aa72095e04489d13d776bf05a66b5a8c49d89397c28b18a1784b9950e#0"
       args:
