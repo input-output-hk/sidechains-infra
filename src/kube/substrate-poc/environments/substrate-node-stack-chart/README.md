@@ -19,12 +19,13 @@ helm template . -f values/ferdie.yaml
 ```
 ## Deploy Pod
 ```
-helm install eve . -f values/alice.yaml
-helm install eve . -f values/bob.yaml
-helm install eve . -f values/charlie.yaml
-helm install eve . -f values/dave.yaml
+helm install alice . -f values/alice.yaml
+helm install bob . -f values/bob.yaml
+helm install charlie . -f values/charlie.yaml
+helm install dave . -f values/dave.yaml
 helm install eve . -f values/eve.yaml
-helm install eve . -f values/ferdie.yaml
+helm install ferdie . -f values/ferdie.yaml
+helm install greg . -f values/greg.yaml
 ```                           
 ## Destroy Pod
 ```
