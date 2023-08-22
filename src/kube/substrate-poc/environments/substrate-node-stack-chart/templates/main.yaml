@@ -147,7 +147,7 @@ spec:
           memory: "4096Mi"
           cpu: "1500m"
       env:
-        - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
+        - name: MC__FIRST_EPOCH_TIMESTAMP_MILLIS
           value: "1666656000000"
         - name: MC__FIRST_EPOCH_NUMBER
           value: "0"
