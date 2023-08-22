@@ -3,8 +3,8 @@ kind: Pod
 metadata:
   name: github-runner
   namespace: sc
-labels:
-  app: github-runner
+  labels:
+    app: github-runner
 spec:
   containers:
   - name: binary-host
