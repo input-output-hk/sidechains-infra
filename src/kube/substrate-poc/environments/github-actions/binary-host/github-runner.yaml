@@ -10,7 +10,7 @@ spec:
     image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.4
     imagePullPolicy: IfNotPresent
     command: ["/bin/sh"]
-    args: ["-c", "cp /tools/* /shared-binaries/ && tail -f /dev/null"]
+    args: ["-c", "cp -r /tools/* /shared-binaries/ && tail -f /dev/null"]
     volumeMounts:
     - name: shared-binaries
       mountPath: /shared-binaries
