@@ -222,9 +222,9 @@ spec:
       env:
         - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
           value: "1666656000000"
-        - name: MC_FIRST_EPOCH_NUMBER
+        - name: MC__FIRST_EPOCH_NUMBER
           value: "0"
-        - name: MC_EPOCH_DURATION_MILLIS
+        - name: MC__EPOCH_DURATION_MILLIS
           value: "86400000"
         - name: CHAIN_ID
           value: "0"
