@@ -10,21 +10,20 @@ RUN apt-get update && \
     curl \
     ca-certificates && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
+    apt-get install -y nodejs default-jdk && \
     rm -rf /var/lib/apt/lists/*
 
 # Set up the app directory
-WORKDIR /app
-
-# Copy the entire trustless-sidechain-ctl directory, including node_modules
-COPY ./trustless-sidechain-ctl ./
+WORKDIR /tools
 
 # Copy the binary files
-COPY cardano-cli /bin/cardano-cli
-COPY sc-evm-cli /bin/sc-evm-cli
+COPY cardano-cli /tools/cardano-cli
+COPY sc-evm-cli /tools/sc-evm-cli
+COPY trustless-sidechain-ctl-cli /tools/trustless-sidechain-ctl-cli
 
 # Make the binary files executable
-RUN chmod +x /bin/cardano-cli
-RUN chmod +x /bin/sc-evm-cli
+RUN chmod +x /tools/cardano-cli
+RUN chmod +x /tools/sc-evm-cli
+RUN chmod +x /tools/trustless-sidechain-ctl-cli
 
 CMD ["/bin/bash"]

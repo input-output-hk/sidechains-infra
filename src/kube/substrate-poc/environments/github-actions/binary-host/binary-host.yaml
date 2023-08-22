@@ -52,16 +52,3 @@ spec:
   - name: cardano-node-data
     persistentVolumeClaim:
       claimName: binary-host-claim-cardano-node-data
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: binary-host-claim-cardano-node-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 30Gi
