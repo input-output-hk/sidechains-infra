@@ -252,8 +252,6 @@ spec:
         - "--prometheus-port"
         - "9615"
         - "--prometheus-external"
-        - "--sync"
-        - "Fast"
       ports:
         - containerPort: 30333
           name: p2p
