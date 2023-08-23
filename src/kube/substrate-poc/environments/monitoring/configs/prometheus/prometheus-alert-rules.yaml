@@ -5,7 +5,7 @@ metadata:
   name: prometheus-alert-rules
   namespace: monitoring
 data:
-  alertmanager.yaml: |
+  prometheus-alert-rules.yaml: |
     groups:
     - name: pod_alerts
       rules:
