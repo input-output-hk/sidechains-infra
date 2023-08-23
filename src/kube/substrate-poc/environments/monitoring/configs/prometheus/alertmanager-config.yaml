@@ -23,5 +23,5 @@ data:
     receivers:
     - name: 'pagerduty'
       pagerduty_configs:
-      - service_key: '<PAGERDUTY_INTEGRATION_KEY>'
+      - service_key: 'dcd401925dc14204d081f57cdd49c59b'
         send_resolved: true
