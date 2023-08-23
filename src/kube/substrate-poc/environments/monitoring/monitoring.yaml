@@ -102,8 +102,8 @@ spec:
         - name: prometheus-data
           mountPath: /prometheus
         - name: prometheus-config
-          mountPath: /etc/prometheus/prometheus.yaml
-          subPath: prometheus.yaml
+          mountPath: /etc/prometheus/prometheus.yml
+          subPath: prometheus.yml
         - name: prometheus-alert-rules
           mountPath: /etc/prometheus/prometheus-alert-rules.yaml
           subPath: prometheus-alert-rules.yaml
