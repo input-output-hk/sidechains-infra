@@ -5,7 +5,7 @@ metadata:
   name: alertmanager-config
   namespace: monitoring
 data:
-  alertmanager.yaml: |
+  alertmanager.yml: |
     global:
       resolve_timeout: 5m
 
