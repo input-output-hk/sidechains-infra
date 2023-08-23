@@ -17,4 +17,49 @@ data:
         annotations:
           summary: "Pod is down"
           description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has been down for more than 10 minutes."
+      - alert: PodWithFailedContainers
+        expr: sum by(pod, namespace)(kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"} + kube_pod_container_status_terminated_reason{reason="Error"}) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Pod with failed containers"
+          description: "Pod {{ $labels.namespace }}/{{ $labels.pod }} has one or more containers in a failed state."
+      - alert: NodeNotReady
+        expr: kube_node_status_condition{condition="Ready", status="false"} == 1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "EKS Node not ready"
+          description: "Node {{ $labels.node }} is not ready."
+      - alert: HighNodeMemory
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High Memory Usage on Node"
+          description: "Node {{ $labels.node }} is using more than 80% of its memory."
+      - alert: HighNodeCPU
+        expr: (100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU Usage on Node"
+          description: "Node {{ $labels.instance }} has high CPU usage."
+      - alert: NodeDiskRunningOutOfSpace
+        expr: (node_filesystem_free_bytes / node_filesystem_size_bytes) < 0.15
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Node running out of disk space"
+          description: "Node {{ $labels.instance }} has less than 15% of disk space left."
+
+
+
+
+
  
