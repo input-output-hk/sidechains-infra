@@ -102,11 +102,9 @@ spec:
         - name: prometheus-data
           mountPath: /prometheus
         - name: prometheus-config
-          mountPath: /etc/prometheus/prometheus.yaml
-          subPath: prometheus.yaml
+          mountPath: /etc/prometheus
         - name: prometheus-alert-rules
-          mountPath: /etc/prometheus/alert-rules.yaml
-          subPath: alert-rules.yaml
+          mountPath: /etc/prometheus
     - name: alertmanager
       image: prom/alertmanager:v0.25.0
       imagePullPolicy: IfNotPresent
@@ -121,8 +119,7 @@ spec:
         - containerPort: 9093
       volumeMounts:
         - name: alertmanager-config
-          mountPath: /etc/alertmanager/alertmanager.yaml
-          subPath: alertmanager.yaml
+          mountPath: /etc/alertmanager
     - name: grafana
       image: grafana/grafana:10.0.1
       imagePullPolicy: IfNotPresent
