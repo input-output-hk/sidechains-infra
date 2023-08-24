@@ -6,9 +6,10 @@ metadata:
   labels:
     app: github-runner
 spec:
-  initContainers:
-  - name: config-runner
+  containers:
+  - name: github-runner
     image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.1
+    imagePullPolicy: IfNotPresent
     command: ["/actions-runner/config.sh"]
     env:
     - name: RUNNER_TOKEN
@@ -16,15 +17,9 @@ spec:
         secretKeyRef:
           name: github-runner-token
           key: TOKEN
-    args: ["--unattended", "--url", "https://github.com/input-output-hk/sidechains-tests", "--token", "$(RUNNER_TOKEN)"]
-
-  containers:
-  - name: github-runner
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.1
-    imagePullPolicy: IfNotPresent
-    env:
     - name: CARDANO_NODE_SOCKET_PATH
       value: /ipc/node.socket
+    args: ["--unattended", "--url", "https://github.com/input-output-hk/sidechains-tests", "--token", "$(RUNNER_TOKEN)"]
     volumeMounts:
     - name: ipc
       mountPath: /ipc
