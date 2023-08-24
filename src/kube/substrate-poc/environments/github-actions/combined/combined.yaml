@@ -17,9 +17,6 @@ spec:
           name: github-runner-token
           key: TOKEN
     args: ["--unattended", "--url", "https://github.com/input-output-hk/sidechains-tests", "--token", "$(RUNNER_TOKEN)"]
-    volumeMounts:
-    - name: runner-config
-      mountPath: /actions-runner
 
   containers:
   - name: github-runner
@@ -31,8 +28,6 @@ spec:
     volumeMounts:
     - name: ipc
       mountPath: /ipc
-    - name: runner-config
-      mountPath: /actions-runner
     resources:
       limits:
         memory: "512Mi"
@@ -62,8 +57,6 @@ spec:
       mountPath: /data
   volumes:
   - name: ipc
-    emptyDir: {}
-  - name: runner-config
     emptyDir: {}
   - name: cardano-node-data
     persistentVolumeClaim:
