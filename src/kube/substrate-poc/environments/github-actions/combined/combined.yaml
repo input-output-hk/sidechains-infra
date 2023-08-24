@@ -10,13 +10,13 @@ spec:
   - name: config-runner
     image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.1
     command: ["/actions-runner/config.sh"]
-    args: ["--url", "https://github.com/input-output-hk/sidechains-tests", "--token", "$(TOKEN)"]
     env:
-    - name: TOKEN
+    - name: RUNNER_TOKEN
       valueFrom:
         secretKeyRef:
           name: github-runner-token
           key: TOKEN
+    args: ["--unattended", "--url", "https://github.com/input-output-hk/sidechains-tests", "--token", "$(RUNNER_TOKEN)"]
     volumeMounts:
     - name: runner-config
       mountPath: /actions-runner
