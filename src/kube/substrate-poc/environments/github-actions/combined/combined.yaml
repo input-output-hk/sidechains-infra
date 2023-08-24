@@ -31,7 +31,7 @@ spec:
       requests:
         memory: "256Mi"
         cpu: "250m"
-    command: ["/scripts/start-runner.sh"]
+    command: ["/bin/bash", "/scripts/start-runner.sh"]
     env:
     - name: RUNNER_TOKEN
       valueFrom:
