@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: github-runner
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.1
     imagePullPolicy: IfNotPresent
     env:
     - name: CARDANO_NODE_SOCKET_PATH
