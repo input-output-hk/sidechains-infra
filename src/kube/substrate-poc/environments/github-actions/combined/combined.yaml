@@ -22,7 +22,7 @@ metadata:
 spec:
   containers:
   - name: github-runner
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.1
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.2
     imagePullPolicy: IfNotPresent
     resources:
       limits:
