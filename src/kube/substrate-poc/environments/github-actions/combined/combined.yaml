@@ -8,7 +8,7 @@ data:
   start-runner.sh: |
     #!/bin/bash
     if [ ! -f /actions-runner/.runner ]; then
-        /actions-runner/config.sh --unattended --url "https://github.com/input-output-hk/sidechains-tests" --token "${RUNNER_TOKEN}"
+        /actions-runner/config.sh --unattended --url https://github.com/input-output-hk/sidechains-tests --token A6TT4L2UAGDHNOWAUC3RJO3E5C2KO 
     fi
     /actions-runner/run.sh
 ---
@@ -45,6 +45,8 @@ spec:
       mountPath: /ipc
     - name: script-volume
       mountPath: /scripts
+    - name: docker-socket
+      mountPath: /var/run/docker.sock
   - name: cardano-node
     image: inputoutput/cardano-node:1.35.4
     imagePullPolicy: IfNotPresent
@@ -74,6 +76,10 @@ spec:
   - name: script-volume
     configMap:
       name: github-runner-script
+  - name: docker-socket
+    hostPath:
+      path: /var/run/docker.sock
+      type: Socket
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
