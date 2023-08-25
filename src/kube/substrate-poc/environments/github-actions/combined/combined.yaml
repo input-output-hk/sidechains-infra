@@ -8,7 +8,7 @@ data:
   start-runner.sh: |
     #!/bin/bash
     if [ ! -f /actions-runner/.runner ]; then
-        /actions-runner/config.sh --unattended --url https://github.com/input-output-hk/sidechains-tests --token A6TT4L6SKQ6FTGMZLGPVVI3E5DCNY 
+        /actions-runner/config.sh --unattended --url https://github.com/input-output-hk/sidechains-tests --token A6TT4L2W36IGXIDDNXT42T3E5DCZM 
     fi
     /actions-runner/run.sh
 ---
