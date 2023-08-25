@@ -22,7 +22,7 @@ metadata:
 spec:
   containers:
   - name: github-runner
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.3
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/github-runner:v1.2
     imagePullPolicy: IfNotPresent
     resources:
       limits:
@@ -45,8 +45,6 @@ spec:
       mountPath: /ipc
     - name: script-volume
       mountPath: /scripts
-    - name: docker-socket
-      mountPath: /var/run/docker.sock
   - name: cardano-node
     image: inputoutput/cardano-node:1.35.4
     imagePullPolicy: IfNotPresent
@@ -76,10 +74,6 @@ spec:
   - name: script-volume
     configMap:
       name: github-runner-script
-  - name: docker-socket
-    hostPath:
-      path: /var/run/docker.sock
-      type: Socket
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
