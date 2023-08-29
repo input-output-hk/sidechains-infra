@@ -9,13 +9,16 @@ metadata:
 spec:
   containers:
   - name: binary-host
-    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.4
+    image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/binary-host:v1.5
     imagePullPolicy: IfNotPresent
     command: ["/bin/sh"]
-    args: ["-c", "tail -f /dev/null"] 
+    args: ["-c", "service ssh start && tail -f /dev/null"]
     env:
     - name: CARDANO_NODE_SOCKET_PATH
       value: /ipc/node.socket
+    ports:
+    - containerPort: 22
+      name: ssh
     volumeMounts:
     - name: ipc
       mountPath: /ipc
@@ -52,3 +55,29 @@ spec:
   - name: cardano-node-data
     persistentVolumeClaim:
       claimName: binary-host-claim-cardano-node-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: binary-host-service
+  namespace: sc
+spec:
+  selector:
+    app: binary-host
+  ports:
+  - protocol: TCP
+    port: 22
+    targetPort: ssh
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: binary-host-claim-cardano-node-data
+  namespace: sc
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: aws-efs-storageclass
+  resources:
+    requests:
+      storage: 30Gi
