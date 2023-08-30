@@ -206,7 +206,7 @@ spec:
         - name: BRIDGE_BACKEND_GRPC_TYPE
           value: "http2"
         - name: BRIDGE_BACKEND_HTTP_PORT
-          value: "8080"
+          value: "18080"
       volumeMounts:
         - name: ipc
           mountPath: /ipc
@@ -241,7 +241,7 @@ spec:
         - name: BRIDGE_BACKEND_GRPC_TYPE
           value: "http2"
         - name: BRIDGE_BACKEND_HTTP_PORT
-          value: "8080"
+          value: "18080"
       args:
         - "--greg"
         - "--base-path"
