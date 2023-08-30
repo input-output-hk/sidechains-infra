@@ -203,6 +203,10 @@ spec:
           value: "b85c9969fd281f5d5f0bf453a104b960a7bc16464abe515de3439535"
         - name: DISTRIBUTED_SET_POLICY_ID
           value: "deadbeef"
+        - name: BRIDGE_BACKEND_GRPC_TYPE
+          value: "http2"
+        - name: BRIDGE_BACKEND_HTTP_PORT
+          value: "8080"
       volumeMounts:
         - name: ipc
           mountPath: /ipc
@@ -234,6 +238,10 @@ spec:
           value: "3"
         - name: GENESIS_COMMITTEE_UTXO
           value: "f17e6d3aa72095e04489d13d776bf05a66b5a8c49d89397c28b18a1784b9950e#0"
+        - name: BRIDGE_BACKEND_GRPC_TYPE
+          value: "http2"
+        - name: BRIDGE_BACKEND_HTTP_PORT
+          value: "8080"
       args:
         - "--greg"
         - "--base-path"
