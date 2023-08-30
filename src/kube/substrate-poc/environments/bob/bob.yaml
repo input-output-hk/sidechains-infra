@@ -205,7 +205,7 @@ spec:
           value: "deadbeef"
         - name: BRIDGE_BACKEND_GRPC_TYPE
           value: "http2"
-        - name: BRIDGE_BACKEND_HTTP_PORT
+        - name: BRIDGE_BACKEND_GRPC_PORT
           value: "18080"
       volumeMounts:
         - name: ipc
