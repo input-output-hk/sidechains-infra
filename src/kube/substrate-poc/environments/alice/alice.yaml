@@ -106,10 +106,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
         requests:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -126,10 +126,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "1000m"
+          cpu: "500m"
         requests:
           memory: "4096Mi"
-          cpu: "1000m"
+          cpu: "500m"
       env:
         - name: NETWORK
           value: "preview"
@@ -154,10 +154,10 @@ spec:
       resources:
         limits:
           memory: "2048Mi"
-          cpu: "1000m"
+          cpu: "500m"
         requests:
           memory: "2048Mi"
-          cpu: "1000m"
+          cpu: "500m"
       ports:
         - containerPort: 5432
           protocol: TCP
@@ -180,10 +180,10 @@ spec:
       resources:
         limits:
           memory: "512Mi"
-          cpu: "1000m"
+          cpu: "500m"
         requests:
           memory: "512Mi"
-          cpu: "1000m"
+          cpu: "500m"
       env:
         - name: BRIDGE_BACKEND_SOCKET_PATH
           value: "/ipc/bridge.socket"
@@ -215,10 +215,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
         requests:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
       env:
         - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
           value: "1666656000000"
@@ -272,10 +272,10 @@ spec:
       resources:
         limits:
           memory: "300Mi"
-          cpu: "1000m"
+          cpu: "500m"
         requests:
           memory: "300Mi"
-          cpu: "1000m"
+          cpu: "500m"
       env:
         - name: VECTOR_SELF_NODE_NAME
           valueFrom:
