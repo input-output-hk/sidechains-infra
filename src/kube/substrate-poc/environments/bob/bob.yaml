@@ -106,10 +106,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
         requests:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
       env:
         - name: NETWORK
           value: "preview"
@@ -215,10 +215,10 @@ spec:
       resources:
         limits:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
         requests:
           memory: "4096Mi"
-          cpu: "1500m"
+          cpu: "1000m"
       env:
         - name: MC_FIRST_EPOCH_TIMESTAMP_MILLIS
           value: "1666656000000"
