@@ -71,7 +71,7 @@ spec:
   - name: cardano-node-data
     persistentVolumeClaim:
       claimName: binary-host-claim-cardano-node-data
-  - name: substrate-keys-volume
+  - name: substrate-keys
     secret:
       secretName: substrate-keys
 ---
