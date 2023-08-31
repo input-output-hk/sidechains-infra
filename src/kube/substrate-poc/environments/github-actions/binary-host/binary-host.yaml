@@ -1,5 +1,15 @@
 ---
 apiVersion: v1
+kind: Secret
+metadata:
+  name: substrate-keys
+  namespace: sc
+type: Opaque
+data:
+  eve.payment.skey.json.decrypted: ewoJInR5cGUiOiAiUGF5bWVudFNpZ25pbmdLZXlTaGVsbGV5X2VkMjU1MTkiLAoJImRlc2NyaXB0aW9uIjogIlBheW1lbnQgU2lnbmluZyBLZXkiLAoJImNib3JIZXgiOiAiNTgyMGEwM2ZmMTFmNGYxMTMzM2UwN2Y1YTAxNWU5OWY5OGE2YTkzZDY2ZjI0ZjMxMjA3MjY2OGE2YmViNDRiODJmNzkiCn0=% 
+  ferdie.payment.skey.json.decrypted: ewoJInR5cGUiOiAiUGF5bWVudFNpZ25pbmdLZXlTaGVsbGV5X2VkMjU1MTkiLAoJImRlc2NyaXB0aW9uIjogIlBheW1lbnQgU2lnbmluZyBLZXkiLAoJImNib3JIZXgiOiAiNTgyMDk3MmJlZTlkMDlmM2YyZmFiODdlYWRkYWNhZWNhZjZkNmU1OTgzOWI1ZTA2YWY0YWU2ZDFhNzYzMDEwNjFkYmYiCn0=%
+---
+apiVersion: v1
 kind: Pod
 metadata:
   name: binary-host
@@ -22,6 +32,12 @@ spec:
     volumeMounts:
     - name: ipc
       mountPath: /ipc
+    - name: substrate-keys-eve
+      mountPath: /secrets/substrate/remote/keys/eve/payment.skey.json.decrypted
+      subPath: eve.payment.skey.json.decrypted
+    - name: substrate-keys-ferdie
+      mountPath: /secrets/substrate/remote/keys/ferdie/payment.skey.json.decrypted
+      subPath: ferdie.payment.skey.json.decrypted
     resources:
       limits:
         memory: "512Mi"
@@ -55,6 +71,9 @@ spec:
   - name: cardano-node-data
     persistentVolumeClaim:
       claimName: binary-host-claim-cardano-node-data
+  - name: substrate-keys-volume
+    secret:
+      secretName: substrate-keys
 ---
 apiVersion: v1
 kind: Service
