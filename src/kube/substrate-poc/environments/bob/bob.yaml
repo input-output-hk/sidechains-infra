@@ -194,13 +194,13 @@ spec:
         - name: CARDANO_FOLLOWER_JDBC_URL
           value: "jdbc:postgresql://localhost:5432/cexplorer"
         - name: FUEL_MINTING_POLICY_ID
-          value: "072fe74f60d91354571ca4998cd37a4b6cc08e7fb83f1dc0e674bbb3"
+          value: "6623b6923de2d6b98fdf6da3c008f10c262b5a2499ffe61155787a17"
         - name: COMMITTEE_CANDIDATE_ADDRESS
-          value: "addr_test1wpqekcukhfrd5estselvpzgne5swwk6wmn0dyeu28xuzh8s48jmng"
+          value: "addr_test1wr5duga03765fz7e457txh6587racmyj89vxu46m8vfnt2sw43exq"
         - name: COMMITTEE_NFT_POLICY_ID
           value: "4a79ec984902f69f254a5618540221711f33cbdc30558b99f27aafa6"
         - name: MERKLE_ROOT_NFT_POLICY_ID
-          value: "fe3facc6390d808b0d68d727288dd94e482614ca92e756c602930685"
+          value: "b85c9969fd281f5d5f0bf453a104b960a7bc16464abe515de3439535"
         - name: DISTRIBUTED_SET_POLICY_ID
           value: "deadbeef"
         - name: BRIDGE_BACKEND_GRPC_TYPE
@@ -250,7 +250,7 @@ spec:
         - "local"
         - "--validator"
         - "--node-key"
-        - "0000000000000000000000000000000000000000000000000000000000000002"
+        - "0000000000000000000000000000000000000000000000000000000000001002"
         - "--bootnodes"
         - "/dns/alice-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWEyoppNCUx8Yx66oV9fJnriXwCcXwDDUA2kj6vnc6iDEp"
         - "/dns/charlie-service.sc.svc.cluster.local/tcp/30333/p2p/12D3KooWSCufgHzV4fCwRijfH2k3abrpAJxTKxEvN1FDuRXA2U9x"
