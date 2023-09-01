@@ -264,8 +264,6 @@ spec:
         - "--prometheus-port"
         - "9615"
         - "--prometheus-external"
-        - "--log"
-        - "network=debug,sync=debug,peerset=debug"
       ports:
         - containerPort: 30333
           name: p2p
