@@ -86,7 +86,7 @@ spec:
         - name: NETWORK
           value: "preview"
         - name: CARDANO_NODE_SOCKET_PATH
-          value: /ipc/node.socket
+          value: "/ipc/node.socket"
       volumeMounts:
         - name: ipc
           mountPath: /ipc
