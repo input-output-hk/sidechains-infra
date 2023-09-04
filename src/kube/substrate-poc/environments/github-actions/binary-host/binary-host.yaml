@@ -94,16 +94,3 @@ spec:
   - protocol: TCP
     port: 22
     targetPort: ssh
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: binary-host-claim-cardano-node-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 30Gi
