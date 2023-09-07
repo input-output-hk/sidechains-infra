@@ -11,3 +11,8 @@ helm repo update
 helm upgrade --install --namespace actions-runner-system --create-namespace --wait actions-runner-controller actions-runner-controller/actions-runner-controller --set syncPeriod=1m
 # Create runner
 kubectl create -f runner.yaml
+
+
+# Verifications
+kubectl --namespace actions-runner-system get all
+kubectl get pod -n actions-runner-system | grep -i "k8s-action-runner"
