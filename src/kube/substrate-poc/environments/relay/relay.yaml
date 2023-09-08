@@ -93,7 +93,7 @@ spec:
         - name: cardano-node-data
           mountPath: /data
     - name: relay
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/relay:1.1
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/relay:v2.0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -104,9 +104,9 @@ spec:
           cpu: "1500m"
       env:
         - name: NODE_URL
-          value: "http://alice-service"
+          value: "http://alice-service:9933"
     - name: ogmios
-      image: cardanosolutions/ogmios:v5.5.7-preview
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/ogmios:pda2xr92g03pznh0ly8xkn8i9sa4p3a0
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -116,12 +116,15 @@ spec:
           memory: "4096Mi"
           cpu: "1500m"
       args:
-        - "--node-socket"
-        - "/ipc/node.socket"
-        - "--node-config"
-        - "/config/preview/config.json"
         - "--host"
         - "0.0.0.0"
+      env:
+        - name: DATA_DIR
+          value: "/data"
+        - name: NODE_CONFIG
+          value: "/config/preview/config.json"
+        - name: SOCKET_PATH
+          value: "/ipc/node.socket"
       ports:
        - containerPort: 1337
          name: ogmios
@@ -132,6 +135,11 @@ spec:
           mountPath: /config
         - name: config
           mountPath: /config/preview
+        - name: ogmios-data
+          mountPath: /data
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
     - name: kupo
       image: cardanosolutions/kupo:v2.2.0
       imagePullPolicy: IfNotPresent
@@ -197,9 +205,6 @@ spec:
         claimName: relay-claim-cardano-node-data
     - name: ipc
       emptyDir: {}
-    - name: substrate-data
-      persistentVolumeClaim:
-        claimName: relay-claim-substrate-data
     - name: cardano-node-config
       persistentVolumeClaim:
         claimName: relay-claim-cardano-node-config
@@ -215,3 +220,5 @@ spec:
     - name: config
       configMap:
         name: relay-configmap
+    - name: ogmios-data
+      emptyDir: {}

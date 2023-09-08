@@ -28,19 +28,6 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: relay-claim-substrate-data
-  namespace: sc
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: aws-efs-storageclass
-  resources:
-    requests:
-      storage: 30Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: relay-claim-kupo-workdir
   namespace: sc
 spec:
