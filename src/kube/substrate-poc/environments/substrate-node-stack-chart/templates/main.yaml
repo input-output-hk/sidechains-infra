@@ -101,7 +101,7 @@ spec:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
     - name: bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.1.0
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.10.0
       command: ["/opt/docker/bin/bridge-backend", "-Dmainchain.epoch-duration=86400000"]
       imagePullPolicy: IfNotPresent
       resources:
@@ -130,6 +130,12 @@ spec:
           value: "b85c9969fd281f5d5f0bf453a104b960a7bc16464abe515de3439535"
         - name: DISTRIBUTED_SET_POLICY_ID
           value: "deadbeef"
+        - name: COMMITTEE_NFT_ADDRESS
+          value: "addr_test1wrhk5g9wpld0hzl3x864w3094qzg0t4wrudvpx6m6muk3cqv0em98"
+        - name: MERKLE_ROOT_NFT_ADDRESS
+          value: "addr_test1wqupx3rnlc9zpx7tyy5v2tup4gsfrvq7tvutll9a0tx9qvcha75r6"
+        - name: DISTRIBUTED_SET_NFT_ADDRESS
+          value: "addr_test1wr6d3u0r6v5xjudetjlmju3l7ghfsxhd2rdnal389tk20lqsah7c9"
       volumeMounts:
         - name: ipc
           mountPath: /ipc
@@ -137,7 +143,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:8986ca8c1a5c096566f85c4604f7639000f9cf1f
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:8fd169d4c5b08bb968e0b74d40eb7d7ee5251581
       imagePullPolicy: IfNotPresent
       resources:
         limits:
