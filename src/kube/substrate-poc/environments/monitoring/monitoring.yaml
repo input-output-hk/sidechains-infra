@@ -70,8 +70,6 @@ spec:
     - name: loki
       image: grafana/loki
       imagePullPolicy: IfNotPresent
-      securityContext:
-        runAsUser: 50060
       resources:
         limits:
           memory: "4096Mi"

@@ -173,10 +173,10 @@ kubectl logs relay -c ogmios -n sc
 kubectl logs relay -c kupo -n sc
 kubectl logs relay -c vector -n sc
 
-kubectl logs monitoring grafana -n sc
-kubectl logs monitoring prometheus -n sc
-kubectl logs monitoring loki -n sc
-kubectl logs monitoring vector -n sc
+kubectl logs monitoring grafana -n monitoring
+kubectl logs monitoring prometheus -n monitoring
+kubectl logs monitoring loki -n monitoring
+kubectl logs monitoring vector -n monitoring
 
 ```
 # Exec 
