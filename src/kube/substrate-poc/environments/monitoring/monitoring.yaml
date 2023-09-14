@@ -84,6 +84,8 @@ spec:
       volumeMounts:
         - name: loki-data
           mountPath: /loki
+        - name: loki-data-ebs
+          mountPath: /ebs
         - name: loki-config
           mountPath: /etc/loki
     - name: prometheus
@@ -156,6 +158,9 @@ spec:
     - name: loki-data
       persistentVolumeClaim:
         claimName: monitoring-claim-loki
+    - name: loki-data-ebs
+      persistentVolumeClaim:
+        claimName: monitoring-claim-loki-ebs
     - name: loki-config
       configMap:
         name: loki-config
