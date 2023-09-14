@@ -20,11 +20,24 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  #storageClassName: aws-ebs-storageclass
-  storageClassName: ebs-sc
+  storageClassName: aws-efs-storageclass
   resources:
     requests:
       storage: 100Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: monitoring-claim-loki
+#  namespace: monitoring
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  #storageClassName: aws-ebs-storageclass
+#  storageClassName: ebs-sc
+#  resources:
+#    requests:
+#      storage: 100Gi
 #---
 #apiVersion: v1
 #kind: PersistentVolume
