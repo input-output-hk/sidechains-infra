@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: sc
+  namespace: argocd
+spec:
+  description: ArgoCD project for sidechains-infra
+  sourceRepos:
+    - 'https://github.com/input-output-hk/sidechains-infra'
+  destinations:
+    - namespace: sc
+      server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
