@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: monitoring
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: monitoring
+  source:
+    path: src/kube/substrate-poc/environments/monitoring
+    repoURL: https://github.com/input-output-hk/sidechains-infra
+    targetRevision: HEAD
