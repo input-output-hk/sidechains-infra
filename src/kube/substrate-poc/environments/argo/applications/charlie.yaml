@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: charlie
+spec:
+  destination:
+    namespace: sc
+    server: https://kubernetes.default.svc
+  project: sc
+  source:
+    path: src/kube/substrate-poc/environments/charlie
+    repoURL: https://github.com/input-output-hk/sidechains-infra
+    targetRevision: HEAD
