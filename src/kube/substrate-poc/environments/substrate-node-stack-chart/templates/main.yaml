@@ -102,7 +102,7 @@ spec:
           mountPath: /var/lib/postgresql/data
     - name: bridge-backend
       image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.10.0
-      command: ["/opt/docker/bin/bridge-backend", "-Dmainchain.epoch-duration=86400000"]
+      command: [ "/opt/docker/bin/bridge-backend", "-Dmainchain.epoch-duration=86400000", "-Dmainchain.security-parameter=432" ]
       imagePullPolicy: IfNotPresent
       resources:
         limits:
