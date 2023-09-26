@@ -220,7 +220,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:8fd169d4c5b08bb968e0b74d40eb7d7ee5251581
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:1bf507fcfdca88b37395aa7e942cf7ff28a39044
       imagePullPolicy: IfNotPresent
       resources:
         limits:
