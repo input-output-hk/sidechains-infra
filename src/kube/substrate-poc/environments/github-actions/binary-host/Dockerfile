@@ -30,13 +30,29 @@ WORKDIR /tools
 
 # Copy the binary files
 COPY cardano-cli /tools/cardano-cli
+COPY bech32 /tools/bech32
 COPY sc-evm-cli /tools/sc-evm-cli
 COPY trustless-sidechain-ctl-cli /tools/trustless-sidechain-ctl-cli
 
 # Make the binary files executable
 RUN chmod +x /tools/cardano-cli
+RUN chmod +x /tools/bech32
 RUN chmod +x /tools/sc-evm-cli
 RUN chmod +x /tools/trustless-sidechain-ctl-cli
+
+# Set the environment variable
+ENV CARDANO_NODE_SOCKET_PATH="/ipc/node.socket"
+
+# Create symbolic links to binaries
+RUN ln -s /tools/cardano-cli /usr/local/bin/cardano-cli && \
+    ln -s /tools/bech32 /usr/local/bin/bech32 && \
+    ln -s /tools/sc-evm-cli/sc-evm-cli /usr/local/bin/sc-evm-cli && \
+    ln -s /tools/trustless-sidechain-ctl-cli /usr/local/bin/trustless-sidechain-ctl-cli
+
+# Alternatively, create bash aliases too
+# RUN echo 'alias cardano-cli="/tools/cardano-cli"' >> ~/.bashrc && \
+#     echo 'alias sc-evm-cli="/tools/sc-evm-cli/sc-evm-cli"' >> ~/.bashrc && \
+#     echo 'alias trustless-sidechain-ctl-cli="/tools/trustless-sidechain-ctl-cli"' >> ~/.bashrc
 
 # Run SSH server in the foreground
 CMD ["/usr/sbin/sshd", "-D"]
