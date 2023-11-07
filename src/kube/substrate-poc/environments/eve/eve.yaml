@@ -174,7 +174,7 @@ spec:
         - name: postgres-data
           mountPath: /var/lib/postgresql/data
     - name: bridge-backend
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.11.0
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/bridge-backend:0.16.0
       command: [ "/opt/docker/bin/bridge-backend", "-Dmainchain.epoch-duration=86400000", "-Dmainchain.security-parameter=432" ]
       imagePullPolicy: IfNotPresent
       resources:
@@ -194,25 +194,31 @@ spec:
         - name: CARDANO_FOLLOWER_JDBC_URL
           value: "jdbc:postgresql://localhost:5432/cexplorer"
         - name: FUEL_MINTING_POLICY_ID
-          value: "6623b6923de2d6b98fdf6da3c008f10c262b5a2499ffe61155787a17"
+          value: "68a3a1612b486b791e02de34f39114d5cd44afceeb071c8a566cd1d6"
         - name: COMMITTEE_CANDIDATE_ADDRESS
-          value: "addr_test1wr5duga03765fz7e457txh6587racmyj89vxu46m8vfnt2sw43exq"
+          value: "addr_test1wr9m7pch0at7lt34783drfn6uxlnhxd2lsnz6am085c7e4cthzmd8"
         - name: COMMITTEE_NFT_POLICY_ID
-          value: "4a79ec984902f69f254a5618540221711f33cbdc30558b99f27aafa6"
+          value: "e67a32f6f21dcaa93b15716fb528c196b64397c3bbf61700c4a0fd98"
         - name: MERKLE_ROOT_NFT_POLICY_ID
-          value: "b85c9969fd281f5d5f0bf453a104b960a7bc16464abe515de3439535"
+          value: "08a2afd7a0156501acfa324febf618061d55260dd94da757aaa567b3"
         - name: DISTRIBUTED_SET_POLICY_ID
-          value: "deadbeef"
+          value: "87ffa8fb6e62c929d9c134307b9a374a601914a93760f7ae9526a8ad"
         - name: BRIDGE_BACKEND_GRPC_TYPE
           value: "http2"
         - name: BRIDGE_BACKEND_GRPC_PORT
           value: "18080"
         - name: COMMITTEE_NFT_ADDRESS
-          value: "addr_test1wrhk5g9wpld0hzl3x864w3094qzg0t4wrudvpx6m6muk3cqv0em98"
+          value: "addr_test1wp5rwrw55e2e63gs0a2zjyrjln05w8v0d3sn5vh2ms84jjckgcwem"
         - name: MERKLE_ROOT_NFT_ADDRESS
-          value: "addr_test1wqupx3rnlc9zpx7tyy5v2tup4gsfrvq7tvutll9a0tx9qvcha75r6"
+          value: "addr_test1wp3hsru6sasaz0cpm02shn4uhzeq26y73v6lcz36uf3e20s643uq5"
         - name: DISTRIBUTED_SET_NFT_ADDRESS
-          value: "addr_test1wr6d3u0r6v5xjudetjlmju3l7ghfsxhd2rdnal389tk20lqsah7c9"
+          value: "addr_test1wpjj5ac463htxu3slmlq2jtpyy52ewr9ueh24g0nksn0v5c3uzx48"
+        - name: D_PARAMETER_POLICY_ID
+          value: "e87721ed30264111c947f9976279dbcdc3ff4f9c70633555ecd96a11"
+        - name: PERMISSIONED_CANDIDATES_POLICY_ID
+          value: "5a1302bbcf9ddb03d0f4d9cbf61f28caf5c69630db2c20e0bbde286f"
+        - name: FUEL_ASSET_NAME
+          value: "4655454c"
       volumeMounts:
         - name: ipc
           mountPath: /ipc
@@ -220,7 +226,7 @@ spec:
         runAsUser: 1000
         runAsGroup: 1000
     - name: substrate-node
-      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:1bf507fcfdca88b37395aa7e942cf7ff28a39044
+      image: 689191102645.dkr.ecr.eu-central-1.amazonaws.com/substrate-node:336e859cbcd0b203215106de4563c69dd9aa8266
       imagePullPolicy: IfNotPresent
       resources:
         limits:
@@ -243,7 +249,9 @@ spec:
         - name: THRESHOLD_DENOMINATOR
           value: "3"
         - name: GENESIS_COMMITTEE_UTXO
-          value: "f17e6d3aa72095e04489d13d776bf05a66b5a8c49d89397c28b18a1784b9950e#0"
+          value: "88f757228c8d90c460d671682f3be5e09f8c1ef66adfded49b04a8a0dc3a7f9a#0"
+        - name: GOVERNANCE_AUTHORITY
+          value: "76da17b2e3371ab7ca88ce0500441149f03cc5091009f99c99c080d9"
         - name: BRIDGE_BACKEND_GRPC_TYPE
           value: "http2"
         - name: BRIDGE_BACKEND_HTTP_PORT
